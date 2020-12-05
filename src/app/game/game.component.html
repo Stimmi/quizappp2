@@ -24,3 +24,10 @@
         </div>
     </div>
 </div>
+
+<div class="container">
+    <div *ngIf="highscores">
+        <h2>Highscore</h2>
+        <div *ngFor='let highscore of highscores'>{{highscore.team}} : {{highscore.score}} </div>
+    </div>
+</div>

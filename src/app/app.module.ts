@@ -10,6 +10,10 @@ import { RegisterComponent } from './register/register.component';
 import { MenuComponent } from './menu/menu.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { RouterModule } from '@angular/router';
+import { DatabaseService } from './services/database.service';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire';
 
 @NgModule({
   declarations: [
@@ -24,9 +28,11 @@ import { RouterModule } from '@angular/router';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule
   ],
-  providers: [],
+  providers: [DatabaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { DatabaseService } from '../services/database.service'
 
 @Component({
   selector: 'app-game',
@@ -7,16 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 
 
-export class GameComponent implements OnInit {
+export class GameComponent implements OnInit, OnDestroy {
 
   easyCountries: Country[];
   flag0: Country;
   flag1: Country;
   flag2: Country;
   flagQuestion: Country;
+  
+  subscriptionHighscores: Subscription;
+  highscores: Highscore[];
 
 
-  constructor() { }
+  constructor(private db: DatabaseService) { }
 
   ngOnInit(): void {
 
@@ -26,21 +31,31 @@ export class GameComponent implements OnInit {
     this.flag2 = this.easyCountries[3];
     this.flagQuestion = this.easyCountries[0];
 
+    this.subscriptionHighscores = this.db.getHighscores()
+    .subscribe(hs => {this.highscores = hs});
+
   }
 
-  onStart() {
+  ngOnDestroy(): void {
+    if(this.subscriptionHighscores){
+      this.subscriptionHighscores.unsubscribe();
+    }
 
-    let numbers = this.generateThreeRandomNumber(this.easyCountries.length);
+  }
+
+
+  onStart (): void {
+
+    let numbers = this.generateThreeRandomNumbers(this.easyCountries.length);
 
     this.flag0 = this.easyCountries[numbers[0]];
     this.flag1 = this.easyCountries[numbers[1]];
     this.flag2 = this.easyCountries[numbers[2]];
 
     this.flagQuestion = this.easyCountries[numbers[Math.floor(Math.random() * numbers.length)]];
-
   }
 
-  generateThreeRandomNumber (base:number) {
+  generateThreeRandomNumbers (base:number): number[] {
 
     let numbers: number[] = [];
 
@@ -52,9 +67,9 @@ export class GameComponent implements OnInit {
     return numbers;
   }
 
-  seed() {
+  seed(): void {
 
-    this.easyCountries = [{name:"Belgie", code:"be"}, 
+    this.easyCountries = [{name:"België", code:"be"}, 
     {name:"Nederland", code:"nl"},
     {name:"Frankrijk", code:"fr"},
     {name:"Duitsland", code:"de"},
@@ -77,4 +92,9 @@ class Country {
     this.name = name;
     this.code = code;
   }
+}
+
+ interface Highscore {
+  team: string;
+  score: number;
 }
