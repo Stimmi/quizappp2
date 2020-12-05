@@ -1,4 +1,26 @@
 
 <app-menu></app-menu>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <h1>{{flagQuestion.name}}</h1>
+        </div>
+    </div>
 
-<img src="https://flagcdn.com/w160/bh.png">
+    <div class="row justify-content-center">
+        <div class="media">
+            <img src="https://flagcdn.com/w160/{{flag0.code}}.png">
+        </div>
+        <div class="media">
+            <img src="https://flagcdn.com/w160/{{flag1.code}}.png">
+        </div>
+        <div class="media">
+            <img src="https://flagcdn.com/w160/{{flag2.code}}.png">
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <button type="btn" class="btn btn-dark" (click)="onStart()">Start</button>
+        </div>
+    </div>
+</div>
