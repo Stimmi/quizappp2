@@ -20,6 +20,9 @@ export class GameComponent implements OnInit, OnDestroy {
   subscriptionHighscores: Subscription;
   highscores: Highscore[];
 
+  timeLeft: number = 10;
+  score: number = 0;
+  interval;
 
   constructor(private db: DatabaseService) { }
 
@@ -44,8 +47,36 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
 
-  onStart (): void {
+  async onStart () {
 
+    this.timeLeft = 10;
+    this.score = 0;
+
+    this.interval = setInterval(() => {
+      if(this.timeLeft > 0) {
+        this.timeLeft--;
+      } else {
+        clearInterval(this.interval);
+      }
+    },1000)
+
+    await new Promise(resolve => setTimeout(resolve, this.timeLeft*1000));
+
+  }
+
+  onFlagClicked(code: String) {
+
+    if(this.flagQuestion.code == code) {
+      this.score++;
+    }
+
+    this.setNewFlags();
+
+
+  }
+
+  setNewFlags() {
+    
     let numbers = this.generateThreeRandomNumbers(this.easyCountries.length);
 
     this.flag0 = this.easyCountries[numbers[0]];
@@ -53,7 +84,10 @@ export class GameComponent implements OnInit, OnDestroy {
     this.flag2 = this.easyCountries[numbers[2]];
 
     this.flagQuestion = this.easyCountries[numbers[Math.floor(Math.random() * numbers.length)]];
+
   }
+
+
 
   generateThreeRandomNumbers (base:number): number[] {
 
@@ -73,7 +107,35 @@ export class GameComponent implements OnInit, OnDestroy {
     {name:"Nederland", code:"nl"},
     {name:"Frankrijk", code:"fr"},
     {name:"Duitsland", code:"de"},
-    {name:"China", code:"cn"}
+    {name:"China", code:"cn"},
+    {name:"Antartica", code:"aq"},
+    {name:"Cambodia", code:"kh"},
+    {name:"Canada", code:"ca"},
+    {name:"Congo DRC", code:"cd"},
+    {name:"Cuba", code:"cu"},
+    {name:"Cyprus", code:"cy"},
+    {name:"Tsjechië", code:"cz"},
+    {name:"Denemarken", code:"dk"},
+    {name:"Griekenland", code:"gr"},
+    {name:"Het Vaticaan", code:"va"},
+    {name:"India", code:"in"},
+    {name:"Israël", code:"il"},
+    {name:"Mexico", code:"mx"},
+    {name:"Libanon", code:"lb"},
+    {name:"Kenia", code:"ke"},
+    {name:"Laos", code:"la"},
+    {name:"Nepal", code:"np"},
+    {name:"Marokko", code:"ma"},
+    {name:"Noorwegen", code:"no"},
+    {name:"Marokko", code:"ma"},
+    {name:"Potugal", code:"pt"},
+    {name:"Rusland", code:"ru"},
+    {name:"Saoudi Arabië", code:"sa"},
+    {name:"Zuid-Korea", code:"kr"},
+    {name:"Sri Lanka", code:"lk"},
+    {name:"Zwitserland", code:"ch"},
+    {name:"Turkije", code:"tr"},
+
 
   ];
 
@@ -83,15 +145,11 @@ export class GameComponent implements OnInit, OnDestroy {
 }
 
 
-class Country {
+interface Country {
 
   name: String;
   code: String;
 
-  constructor(name: String, code: String) {
-    this.name = name;
-    this.code = code;
-  }
 }
 
  interface Highscore {
