@@ -11,7 +11,9 @@ import { DatabaseService } from '../services/database.service'
 
 export class GameComponent implements OnInit, OnDestroy {
 
-  easyCountries: Country[];
+  countries; 
+  usedFlags = [[],[],[]];
+
   flag0: Country;
   flag1: Country;
   flag2: Country;
@@ -20,7 +22,7 @@ export class GameComponent implements OnInit, OnDestroy {
   subscriptionHighscores: Subscription;
   highscores: Highscore[];
 
-  timeLeft: number = 10;
+  timeLeft: number = 100;
   score: number = 0;
   interval;
 
@@ -29,10 +31,10 @@ export class GameComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     this.seed();
-    this.flag0 = this.easyCountries[0];
-    this.flag1 = this.easyCountries[1];
-    this.flag2 = this.easyCountries[3];
-    this.flagQuestion = this.easyCountries[0];
+    this.flag0 = this.countries[0][0];
+    this.flag1 = this.countries[0][1];
+    this.flag2 = this.countries[0][2];
+    this.flagQuestion = this.countries[0][1];
 
     this.subscriptionHighscores = this.db.getHighscores()
     .subscribe(hs => {this.highscores = hs});
@@ -49,8 +51,10 @@ export class GameComponent implements OnInit, OnDestroy {
 
   async onStart () {
 
-    this.timeLeft = 10;
+    this.timeLeft = 100;
     this.score = 0;
+    this.usedFlags = [[],[],[]];
+
 
     this.interval = setInterval(() => {
       if(this.timeLeft > 0) {
@@ -62,6 +66,8 @@ export class GameComponent implements OnInit, OnDestroy {
 
     await new Promise(resolve => setTimeout(resolve, this.timeLeft*1000));
 
+    alert('Uw score is: ' + this.score);
+
   }
 
   onFlagClicked(code: String) {
@@ -72,18 +78,54 @@ export class GameComponent implements OnInit, OnDestroy {
 
     this.setNewFlags();
 
-
   }
 
   setNewFlags() {
+
+    var selectedCategory: number = 0;
+    var used: boolean = true;
+    let numbers: number[];
+    let question: number;
+
+
+    if(this.timeLeft < 30) {
+      selectedCategory = 2;
+
+    } else if (this.timeLeft > 29 && this.timeLeft < 60){
+      selectedCategory = 1;
+
+    } else {
+      selectedCategory = 0;
+
+    }
+
+    while (used) {
+
+      //Check if all flags of a the category are allready selected. Otherwise clear the list
+      if((this.countries[selectedCategory].length) == this.usedFlags[selectedCategory].length) {
+        this.usedFlags[selectedCategory] = [];
+      };
+
+      //Pick three random number from the selected category, one of them is the anwser/question
+      numbers = this.generateThreeRandomNumbers(this.countries[selectedCategory].length);
+      question = numbers[Math.floor(Math.random() * numbers.length)];
+
+      //Check if the selected flags is already chosen or not
+      if(this.usedFlags[selectedCategory].indexOf(question) === -1) {
+        this.usedFlags[selectedCategory].push(question);
+        used = false;
+      } else {
+        used = true;
+      }
+
+    }
     
-    let numbers = this.generateThreeRandomNumbers(this.easyCountries.length);
+    // Assign the selected flags 
+    this.flag0 = this.countries[selectedCategory][numbers[0]];
+    this.flag1 = this.countries[selectedCategory][numbers[1]];
+    this.flag2 = this.countries[selectedCategory][numbers[2]];
 
-    this.flag0 = this.easyCountries[numbers[0]];
-    this.flag1 = this.easyCountries[numbers[1]];
-    this.flag2 = this.easyCountries[numbers[2]];
-
-    this.flagQuestion = this.easyCountries[numbers[Math.floor(Math.random() * numbers.length)]];
+    this.flagQuestion = this.countries[selectedCategory][question];
 
   }
 
@@ -103,7 +145,9 @@ export class GameComponent implements OnInit, OnDestroy {
 
   seed(): void {
 
-    this.easyCountries = [{name:"België", code:"be"}, 
+    this.countries = [
+    //Easy countries  
+    [{name:"België", code:"be"}, 
     {name:"Nederland", code:"nl"},
     {name:"Frankrijk", code:"fr"},
     {name:"Duitsland", code:"de"},
@@ -127,20 +171,33 @@ export class GameComponent implements OnInit, OnDestroy {
     {name:"Nepal", code:"np"},
     {name:"Marokko", code:"ma"},
     {name:"Noorwegen", code:"no"},
-    {name:"Marokko", code:"ma"},
     {name:"Potugal", code:"pt"},
     {name:"Rusland", code:"ru"},
     {name:"Saoudi Arabië", code:"sa"},
     {name:"Zuid-Korea", code:"kr"},
     {name:"Sri Lanka", code:"lk"},
     {name:"Zwitserland", code:"ch"},
-    {name:"Turkije", code:"tr"},
+    {name:"Turkije", code:"tr"}
 
+
+    //Medium difficulty countries
+    ], [{name: "Bangladesh", code: "bd"},
+    {name:"Bhutan", code:"bt"},
+    {name:"Bolivië", code:"bo"},
+    {name:"Burundi", code:"bi"},
+    {name:"Kameroen", code:"cm"}
+
+    //Hard difficulty countries
+    ], [{name: "Barbados", code: "bb"},
+    {name:"Belize", code:"bz"},
+    {name:"Tsjaad", code:"td"},
+    {name:"Djibouti", code:"dj"},
+    {name:"Eritrea", code:"er"}
+    ]
 
   ];
 
   }
-
 
 }
 
