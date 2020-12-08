@@ -2,20 +2,29 @@
 <app-menu></app-menu>
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-4">
-            <h1>{{flagQuestion.name}}</h1><h1>Timer: {{timeLeft}} - Score: {{score}}</h1>
+        <div class="col-3">
+            <h1>Timer: {{timeLeft}}</h1>
+        </div>
+        <div class="col-6">
+            <h1>{{flagQuestion.name}}</h1>
+        </div>
+        <div class="col-3">
+            <h1>Score: {{score}}</h1>
         </div>
     </div>
 
-    <div class="row justify-content-center">
-        <div class="media">
-            <img src="https://flagcdn.com/w160/{{flag0.code}}.png" (click)="onFlagClicked(flag0.code)">
+    <div class="row justify-content-center text-center">
+        <div class="col-12 col-md-2">
+            <img src="https://flagcdn.com/h80/{{flag0.code}}.png" (click)="onFlagClicked(flag0.code)"
+            [class]="classFlag0">
         </div>
-        <div class="media">
-            <img src="https://flagcdn.com/w160/{{flag1.code}}.png" (click)="onFlagClicked(flag1.code)">
+        <div class="col-12 col-md-2">
+            <img src="https://flagcdn.com/h80/{{flag1.code}}.png" (click)="onFlagClicked(flag1.code)"
+            [class]="classFlag1">
         </div>
-        <div class="media">
-            <img src="https://flagcdn.com/w160/{{flag2.code}}.png" (click)="onFlagClicked(flag2.code)">
+        <div class="col-12 col-md-2">
+            <img src="https://flagcdn.com/h80/{{flag2.code}}.png" (click)="onFlagClicked(flag2.code)"
+            [class]="classFlag2">
         </div>
     </div>
     <div class="row justify-content-center">

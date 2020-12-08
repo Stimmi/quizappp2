@@ -1,4 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Console } from 'console';
+import { promise } from 'protractor';
 import { Subscription } from 'rxjs';
 import { DatabaseService } from '../services/database.service'
 
@@ -26,6 +28,11 @@ export class GameComponent implements OnInit, OnDestroy {
   score: number = 0;
   interval;
 
+  classFlag0 = 'border border-dark rounded';
+  classFlag1 = 'border border-dark rounded';
+  classFlag2 = 'border border-dark rounded';
+
+
   constructor(private db: DatabaseService) { }
 
   ngOnInit(): void {
@@ -51,30 +58,32 @@ export class GameComponent implements OnInit, OnDestroy {
 
   async onStart () {
 
-    this.timeLeft = 100;
+    this.timeLeft = 10;
     this.score = 0;
     this.usedFlags = [[],[],[]];
 
+    await new Promise(resolve => {
+      const interval = setInterval(() => {
+        if (this.timeLeft > 0) {
+          this.timeLeft--;
+        } else {
+          resolve('');
+          clearInterval(interval);
+        };
+      }, 1000);})
 
-    this.interval = setInterval(() => {
-      if(this.timeLeft > 0) {
-        this.timeLeft--;
-      } else {
-        clearInterval(this.interval);
-      }
-    },1000)
-
-    await new Promise(resolve => setTimeout(resolve, this.timeLeft*1000));
 
     alert('Uw score is: ' + this.score);
 
   }
+
 
   onFlagClicked(code: String) {
 
     if(this.flagQuestion.code == code) {
       this.score++;
     }
+
 
     this.setNewFlags();
 
