@@ -13,7 +13,8 @@ const routes: Routes = [
   { path: 'start', component: HomeComponent },
   { path: 'score', component: ScoreboardComponent },
   { path: 'schifting', component: GameComponent },
-  { path: 'quiz', component: QuizComponent }
+  { path: 'quiz', component: QuizComponent },
+  { path: '**', component: RegisterComponent }
 
 ];
 

@@ -16,4 +16,8 @@ export class DatabaseService {
     return this.highscores;
 
   }
+
+  addHighscore(highscore) {
+    return this.afs.collection(`highscores`).add(Object.assign({},highscore));
+  }
 }

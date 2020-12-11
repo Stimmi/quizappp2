@@ -1,6 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Console } from 'console';
-import { promise } from 'protractor';
 import { Subscription } from 'rxjs';
 import { DatabaseService } from '../services/database.service'
 
@@ -32,6 +30,10 @@ export class GameComponent implements OnInit, OnDestroy {
   classFlag1 = 'border border-dark rounded';
   classFlag2 = 'border border-dark rounded';
 
+  gameState: string = 'start';
+  playerName: string = '';
+  save: boolean = true;
+
 
   constructor(private db: DatabaseService) { }
 
@@ -44,7 +46,7 @@ export class GameComponent implements OnInit, OnDestroy {
     this.flagQuestion = this.countries[0][1];
 
     this.subscriptionHighscores = this.db.getHighscores()
-    .subscribe(hs => {this.highscores = hs});
+    .subscribe(hs => this.processHighscores(hs));
 
   }
 
@@ -58,7 +60,9 @@ export class GameComponent implements OnInit, OnDestroy {
 
   async onStart () {
 
-    this.timeLeft = 10;
+    this.gameState = 'game';
+    this.save = true;
+    this.timeLeft = 100;
     this.score = 0;
     this.usedFlags = [[],[],[]];
 
@@ -72,8 +76,8 @@ export class GameComponent implements OnInit, OnDestroy {
         };
       }, 1000);})
 
+      this.gameState = 'finish';
 
-    alert('Uw score is: ' + this.score);
 
   }
 
@@ -152,17 +156,48 @@ export class GameComponent implements OnInit, OnDestroy {
     return numbers;
   }
 
+  saveHighScore(): boolean {
+
+    this.save = false;
+
+    let highscore = {
+      team: this.playerName, 
+      score: this.score
+    }
+
+    if(this.playerName.length > 1) {
+      this.db.addHighscore(highscore)
+
+    }
+
+    return false;
+
+  }
+
+  processHighscores(hs) {
+
+    this.highscores = hs;
+    this.highscores.sort((a,b) => b.score - a.score);
+  }
+
   seed(): void {
 
     this.countries = [
     //Easy countries  
     [{name:"België", code:"be"}, 
     {name:"Nederland", code:"nl"},
+    {name:"Bulgarije", code:"bg"},
     {name:"Frankrijk", code:"fr"},
     {name:"Duitsland", code:"de"},
     {name:"China", code:"cn"},
     {name:"Antartica", code:"aq"},
     {name:"Cambodia", code:"kh"},
+    {name:"Colombia", code:"co"},
+    {name:"Ethiopië", code:"et"},
+    {name:"Fiji", code:"fj"},
+    {name:"Georgië", code:"ge"},
+    {name:"Groenland", code:"gl"},
+
     {name:"Canada", code:"ca"},
     {name:"Congo DRC", code:"cd"},
     {name:"Cuba", code:"cu"},
@@ -194,14 +229,66 @@ export class GameComponent implements OnInit, OnDestroy {
     {name:"Bhutan", code:"bt"},
     {name:"Bolivië", code:"bo"},
     {name:"Burundi", code:"bi"},
-    {name:"Kameroen", code:"cm"}
+    {name:"Brunei", code:"bn"},
+    {name:"Costa Rica", code:"cr"},
+    {name:"Curaçao", code:"cw"},
+    {name:"Dominicaanse Rebubliek", code:"do"},
+    {name:"Haiti", code:"ht"},
+    {name:"Hong Kong", code:"hk"},
+    {name:"Hongarije", code:"hu"},
+    {name:"Ijsland", code:"is"},
+    {name:"Maleisië", code:"my"},
+    {name:"Micornesië", code:"fm"},
+    {name:"Mongolië", code:"mn"},
+    {name:"Myanmar", code:"mm"},
+
+    {name:"Kameroen", code:"cm"},
+    {name:"Andorra", code:"ad"},
+    {name:"Angola", code:"ao"},
+    {name:"Chili", code:"cl"},
+    {name:"Venezuela", code:"ve"},
+    {name:"Uruguay", code:"uy"},
+    {name:"Tunesië", code:"tn"},
+    {name:"Thailand", code:"th"},
+
+    {name:"Oostenrijk", code:"at"},
+    {name:"Armenië", code:"am"},
+    {name:"Azerbeidzjan", code:"az"},
+    {name:"Wit-Rusland", code:"by"},
+    {name:"Bosnië-Herzegovina", code:"ba"}
+
 
     //Hard difficulty countries
     ], [{name: "Barbados", code: "bb"},
     {name:"Belize", code:"bz"},
     {name:"Tsjaad", code:"td"},
     {name:"Djibouti", code:"dj"},
-    {name:"Eritrea", code:"er"}
+    {name:"Eritrea", code:"er"},
+    {name:"Benin", code:"bj"},
+    {name:"Botswana", code:"bw"},
+    {name:"Gabon", code:"ga"},
+    {name:"Mali", code:"ml"},
+
+    {name:"Burkina Faso", code:"bf"},
+    {name:"Tuvalu", code:"tv"},
+    {name:"Oost-Timor", code:"tl"},
+    {name:"Guinee Bissau", code:"gw"},
+    {name:"Guyana", code:"gy"},
+    {name:"Irak", code:"iq"},
+    {name:"Syrie", code:"sy"},
+    {name:"Palestina", code:"ps"},
+    {name:"Turkmenistan", code:"tm"},
+
+    {name:"Egypte", code:"eg"},
+    {name:"Kyrgyzië", code:"kg"},
+    {name:"Mauritanië", code:"mr"},
+    {name:"Mauritius", code:"mu"},
+    {name:"Nauru", code:"nr"},
+    {name:"Yemen", code:"ye"},
+
+    {name:"Zambia", code:"zm"},
+    {name:"Zimbabwe", code:"zw"},
+
     ]
 
   ];

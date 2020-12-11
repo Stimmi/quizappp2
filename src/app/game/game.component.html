@@ -1,18 +1,19 @@
 
 <app-menu></app-menu>
-<div class="container">
+<div *ngIf="gameState=='game'" class="container">
     <div class="row justify-content-center">
-        <div class="col-3">
-            <h1>Timer: {{timeLeft}}</h1>
+        <div class="col-6 text-center">
+            <h3>Tijd: {{timeLeft}}</h3>
         </div>
+        <div class="col-6 text-center">
+            <h3>Score: {{score}}</h3>
+        </div>
+    </div>
+    <div class="row justify-content-center">
         <div class="col-6">
             <h1>{{flagQuestion.name}}</h1>
         </div>
-        <div class="col-3">
-            <h1>Score: {{score}}</h1>
-        </div>
     </div>
-
     <div class="row justify-content-center text-center">
         <div class="col-12 col-md-2">
             <img src="https://flagcdn.com/h80/{{flag0.code}}.png" (click)="onFlagClicked(flag0.code)"
@@ -27,16 +28,48 @@
             [class]="classFlag2">
         </div>
     </div>
+
+</div>
+<div *ngIf="gameState=='start'" class="container">
+    <div class="row text-center">
+        <div class="col-12">
+            <p>Raad zo veel mogelijk vlaggen in 100 seconden!</p>
+        </div>
+    </div>
     <div class="row justify-content-center">
-        <div class="col-4">
-            <button type="btn" class="btn btn-dark" (click)="onStart()">Start</button>
+        <div class="col-auto">
+            <button type="btn" class="btn btn-dark" (click)="onStart()">Start het spel</button>
         </div>
     </div>
 </div>
+<div *ngIf="gameState=='finish'" class="container">
+    <div class="row text-center">
+        <div class="col-12">
+            <p>Goed gedaan! Je hebt {{score}} vlaggen correct geraden</p>
 
+            <p>Geef je naam in om je score te bewaren</p>
+        </div>
+    </div>
+    <form>
+        <div *ngIf="save" class="form-row align-items-center justify-content-center">
+            <div class="col-auto my-1">
+                <input type="text" class="form-control" [value]="playerName" (input)="playerName=$event.target.value" placeholder="Naam">
+            </div>
+            <div class="col-auto my-1">
+                <button type="submit" class="btn btn-primary" (click)="saveHighScore()">Opslaan</button>
+            </div>
+        </div>
+    </form>
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <button type="btn" class="btn btn-dark" (click)="onStart()">Nog een keer?</button>
+        </div>
+    </div>
+</div>
 <div class="container">
     <div *ngIf="highscores">
         <h2>Highscore</h2>
         <div *ngFor='let highscore of highscores'>{{highscore.team}} : {{highscore.score}} </div>
     </div>
 </div>
+
