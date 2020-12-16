@@ -215,7 +215,7 @@ export class GameComponent implements OnInit, OnDestroy {
     {name:"Nepal", code:"np"},
     {name:"Marokko", code:"ma"},
     {name:"Noorwegen", code:"no"},
-    {name:"Potugal", code:"pt"},
+    {name:"Portugal", code:"pt"},
     {name:"Rusland", code:"ru"},
     {name:"Saoudi Arabië", code:"sa"},
     {name:"Zuid-Korea", code:"kr"},
