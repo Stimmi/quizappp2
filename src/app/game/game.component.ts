@@ -166,7 +166,7 @@ export class GameComponent implements OnInit, OnDestroy {
     }
 
     if(this.playerName.length > 1) {
-      this.db.addHighscore(highscore)
+      this.db.setHighscore(highscore)
 
     }
 

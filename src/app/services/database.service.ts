@@ -17,7 +17,7 @@ export class DatabaseService {
 
   }
 
-  addHighscore(highscore) {
+  setHighscore(highscore) {
     return this.afs.collection(`highscores`).add(Object.assign({},highscore));
   }
 }
