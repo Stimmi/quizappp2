@@ -30,6 +30,7 @@ export class QuizComponent implements OnInit {
   });
 
   round2 = new FormGroup({
+    round: new FormControl(2),
     a1: new FormControl(''),
     a2: new FormControl(''),
     a3: new FormControl(''),
