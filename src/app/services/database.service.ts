@@ -20,4 +20,8 @@ export class DatabaseService {
   setHighscore(highscore) {
     return this.afs.collection(`highscores`).add(Object.assign({},highscore));
   }
+
+  setRound(round) {
+    return this.afs.collection(`rounds`).add(Object.assign({},round));
+  }
 }

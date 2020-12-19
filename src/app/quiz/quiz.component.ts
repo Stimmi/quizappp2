@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { DatabaseService } from '../services/database.service';
 
 @Component({
   selector: 'app-quiz',
@@ -7,9 +9,55 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuizComponent implements OnInit {
 
-  constructor() { }
+  // Working with reactive forms check: https://angular.io/guide/reactive-forms
+
+  round;
+  team: string = 'Test team'
+
+  round1 = new FormGroup({
+    round: new FormControl(1),
+    a1: new FormControl(''),
+    a2: new FormControl(''),
+    a3: new FormControl(''),
+    a4: new FormControl(''),
+    a5: new FormControl(''),
+    a6: new FormControl(''),
+    a7: new FormControl(''),
+    a8: new FormControl(''),
+    a9: new FormControl(''),
+    a10: new FormControl('')
+
+  });
+
+  round2 = new FormGroup({
+    a1: new FormControl(''),
+    a2: new FormControl(''),
+    a3: new FormControl(''),
+    a4: new FormControl(''),
+    a5: new FormControl(''),
+    a6: new FormControl(''),
+    a7: new FormControl(''),
+    a8: new FormControl(''),
+    a9: new FormControl(''),
+    a10: new FormControl('')
+
+  });
+
+  constructor(private db: DatabaseService) { }
 
   ngOnInit(): void {
+  }
+
+
+  onSubmit(round) {
+
+    this.round = round.value;
+    this.round.team = this.team;
+
+    this.db.setRound(this.round);
+
+    console.log(round.value);
+
   }
 
 }
