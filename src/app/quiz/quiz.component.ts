@@ -15,7 +15,7 @@ export class QuizComponent implements OnInit {
   team: string = 'Test team'
 
   round1 = new FormGroup({
-    round: new FormControl(1),
+    number: new FormControl(1),
     a1: new FormControl(''),
     a2: new FormControl(''),
     a3: new FormControl(''),
@@ -30,7 +30,7 @@ export class QuizComponent implements OnInit {
   });
 
   round2 = new FormGroup({
-    round: new FormControl(2),
+    number: new FormControl(2),
     a1: new FormControl(''),
     a2: new FormControl(''),
     a3: new FormControl(''),
@@ -50,6 +50,7 @@ export class QuizComponent implements OnInit {
   }
 
 
+  // Submitting a from 
   onSubmit(round) {
 
     this.round = round.value;
@@ -57,7 +58,6 @@ export class QuizComponent implements OnInit {
 
     this.db.setRound(this.round);
 
-    console.log(round.value);
 
   }
 

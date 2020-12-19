@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
+import { CorrectionsComponent } from './corrections/corrections.component';
 import { GameComponent } from './game/game.component';
 import { HomeComponent } from './home/home.component';
 import { QuizComponent } from './quiz/quiz.component';
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'score', component: ScoreboardComponent },
   { path: 'schifting', component: GameComponent },
   { path: 'quiz', component: QuizComponent },
+  { path: 'verbeter', component: CorrectionsComponent },
   { path: '**', component: RegisterComponent }
 
 ];

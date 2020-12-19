@@ -15,6 +15,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CorrectionsComponent } from './corrections/corrections.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ScoreboardComponent,
     RegisterComponent,
     MenuComponent,
-    QuizComponent
+    QuizComponent,
+    CorrectionsComponent
   ],
   imports: [
     BrowserModule,
