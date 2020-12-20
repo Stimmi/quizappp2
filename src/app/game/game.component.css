@@ -2,6 +2,24 @@ img {
     margin: 20px;
 }
 
-h1 {
+h3 {
     text-align: center;
 }
+
+
+.correct {
+    transform: scale(1.2);
+    border: 5px solid green;
+    border-radius: 15px;
+}
+
+.incorrect {
+    transform: scale(0.8);
+    border: 5px solid red;
+    border-radius: 15px;
+}                
+
+.selection {
+    border: 1px solid black;
+    border-radius: 15px;
+}  

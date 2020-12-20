@@ -1,11 +1,30 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { DatabaseService } from '../services/database.service'
+import { DatabaseService } from '../services/database.service';
+import {
+  trigger,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
-  styleUrls: ['./game.component.css']
+  styleUrls: ['./game.component.css'],
+
+  animations: [
+    trigger('flyInOut', [
+      transition(':enter', [
+        style({transform: 'translateX(-100%)'}),
+        animate('200ms ease-in', style({transform: 'translateX(0%)'}))
+      ]),
+      transition(':leave', [
+        animate('1000ms ease-in', style({transform: 'translateX(100%)'}))
+      ])
+    ])
+  ]
+
 })
 
 
@@ -26,13 +45,18 @@ export class GameComponent implements OnInit, OnDestroy {
   score: number = 0;
   interval;
 
-  classFlag0 = 'border border-dark rounded';
-  classFlag1 = 'border border-dark rounded';
-  classFlag2 = 'border border-dark rounded';
+  classFlag0 = 'selection';
+  classFlag1 = 'selection';
+  classFlag2 = 'selection';
+  classFlagStart = 'selection';
 
   gameState: string = 'start';
   playerName: string = '';
   save: boolean = true;
+  showCountry = true;
+  flagClicked = false;
+
+
 
 
   constructor(private db: DatabaseService) { }
@@ -82,14 +106,41 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
 
-  onFlagClicked(code: String) {
+  async onFlagClicked(code: String) {
 
+    if(!this.flagClicked) {
+
+    this.flagClicked = true;
+
+    // Add point to score when answer is correct
     if(this.flagQuestion.code == code) {
       this.score++;
     }
 
+    //Make the correct flag bigger
+    if(this.flagQuestion.code == this.flag0.code) {
+      this.classFlag0 = 'correct';
+    } else {
+      this.classFlag0 = 'incorrect';
+    }
+    if(this.flagQuestion.code == this.flag1.code) {
+      this.classFlag1 = 'correct';
+    } else {
+      this.classFlag1 = 'incorrect';
+    }
+    if(this.flagQuestion.code == this.flag2.code) {
+      this.classFlag2 = 'correct';
+    } else {
+      this.classFlag2 = 'incorrect';
+    }
 
+    this.showCountry = false;
+
+    await new Promise(resolve => setTimeout(resolve, 1000))
     this.setNewFlags();
+
+    }
+
 
   }
 
@@ -99,6 +150,13 @@ export class GameComponent implements OnInit, OnDestroy {
     var used: boolean = true;
     let numbers: number[];
     let question: number;
+
+    this.classFlag0 = this.classFlagStart;
+    this.classFlag1 = this.classFlagStart;
+    this.classFlag2 = this.classFlagStart;
+
+    this.showCountry = true;
+    this.flagClicked = false;
 
 
     if(this.timeLeft < 30) {
