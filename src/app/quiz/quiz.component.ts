@@ -15,32 +15,30 @@ export class QuizComponent implements OnInit {
   team: string = 'Test team'
 
   round1 = new FormGroup({
-    number: new FormControl(1),
-    a1: new FormControl(''),
-    a2: new FormControl(''),
-    a3: new FormControl(''),
-    a4: new FormControl(''),
-    a5: new FormControl(''),
-    a6: new FormControl(''),
-    a7: new FormControl(''),
-    a8: new FormControl(''),
-    a9: new FormControl(''),
-    a10: new FormControl('')
+    1: new FormControl(''),
+    2: new FormControl(''),
+    3: new FormControl(''),
+    4: new FormControl(''),
+    5: new FormControl(''),
+    6: new FormControl(''),
+    7: new FormControl(''),
+    8: new FormControl(''),
+    9: new FormControl(''),
+    10: new FormControl('')
 
   });
 
   round2 = new FormGroup({
-    number: new FormControl(2),
-    a1: new FormControl(''),
-    a2: new FormControl(''),
-    a3: new FormControl(''),
-    a4: new FormControl(''),
-    a5: new FormControl(''),
-    a6: new FormControl(''),
-    a7: new FormControl(''),
-    a8: new FormControl(''),
-    a9: new FormControl(''),
-    a10: new FormControl('')
+    1: new FormControl(''),
+    2: new FormControl(''),
+    3: new FormControl(''),
+    4: new FormControl(''),
+    5: new FormControl(''),
+    6: new FormControl(''),
+    7: new FormControl(''),
+    8: new FormControl(''),
+    9: new FormControl(''),
+    10: new FormControl('')
 
   });
 
@@ -51,10 +49,22 @@ export class QuizComponent implements OnInit {
 
 
   // Submitting a from 
-  onSubmit(round) {
+  onSubmit(round, number) {
 
-    this.round = round.value;
+    this.round = {};
+    let answers = [];
+
+    for (const key in round.value) {
+      if (Object.prototype.hasOwnProperty.call(round.value, key)) {
+        const element = {answer: round.value[key], number: key};
+        answers.push(element);
+        
+      }
+    }
+
     this.round.team = this.team;
+    this.round.answers = answers;
+    this.round.number = number;
 
     this.db.setRound(this.round);
 

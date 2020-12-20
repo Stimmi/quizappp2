@@ -1,1 +1,23 @@
-<p>corrections works!</p>
+<div class="container">
+    <div *ngFor="let round of correctionsList">
+        <h3>Ronde: {{round.number}} Ploeg: {{round.team}}</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Antwoord</th>
+                    <th scope="col">Verbetering</th>
+                    <th scope="col">Correct</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let answer of round.answers">
+                    <th scope="row">{{answer.number}}</th>
+                    <td>{{answer.answer}}</td>
+                    <td>{{answer.corrections}}</td>
+                    <td><input type="checkbox" class="form-check-input" id="exampleCheck1"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

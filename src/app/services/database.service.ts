@@ -9,13 +9,10 @@ export class DatabaseService {
 
   highscores: Observable<any[]>;
 
-  private roundsSource = new BehaviorSubject([]);
-  currentRounds = this.roundsSource.asObservable();
+
 
   constructor(private afs: AngularFirestore) { 
 
-    //Upon loading the app all rounds are loaded
-    this.getRounds();
   }
 
   getHighscores () {
@@ -32,6 +29,11 @@ export class DatabaseService {
     return this.afs.collection(`rounds`).add(Object.assign({},round));
   }
 
+  getRounds() {
+    return this.afs.collection("rounds").valueChanges({ idField: 'id' });
+
+  }
+
   getCorrections () {
 
     return this.afs.collection('corrections').valueChanges();
@@ -39,8 +41,11 @@ export class DatabaseService {
   }
 
 
-
+/*
   //Data avalaibe in the entire application
+  private roundsSource = new BehaviorSubject([]);
+  currentRounds = this.roundsSource.asObservable();
+
   getRounds() {
 
     this.afs.collection("rounds").valueChanges({ idField: 'id' })
@@ -52,6 +57,6 @@ export class DatabaseService {
 
     this.roundsSource.next(message)
   }
-
+*/
 
 }

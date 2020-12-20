@@ -10,7 +10,10 @@ import { DatabaseService } from '../services/database.service';
 export class CorrectionsComponent implements OnInit, OnDestroy {
 
   subscriptionCorrections: Subscription;
-  subscriptionRounds: Subscription
+  subscriptionRounds: Subscription;
+  correctionsList;
+  corrections;
+  rounds;
 
   constructor(private db: DatabaseService) { }
 
@@ -18,7 +21,7 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
 
     this.subscriptionCorrections = this.db.getCorrections().subscribe(corrections => this.processCorrections(corrections));
 
-    this.subscriptionRounds = this.db.currentRounds.subscribe(rounds => this.processRounds(rounds));
+    this.subscriptionRounds = this.db.getRounds().subscribe(rounds => this.processRounds(rounds));
 
   }
 
@@ -36,10 +39,47 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
 
   processCorrections(corrections) {
     console.log(corrections);
+    this.corrections = corrections;
+
+    if(this.rounds) {
+      this.createCorrectionsList();
+    }    
+
+
+
   }
 
-  processRounds(corrections) {
-    console.log(corrections);
+  processRounds(rounds) {
+    console.log(rounds);
+    this.rounds = rounds;
+    if(this.corrections) {
+      this.createCorrectionsList();
+
+    }
+
+  }
+
+  createCorrectionsList() {
+
+
+    this.correctionsList = this.rounds;
+
+    for (let index = 0; index < this.correctionsList.length; index++) {
+      for (let indexx = 0; indexx < this.correctionsList[index].answers.length; indexx++) {
+
+
+        if(this.corrections[this.correctionsList[index].number-1].corrections[indexx]) {
+
+          this.correctionsList[index].answers[indexx].corrections = this.corrections[this.correctionsList[index].number-1].corrections[indexx].correction;
+        
+        }
+        
+      }
+      
+    }
+
+
+
   }
 
 }
