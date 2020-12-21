@@ -5,7 +5,7 @@ import { DatabaseService } from '../services/database.service';
 @Component({
   selector: 'app-corrections',
   templateUrl: './corrections.component.html',
-  styleUrls: ['./corrections.component.css']
+  styleUrls: ['./corrections.component.scss']
 })
 export class CorrectionsComponent implements OnInit, OnDestroy {
 

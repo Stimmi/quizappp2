@@ -12,7 +12,7 @@ import {
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
-  styleUrls: ['./game.component.css'],
+  styleUrls: ['./game.component.scss'],
 
   animations: [
     trigger('flyInOut', [
