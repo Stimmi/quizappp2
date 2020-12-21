@@ -1,16 +1,23 @@
 
 <app-menu></app-menu>
 <div *ngIf="gameState=='game'" class="container">
-    <div class="row justify-content-center">
-        <div class="col-6 text-center">
-            <h3>Tijd: {{timeLeft}}</h3>
+
+    <div class="row firstRow">
+        <div class="col-9">
+            <div class="progress" style="height: 30px;">
+                <div class="progress-bar bg-secondary" role="progressbar" aria-valuenow="timeLeft"
+                aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'width': timeLeft + '%', 'height':'30px'}">
+                </div>
+            </div> 
         </div>
-        <div class="col-6 text-center">
-            <h3>Score: {{score}}</h3>
+        <div class="col-3">
+            <div class="circle">
+                {{score}}
+            </div>
         </div>
     </div>
     <div class="row justify-content-center" [@flyInOut] *ngIf="showCountry">
-        <div  class="col-6">
+        <div  class="col-12">
             <h3>{{flagQuestion.name}}</h3>
         </div>
     </div>
@@ -67,9 +74,22 @@
     </div>
 </div>
 <div class="container">
-    <div *ngIf="highscores">
-        <h2>Highscore</h2>
-        <div *ngFor='let highscore of highscores'>{{highscore.team}} : {{highscore.score}} </div>
-    </div>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Ploeg</th>
+            <th scope="col">Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let highscore of highscores; let i = index" [attr.data-index]="i">
+            <th scope="row">{{i}}</th>
+            <td>{{highscore.team}}</td>
+            <td>{{highscore.score}}</td>
+          </tr>
+        </tbody>
+      </table>
 </div>
+
 

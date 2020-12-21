@@ -8,6 +8,7 @@ import {
   transition
 } from '@angular/animations';
 
+
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
@@ -55,7 +56,6 @@ export class GameComponent implements OnInit, OnDestroy {
   save: boolean = true;
   showCountry = true;
   flagClicked = false;
-
 
 
 
