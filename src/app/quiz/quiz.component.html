@@ -1,38 +1,77 @@
 <app-menu></app-menu>
-<div class="container">
-    <form [formGroup]="round1" (ngSubmit)="onSubmit(round1,1)">
+<div class="page-wrapper chiller-theme" [class.toggled]="statusSidebar">
+  <a (click)="toggleSidebar()" id="show-sidebar" class="btn btn-sm btn-dark show-sidebar">
+    Rondes
+  </a>
+  <nav id="sidebar" class="sidebar-wrapper">
 
-        <h5>Ronde 1</h5> 
 
-        <input type="text" formControlName="1" class="form-control" placeholder="Vraag 1">
-        <input type="text" formControlName="2" class="form-control" placeholder="Vraag 2"> 
-        <input type="text" formControlName="3" class="form-control" placeholder="Vraag 3"> 
-        <input type="text" formControlName="4" class="form-control" placeholder="Vraag 4"> 
-        <input type="text" formControlName="5" class="form-control" placeholder="Vraag 5"> 
-        <input type="text" formControlName="6" class="form-control" placeholder="Vraag 6"> 
-        <input type="text" formControlName="7" class="form-control" placeholder="Vraag 7"> 
-        <input type="text" formControlName="8" class="form-control" placeholder="Vraag 8"> 
-        <input type="text" formControlName="9" class="form-control" placeholder="Vraag 9"> 
-        <input type="text" formControlName="10" class="form-control" placeholder="Vraag 10"> 
+    <div class="sidebar-brand">
+      <a></a>
+      <div (click)="toggleSidebar()" id="close-sidebar">
+        <fa-icon [icon]="faTimes"></fa-icon>
+      </div>
+    </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    
-      <form [formGroup]="round2" (ngSubmit)="onSubmit(round2,2)">
+    <div id="sidebar-title" class="sidebar-title">Rondes</div>
+    <div id="rounds-menu" class="rounds-menu">
+      <ul class="rounds-menu-list">
+        <li class="rounds-menu-item"><a class="rounds-menu-item-number" (click)="setRound(1)">1</a></li>
+        <li class="rounds-menu-item"><a class="rounds-menu-item-text" (click)="setRound(2)">2<br>ABC</a></li>
+        <li class="rounds-menu-item"><a class="rounds-menu-item-number">3</a></li>
+        <li class="rounds-menu-item"><a class="rounds-menu-item-text">4<br>Cluedo</a></li>
+        <li class="rounds-menu-item"><a class="rounds-menu-item-number">5</a></li>
+        <li class="rounds-menu-item"><a class="rounds-menu-item-text">6<br>Triple</a></li>
 
-        <h5>Ronde 2</h5> 
+      </ul>
+    </div>
+    <!-- End of sidebar -->
 
-        <input type="text" formControlName="1" class="form-control" placeholder="Vraag 1">
-        <input type="text" formControlName="2" class="form-control" placeholder="Vraag 2"> 
-        <input type="text" formControlName="3" class="form-control" placeholder="Vraag 3"> 
-        <input type="text" formControlName="4" class="form-control" placeholder="Vraag 4"> 
-        <input type="text" formControlName="5" class="form-control" placeholder="Vraag 5"> 
-        <input type="text" formControlName="6" class="form-control" placeholder="Vraag 6"> 
-        <input type="text" formControlName="7" class="form-control" placeholder="Vraag 7"> 
-        <input type="text" formControlName="8" class="form-control" placeholder="Vraag 8"> 
-        <input type="text" formControlName="9" class="form-control" placeholder="Vraag 9"> 
-        <input type="text" formControlName="10" class="form-control" placeholder="Vraag 10"> 
 
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+  </nav>
+  <!-- Answer form wrapper  -->
+  <main class="page-content">
+    <div class="container">
+      
+        <form [formGroup]="round1" [hidden]="currentRound != 1" (ngSubmit)="onSubmit(round1,1)">
+
+          <h5>Ronde 1</h5>
+
+          <input type="text" formControlName="1" class="form-control" placeholder="Vraag 1">
+          <input type="text" formControlName="2" class="form-control" placeholder="Vraag 2">
+          <input type="text" formControlName="3" class="form-control" placeholder="Vraag 3">
+          <input type="text" formControlName="4" class="form-control" placeholder="Vraag 4">
+          <input type="text" formControlName="5" class="form-control" placeholder="Vraag 5">
+          <input type="text" formControlName="6" class="form-control" placeholder="Vraag 6">
+          <input type="text" formControlName="7" class="form-control" placeholder="Vraag 7">
+          <input type="text" formControlName="8" class="form-control" placeholder="Vraag 8">
+          <input type="text" formControlName="9" class="form-control" placeholder="Vraag 9">
+          <input type="text" formControlName="10" class="form-control" placeholder="Vraag 10">
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <form [formGroup]="round2" [hidden]="currentRound != 2" (ngSubmit)="onSubmit(round2,2)">
+
+          <h5>Ronde 2</h5>
+
+          <input type="text" formControlName="1" class="form-control" placeholder="Vraag 1">
+          <input type="text" formControlName="2" class="form-control" placeholder="Vraag 2">
+          <input type="text" formControlName="3" class="form-control" placeholder="Vraag 3">
+          <input type="text" formControlName="4" class="form-control" placeholder="Vraag 4">
+          <input type="text" formControlName="5" class="form-control" placeholder="Vraag 5">
+          <input type="text" formControlName="6" class="form-control" placeholder="Vraag 6">
+          <input type="text" formControlName="7" class="form-control" placeholder="Vraag 7">
+          <input type="text" formControlName="8" class="form-control" placeholder="Vraag 8">
+          <input type="text" formControlName="9" class="form-control" placeholder="Vraag 9">
+          <input type="text" formControlName="10" class="form-control" placeholder="Vraag 10">
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+     
+
+    </div>
+
+  </main>
+
 </div>

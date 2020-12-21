@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+.navbar-brand {
+    font-family: "Bebas Neue";
+    color: #facf5adc;
+    
+}
+.navbar-brand:hover{
+    font-family: "Bebas Neue";
+    color: #facf5adc;
+    
+}
+
+.navbar-custom {
+    color: #facf5adc;
+    background-color: #086850;
+}
+
+.brand-name {
+    padding-left: 10px;
+}
+
+
+.nav-link {
+    font-family: "Bebas Neue";
+    font-size: large;
+    
+}
+
+#navbar-menu {
+    margin-left: 70px;
+}
+
+.navbar-custom .navbar-text {
+    color: #facf5adc;
+}
+/* change the link color */
+.navbar-custom .navbar-nav .nav-link {
+    color: #facf5a81;
+}
+/* change the color of active or hovered links */
+.navbar-custom .nav-item.active .nav-link {
+    color: #ff5959
+}
+.navbar-custom .nav-item:hover .nav-link {
+    color: #facf5adc;
+}

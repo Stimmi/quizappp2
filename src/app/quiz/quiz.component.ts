@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DatabaseService } from '../services/database.service';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-quiz',
@@ -8,6 +10,22 @@ import { DatabaseService } from '../services/database.service';
   styleUrls: ['./quiz.component.css']
 })
 export class QuizComponent implements OnInit {
+
+  // Font awesome icons
+  faTimes = faTimes;
+
+  // Sidebar handling
+  statusSidebar: boolean = false;
+toggleSidebar(){
+    this.statusSidebar = !this.statusSidebar;
+    console.log(this.statusSidebar)       
+}
+
+// Current Round handling
+currentRound = 1
+setRound(newRound){
+  this.currentRound = newRound
+}
 
   // Working with reactive forms check: https://angular.io/guide/reactive-forms
 
@@ -71,4 +89,10 @@ export class QuizComponent implements OnInit {
 
   }
 
+ 
+    
+  
+
 }
+
+
