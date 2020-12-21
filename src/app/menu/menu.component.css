@@ -45,3 +45,7 @@
 .navbar-custom .nav-item:hover .nav-link {
     color: #facf5adc;
 }
+/* Bring Menu for other items */
+.navbar {
+    z-index: 100;
+}

@@ -1,4 +1,5 @@
 <app-menu></app-menu>
+<div class="master-wrapper">
 <div class="page-wrapper chiller-theme" [class.toggled]="statusSidebar">
   <a (click)="toggleSidebar()" id="show-sidebar" class="btn btn-sm btn-dark show-sidebar">
     Rondes
@@ -31,7 +32,7 @@
   </nav>
   <!-- Answer form wrapper  -->
   <main class="page-content">
-    <div class="container">
+    <div id="form-container" class="container">
       
         <form [formGroup]="round1" [hidden]="currentRound != 1" (ngSubmit)="onSubmit(round1,1)">
 
@@ -73,5 +74,5 @@
     </div>
 
   </main>
-
+</div>
 </div>
