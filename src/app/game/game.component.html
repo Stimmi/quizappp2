@@ -2,11 +2,19 @@
 <app-menu></app-menu>
 <div *ngIf="gameState=='game'" class="container">
 
-    <div class="row firstRow">
-        <div class="col-9">
-            <div class="progress" style="height: 30px;">
+    <div class="row align-items-center firstRow">
+        <div *ngIf="!(streakCounter>6)" class="col-9">
+            <div class="progress" style="height: 35px;">
                 <div class="progress-bar bg-secondary" role="progressbar" aria-valuenow="timeLeft"
-                aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'width': timeLeft + '%', 'height':'30px'}">
+                aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'width': (gameTime-timeLeft) + '%', 'height':'35px'}">
+                </div>
+            </div> 
+        </div>
+        <div *ngIf="streakCounter>6" class="col-9">
+            <div class="progress" style="height: 35px;">
+                <div class="progress-bar bg-dark" role="progressbar" aria-valuenow="timeLeft"
+                aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'width': 100 + '%', 'height':'35px'}">
+                <h5>Zeven op een rij! +3 sec</h5>
                 </div>
             </div> 
         </div>
@@ -40,7 +48,9 @@
 <div *ngIf="gameState=='start'" class="container">
     <div class="row text-center">
         <div class="col-12">
-            <p>Raad zo veel mogelijk vlaggen in 100 seconden!</p>
+            <br>
+            <h4>Raad zo veel mogelijk vlaggen in 100 seconden!</h4>
+            <br>
         </div>
     </div>
     <div class="row justify-content-center">
@@ -74,6 +84,7 @@
     </div>
 </div>
 <div class="container">
+    <br>
     <table class="table table-striped">
         <thead>
           <tr>

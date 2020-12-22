@@ -21,7 +21,7 @@ import {
         animate('200ms ease-in', style({transform: 'translateX(0%)'}))
       ]),
       transition(':leave', [
-        animate('1000ms ease-in', style({transform: 'translateX(100%)'}))
+        animate('700ms ease-in', style({transform: 'translateX(100%)'}))
       ])
     ])
   ]
@@ -43,8 +43,11 @@ export class GameComponent implements OnInit, OnDestroy {
   highscores: Highscore[];
 
   timeLeft: number = 100;
+  // Set the amount of time that each game will take
+  gameTime: number = 100;
   score: number = 0;
   interval;
+  streakCounter: number = 0;
 
   classFlag0 = 'selection';
   classFlag1 = 'selection';
@@ -64,10 +67,6 @@ export class GameComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     this.seed();
-    this.flag0 = this.countries[0][0];
-    this.flag1 = this.countries[0][1];
-    this.flag2 = this.countries[0][2];
-    this.flagQuestion = this.countries[0][1];
 
     this.subscriptionHighscores = this.db.getHighscores()
     .subscribe(hs => this.processHighscores(hs));
@@ -86,9 +85,12 @@ export class GameComponent implements OnInit, OnDestroy {
 
     this.gameState = 'game';
     this.save = true;
-    this.timeLeft = 100;
+    this.timeLeft = this.gameTime;
+    this.setNewFlags();
     this.score = 0;
     this.usedFlags = [[],[],[]];
+    this.streakCounter = 0;
+
 
     await new Promise(resolve => {
       const interval = setInterval(() => {
@@ -108,6 +110,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
   async onFlagClicked(code: String) {
 
+    // Prevent the player from clicking the same flag twice
     if(!this.flagClicked) {
 
     this.flagClicked = true;
@@ -115,6 +118,14 @@ export class GameComponent implements OnInit, OnDestroy {
     // Add point to score when answer is correct
     if(this.flagQuestion.code == code) {
       this.score++;
+      this.streakCounter++
+    } else {
+      this.streakCounter = 0;
+    }
+
+    // When the streak counter reach max value, bonus time is granted
+    if(this.streakCounter == 7) {
+      this.timeLeft = this.timeLeft + 3;
     }
 
     //Make the correct flag bigger
@@ -136,8 +147,12 @@ export class GameComponent implements OnInit, OnDestroy {
 
     this.showCountry = false;
 
-    await new Promise(resolve => setTimeout(resolve, 1000))
+    await new Promise(resolve => setTimeout(resolve, 700))
     this.setNewFlags();
+
+      if(this.streakCounter == 7) {
+        this.streakCounter = 0;
+      }
 
     }
 
@@ -240,10 +255,13 @@ export class GameComponent implements OnInit, OnDestroy {
 
   seed(): void {
 
-    this.countries = [
+   this.countries = [
     //Easy countries  
     [{name:"België", code:"be"}, 
     {name:"Nederland", code:"nl"},
+    {name:"Albanië", code:"al"},
+    {name:"Argentinië", code:"ar"},
+    {name:"Australië", code:"au"},
     {name:"Bulgarije", code:"bg"},
     {name:"Frankrijk", code:"fr"},
     {name:"Duitsland", code:"de"},
@@ -255,17 +273,22 @@ export class GameComponent implements OnInit, OnDestroy {
     {name:"Fiji", code:"fj"},
     {name:"Georgië", code:"ge"},
     {name:"Groenland", code:"gl"},
-
+    {name:"Kroatië", code:"hr"},
     {name:"Canada", code:"ca"},
     {name:"Congo DRC", code:"cd"},
     {name:"Cuba", code:"cu"},
     {name:"Cyprus", code:"cy"},
     {name:"Tsjechië", code:"cz"},
     {name:"Denemarken", code:"dk"},
+    {name:"Finland", code:"fi"},
     {name:"Griekenland", code:"gr"},
     {name:"Het Vaticaan", code:"va"},
     {name:"India", code:"in"},
+    {name:"Ierland", code:"ie"},
+    {name:"Jamaica", code:"jm"},
     {name:"Israël", code:"il"},
+    {name:"Italië", code:"it"},
+    {name:"Malta", code:"mt"},
     {name:"Mexico", code:"mx"},
     {name:"Libanon", code:"lb"},
     {name:"Kenia", code:"ke"},
@@ -276,39 +299,70 @@ export class GameComponent implements OnInit, OnDestroy {
     {name:"Portugal", code:"pt"},
     {name:"Rusland", code:"ru"},
     {name:"Saoudi Arabië", code:"sa"},
+    {name:"Taiwan", code:"tw"},
+    {name:"Singapore", code:"sg"},
+    {name:"Vietnam", code:"vn"},
     {name:"Zuid-Korea", code:"kr"},
     {name:"Sri Lanka", code:"lk"},
+    {name:"Suriname", code:"sr"},
     {name:"Zwitserland", code:"ch"},
+    {name:"Zweden", code:"se"},
     {name:"Turkije", code:"tr"}
 
 
     //Medium difficulty countries
     ], [{name: "Bangladesh", code: "bd"},
     {name:"Bhutan", code:"bt"},
+    {name:"Algarije", code:"dz"},
     {name:"Bolivië", code:"bo"},
     {name:"Burundi", code:"bi"},
     {name:"Brunei", code:"bn"},
+    {name:"Bahrein", code:"bh"},
     {name:"Costa Rica", code:"cr"},
     {name:"Curaçao", code:"cw"},
+    {name:"Centraal Afrikaanse Republiek", code:"cf"},
     {name:"Dominicaanse Rebubliek", code:"do"},
+    {name:"Filipijnen", code:"ph"},
+    {name:"Ecuador", code:"ec"},
+    {name:"Ghana", code:"gh"},
     {name:"Haiti", code:"ht"},
     {name:"Hong Kong", code:"hk"},
     {name:"Hongarije", code:"hu"},
     {name:"Ijsland", code:"is"},
+    {name:"Indonesië", code:"id"},
+    {name:"Iran", code:"ir"},
+    {name:"Kazachstan", code:"kz"},
+    {name:"Letland", code:"lv"},
+    {name:"Liberia", code:"lr"},
+    {name:"Litouwen", code:"lt"},
+    {name:"Lichtenstein", code:"li"},
     {name:"Maleisië", code:"my"},
+    {name:"Madagascar", code:"mg"},
     {name:"Micornesië", code:"fm"},
     {name:"Mongolië", code:"mn"},
+    {name:"Moldavië", code:"md"},
+    {name:"Montenegro", code:"me"},
     {name:"Myanmar", code:"mm"},
-
+    {name:"Noord-Korea", code:"kp"},
+    {name:"Niger", code:"ne"},
+    {name:"Nigeria", code:"ng"},
+    {name:"Oman", code:"om"},
+    {name:"Oezbekistan", code:"uz"},
+    {name:"Pakistan", code:"pk"},
+    {name:"Panama", code:"pa"},
+    {name:"Papoea-Nieuw-Guinea", code:"pg"},
+    {name:"Somalië", code:"so"},
+    {name:"Senegal", code:"sn"},
+    {name:"San Marino", code:"sm"},
     {name:"Kameroen", code:"cm"},
     {name:"Andorra", code:"ad"},
     {name:"Angola", code:"ao"},
     {name:"Chili", code:"cl"},
     {name:"Venezuela", code:"ve"},
     {name:"Uruguay", code:"uy"},
+    {name:"Rwanda", code:"rw"},
     {name:"Tunesië", code:"tn"},
     {name:"Thailand", code:"th"},
-
     {name:"Oostenrijk", code:"at"},
     {name:"Armenië", code:"am"},
     {name:"Azerbeidzjan", code:"az"},
@@ -320,30 +374,54 @@ export class GameComponent implements OnInit, OnDestroy {
     ], [{name: "Barbados", code: "bb"},
     {name:"Belize", code:"bz"},
     {name:"Tsjaad", code:"td"},
+    {name:"Bahamas", code:"bs"},
+    {name:"Comoren", code:"km"},
     {name:"Djibouti", code:"dj"},
     {name:"Eritrea", code:"er"},
+    {name:"Equatoriaal-Guinea", code:"gq"},
+    {name:"El-Salvador", code:"sv"},
     {name:"Benin", code:"bj"},
     {name:"Botswana", code:"bw"},
     {name:"Gabon", code:"ga"},
+    {name:"Gambia", code:"gm"},
+    {name:"Guatemala", code:"gt"},
+    {name:"Ivoorkust", code:"ci"},
+    {name:"Jordanië", code:"jo"},
+    {name:"Kiribati", code:"ki"},
+    {name:"Lesotho", code:"ls"},
+    {name:"Libië", code:"ly"},
     {name:"Mali", code:"ml"},
-
+    {name:"Malawi", code:"mw"},
+    {name:"Maladiven", code:"mv"},
+    {name:"Marshall Eilanden", code:"mh"},
+    {name:"Mozambique", code:"mz"},
+    {name:"Namibië", code:"na"},
+    {name:"Nicaragua", code:"ni"},
     {name:"Burkina Faso", code:"bf"},
     {name:"Tuvalu", code:"tv"},
     {name:"Oost-Timor", code:"tl"},
+    {name:"Palau", code:"pw"},
     {name:"Guinee Bissau", code:"gw"},
     {name:"Guyana", code:"gy"},
     {name:"Irak", code:"iq"},
     {name:"Syrie", code:"sy"},
+    {name:"Swaziland", code:"sz"},
+    {name:"Verenigde Arabische Emiraten", code:"ae"},
     {name:"Palestina", code:"ps"},
+    {name:"Soedan", code:"sd"},
+    {name:"Solomon Eilanden", code:"sb"},
+    {name:"Seychellen", code:"sc"},
     {name:"Turkmenistan", code:"tm"},
-
+    {name:"Trinidad en Tobaga", code:"tt"},
+    {name:"Togo", code:"tg"},
+    {name:"Tonga", code:"to"},
+    {name:"Tadzjikistan", code:"tj"},
     {name:"Egypte", code:"eg"},
     {name:"Kyrgyzië", code:"kg"},
     {name:"Mauritanië", code:"mr"},
     {name:"Mauritius", code:"mu"},
     {name:"Nauru", code:"nr"},
     {name:"Yemen", code:"ye"},
-
     {name:"Zambia", code:"zm"},
     {name:"Zimbabwe", code:"zw"},
 
