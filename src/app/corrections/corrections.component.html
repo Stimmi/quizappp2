@@ -1,4 +1,24 @@
+<app-menu></app-menu>
+
+
 <div class="container">
+    <form [formGroup]="filterForm" (ngSubmit)="onSubmit()">
+        <select formControlName="roundNumbersControl" class="form-control">
+          <option [value]="round" *ngFor="let round of roundNumbers">{{round}}</option>
+        </select>
+
+        <select formControlName="teamsControl" class="form-control">
+            <option [value]="team" *ngFor="let team of teams">{{team}}</option>
+        </select>
+
+        <select formControlName="checkedControl" class="form-control">
+            <option [value]="check" *ngFor="let check of checked">{{check}}</option>
+        </select>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+
     <div *ngFor="let round of correctionsList">
         <h3>Ronde: {{round.number}} Ploeg: {{round.team}}</h3>
         <table class="table">
@@ -15,7 +35,11 @@
                     <th scope="row">{{answer.number}}</th>
                     <td>{{answer.answer}}</td>
                     <td>{{answer.corrections}}</td>
-                    <td><input type="checkbox" class="form-check-input" id="exampleCheck1"></td>
+                    <td><input type="checkbox" class="form-check-input" id="exampleCheck1" [checked]="answer.autoCorrect"></td>
+                </tr>
+                <tr>
+                    <th>Totaal</th>
+                    <th>{{round.autoScore}}</th>
                 </tr>
             </tbody>
         </table>

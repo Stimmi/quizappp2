@@ -95,7 +95,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let highscore of highscores; let i = index" [attr.data-index]="i">
-            <th scope="row">{{i}}</th>
+            <th scope="row">{{i+1}}</th>
             <td>{{highscore.team}}</td>
             <td>{{highscore.score}}</td>
           </tr>

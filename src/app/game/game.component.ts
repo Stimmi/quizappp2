@@ -298,10 +298,13 @@ export class GameComponent implements OnInit, OnDestroy {
     {name:"Noorwegen", code:"no"},
     {name:"Portugal", code:"pt"},
     {name:"Rusland", code:"ru"},
+    {name:"Slovenië", code:"si"},
     {name:"Saoudi Arabië", code:"sa"},
+    {name:"Spanje", code:"es"},
     {name:"Taiwan", code:"tw"},
     {name:"Singapore", code:"sg"},
     {name:"Vietnam", code:"vn"},
+    {name:"Verenigde Staten", code:"us"},
     {name:"Zuid-Korea", code:"kr"},
     {name:"Sri Lanka", code:"lk"},
     {name:"Suriname", code:"sr"},
@@ -353,6 +356,7 @@ export class GameComponent implements OnInit, OnDestroy {
     {name:"Papoea-Nieuw-Guinea", code:"pg"},
     {name:"Somalië", code:"so"},
     {name:"Senegal", code:"sn"},
+    {name:"Servië", code:"rs"},
     {name:"San Marino", code:"sm"},
     {name:"Kameroen", code:"cm"},
     {name:"Andorra", code:"ad"},
@@ -360,6 +364,7 @@ export class GameComponent implements OnInit, OnDestroy {
     {name:"Chili", code:"cl"},
     {name:"Venezuela", code:"ve"},
     {name:"Uruguay", code:"uy"},
+    {name:"Oeganda", code:"ug"},
     {name:"Rwanda", code:"rw"},
     {name:"Tunesië", code:"tn"},
     {name:"Thailand", code:"th"},
@@ -423,7 +428,7 @@ export class GameComponent implements OnInit, OnDestroy {
     {name:"Nauru", code:"nr"},
     {name:"Yemen", code:"ye"},
     {name:"Zambia", code:"zm"},
-    {name:"Zimbabwe", code:"zw"},
+    {name:"Zimbabwe", code:"zw"}
 
     ]
 

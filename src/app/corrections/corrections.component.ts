@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { DatabaseService } from '../services/database.service';
 
@@ -14,6 +15,17 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
   correctionsList;
   corrections;
   rounds;
+
+  roundNumbers = ['Ronde',1,2,3,4,5,6];
+  teams = ['qdsf','dfsdf'];
+  checked = ['Verbeterd', 'Ja', 'Nee'];
+
+  filterForm = new FormGroup({
+    roundNumbersControl: new FormControl('Ronde'),
+    teamsControl: new FormControl(''),
+    checkedControl: new FormControl('Verbeterd')
+
+  });
 
   constructor(private db: DatabaseService) { }
 
@@ -38,19 +50,15 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
   }
 
   processCorrections(corrections) {
-    console.log(corrections);
     this.corrections = corrections;
 
     if(this.rounds) {
       this.createCorrectionsList();
     }    
 
-
-
   }
 
   processRounds(rounds) {
-    console.log(rounds);
     this.rounds = rounds;
     if(this.corrections) {
       this.createCorrectionsList();
@@ -64,22 +72,61 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
 
     this.correctionsList = this.rounds;
 
+    // Loop over all rounds
     for (let index = 0; index < this.correctionsList.length; index++) {
+
+      this.correctionsList[index].autoScore = 0;
+
+      //Loop over all questions of this round
       for (let indexx = 0; indexx < this.correctionsList[index].answers.length; indexx++) {
 
 
+        // If a correction exists, match it with the answer and make auto correction
         if(this.corrections[this.correctionsList[index].number-1].corrections[indexx]) {
 
-          this.correctionsList[index].answers[indexx].corrections = this.corrections[this.correctionsList[index].number-1].corrections[indexx].correction;
-        
+          this.correctionsList[index].answers[indexx].corrections = this.corrections[this.correctionsList[index].number-1].corrections[indexx].correction;       
+          let autoCorrectResult = this.autoCorrect(this.correctionsList[index].answers[indexx].answer, this.correctionsList[index].answers[indexx].corrections);
+          
+          if(autoCorrectResult) {
+            this.correctionsList[index].answers[indexx].autoCorrect = true;
+            this.correctionsList[index].autoScore++;
+          } else {
+            this.correctionsList[index].answers[indexx].autoCorrect = false;
+          }
+
+
         }
         
       }
       
     }
 
-
+    console.log(this.correctionsList)
 
   }
+
+  autoCorrect(answer: string, corrections: string[]): boolean {
+
+    var autoCorrect = false;
+
+    answer = answer.toString().toLowerCase().trim();
+
+    if(corrections.includes(answer)){
+      autoCorrect = true;
+    };
+
+    if(answer.includes(corrections[0])) {
+      autoCorrect = true;
+    };
+
+    return autoCorrect;
+  }
+
+  onSubmit() {
+
+    console.log(this.filterForm.value);
+    
+  }
+
 
 }
