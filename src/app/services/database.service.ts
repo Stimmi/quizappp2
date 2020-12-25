@@ -12,21 +12,31 @@ export class DatabaseService {
   private teamsSource = new BehaviorSubject([]);;
   currentTeams = this.teamsSource.asObservable();
 
+  private currentTeamSource = new BehaviorSubject([]);;
+  currentTeam = this.currentTeamSource.asObservable();
+
 
   constructor(private afs: AngularFirestore) { 
 
     this.getTeams();
 
+    this.changeCurrentTeam(localStorage.currentTeam);
+
+
   }
 
   getHighscores () {
-    this.highscores = this.afs.collection('highscores').valueChanges();
+    this.highscores = this.afs.collection('highscores').valueChanges({ idField: 'id' });
     return this.highscores;
 
   }
 
   setHighscore(highscore) {
     return this.afs.collection("highscores").add(Object.assign({},highscore));
+  }
+
+  updateHighscore(id, highscore) {
+    return this.afs.collection("highscores").doc(id).set(Object.assign({},highscore));
   }
 
   setRound(round) {
@@ -64,6 +74,11 @@ export class DatabaseService {
   setRegistration(registration) {
     return this.afs.collection("registrations").add(Object.assign({},registration));
 
+  }
+
+  changeCurrentTeam(message: any) {
+
+    this.currentTeamSource.next(message)
   }
 
 /*

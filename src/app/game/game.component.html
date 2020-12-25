@@ -62,21 +62,10 @@
 <div *ngIf="gameState=='finish'" class="container">
     <div class="row text-center">
         <div class="col-12">
-            <p>Goed gedaan! Je hebt {{score}} vlaggen correct geraden</p>
-
-            <p>Geef je naam in om je score te bewaren</p>
+            <h4 *ngIf="newHs">Nieuwe topscore!</h4>
+            <h4>Goed gedaan! Je hebt {{score}} vlaggen correct geraden</h4>
         </div>
     </div>
-    <form>
-        <div *ngIf="save" class="form-row align-items-center justify-content-center">
-            <div class="col-auto my-1">
-                <input type="text" class="form-control" [value]="playerName" (input)="playerName=$event.target.value" placeholder="Naam">
-            </div>
-            <div class="col-auto my-1">
-                <button type="submit" class="btn btn-primary" (click)="saveHighScore()">Opslaan</button>
-            </div>
-        </div>
-    </form>
     <div class="row justify-content-center">
         <div class="col-auto">
             <button type="btn" class="btn btn-dark" (click)="onStart()">Nog een keer?</button>

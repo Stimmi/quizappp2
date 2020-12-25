@@ -31,6 +31,8 @@ import {
 
 export class GameComponent implements OnInit, OnDestroy {
 
+  currentTeam;
+  
   countries; 
   usedFlags = [[],[],[]];
 
@@ -40,11 +42,14 @@ export class GameComponent implements OnInit, OnDestroy {
   flagQuestion: Country;
   
   subscriptionHighscores: Subscription;
-  highscores: Highscore[];
+  subscriptionCurrentTeam: Subscription;
 
-  timeLeft: number = 100;
+  highscores: Highscore[];
+  newHs: boolean = false;
+
+  timeLeft: number = 10;
   // Set the amount of time that each game will take
-  gameTime: number = 100;
+  gameTime: number = 10;
   score: number = 0;
   interval;
   streakCounter: number = 0;
@@ -56,7 +61,6 @@ export class GameComponent implements OnInit, OnDestroy {
 
   gameState: string = 'start';
   playerName: string = '';
-  save: boolean = true;
   showCountry = true;
   flagClicked = false;
 
@@ -71,6 +75,10 @@ export class GameComponent implements OnInit, OnDestroy {
     this.subscriptionHighscores = this.db.getHighscores()
     .subscribe(hs => this.processHighscores(hs));
 
+    this.subscriptionCurrentTeam = this.db.currentTeam
+    .subscribe(currentTeam => {this.currentTeam = currentTeam});
+
+
   }
 
   ngOnDestroy(): void {
@@ -83,8 +91,8 @@ export class GameComponent implements OnInit, OnDestroy {
 
   async onStart () {
 
+
     this.gameState = 'game';
-    this.save = true;
     this.timeLeft = this.gameTime;
     this.setNewFlags();
     this.score = 0;
@@ -103,6 +111,7 @@ export class GameComponent implements OnInit, OnDestroy {
       }, 1000);})
 
       this.gameState = 'finish';
+      this.saveHighScore();
 
 
   }
@@ -229,22 +238,37 @@ export class GameComponent implements OnInit, OnDestroy {
     return numbers;
   }
 
-  saveHighScore(): boolean {
+  saveHighScore() {
 
-    this.save = false;
+    let newHighScore = true;
+    this.newHs = false;
 
     let highscore = {
-      team: this.playerName, 
+      team: this.currentTeam, 
       score: this.score
     }
 
-    if(this.playerName.length > 1) {
-      this.db.setHighscore(highscore)
+    for (let index = 0; index < this.highscores.length; index++) {
 
+      // check if an entry of the teams exists
+      if(this.highscores[index].team == this.currentTeam) {
+        newHighScore = false;
+      }
+
+      if(this.highscores[index].team == this.currentTeam && this.highscores[index].score < this.score) {
+        // update highscore
+        this.newHs = true;
+        this.db.updateHighscore(this.highscores[index].id, highscore);
+      }
+      
     }
 
-    return false;
+    if(newHighScore) {
+      this.newHs = true;
+      this.db.setHighscore(highscore);
+    }
 
+ 
   }
 
   processHighscores(hs) {
@@ -449,4 +473,5 @@ interface Country {
  interface Highscore {
   team: string;
   score: number;
+  id: string;
 }

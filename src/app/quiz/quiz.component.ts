@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DatabaseService } from '../services/database.service';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -9,7 +10,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.scss']
 })
-export class QuizComponent implements OnInit {
+export class QuizComponent implements OnInit, OnDestroy {
 
   // Font awesome icons
   faTimes = faTimes;
@@ -30,7 +31,8 @@ setRound(newRound){
   // Working with reactive forms check: https://angular.io/guide/reactive-forms
 
   round;
-  team: string = 'Test team'
+  currentTeam;
+  subscriptionCurrentTeam: Subscription;
 
   round1 = new FormGroup({
     1: new FormControl(''),
@@ -63,7 +65,18 @@ setRound(newRound){
   constructor(private db: DatabaseService) { }
 
   ngOnInit(): void {
+
+    this.subscriptionCurrentTeam = this.db.currentTeam
+    .subscribe(currentTeam => {this.currentTeam = currentTeam});
+
   }
+
+  ngOnDestroy() {
+    if(this.subscriptionCurrentTeam) {
+      this.subscriptionCurrentTeam.unsubscribe();
+    }
+  }
+
 
 
   // Submitting a form 
@@ -80,7 +93,7 @@ setRound(newRound){
       }
     }
 
-    this.round.team = this.team;
+    this.round.team = this.currentTeam;
     this.round.answers = answers;
     this.round.number = number;
 
