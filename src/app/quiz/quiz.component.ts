@@ -66,7 +66,7 @@ setRound(newRound){
   }
 
 
-  // Submitting a from 
+  // Submitting a form 
   onSubmit(round, number) {
 
     this.round = {};
@@ -74,7 +74,7 @@ setRound(newRound){
 
     for (const key in round.value) {
       if (Object.prototype.hasOwnProperty.call(round.value, key)) {
-        const element = {answer: round.value[key], number: key};
+        const element = {answer: round.value[key]};
         answers.push(element);
         
       }

@@ -2,26 +2,29 @@
 
 
 <div class="container">
-    <form [formGroup]="filterForm" (ngSubmit)="onSubmit()">
+    <br>
+    <form [formGroup]="filterForm" class="form-inline" (ngSubmit)="onSubmit()">
+
         <select formControlName="roundNumbersControl" class="form-control">
           <option [value]="round" *ngFor="let round of roundNumbers">{{round}}</option>
         </select>
 
         <select formControlName="teamsControl" class="form-control">
-            <option [value]="team" *ngFor="let team of teams">{{team}}</option>
+            <option [value]="team.name" *ngFor="let team of teams">{{team.name}}</option>
         </select>
 
         <select formControlName="checkedControl" class="form-control">
             <option [value]="check" *ngFor="let check of checked">{{check}}</option>
         </select>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Filter</button>
 
     </form>
 
-    <div *ngFor="let round of correctionsList">
+    <div *ngFor="let round of filteredList; let i = index" [attr.data-index]="i">
+        <br>
         <h3>Ronde: {{round.number}} Ploeg: {{round.team}}</h3>
-        <table class="table">
+        <table class="table table-striped">
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -31,14 +34,17 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let answer of round.answers">
-                    <th scope="row">{{answer.number}}</th>
+                <tr *ngFor="let answer of round.answers; let j = index" [attr.data-index]="j">
+                    <th scope="row">{{j+1}}</th>
                     <td>{{answer.answer}}</td>
                     <td>{{answer.corrections}}</td>
-                    <td><input type="checkbox" class="form-check-input" id="exampleCheck1" [checked]="answer.autoCorrect"></td>
+                    <td class="justify-content-center"><input type="checkbox" class="form-check-input" id="exampleCheck1" [(ngModel)]="answer.autoCorrect"
+                        (change)="recalculateTotal(i)"></td>
                 </tr>
                 <tr>
                     <th>Totaal</th>
+                    <th>Bevestigde score: {{round.score}}</th>
+                    <th><button type="submit" class="btn btn-primary" (click)="setScore(i)">Bevestig</button></th>
                     <th>{{round.autoScore}}</th>
                 </tr>
             </tbody>

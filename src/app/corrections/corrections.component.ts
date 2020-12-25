@@ -12,17 +12,19 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
 
   subscriptionCorrections: Subscription;
   subscriptionRounds: Subscription;
+  subscriptionTeams: Subscription;
   correctionsList;
+  filteredList;
   corrections;
   rounds;
+  teams = [{name: "Ploeg"}];
 
   roundNumbers = ['Ronde',1,2,3,4,5,6];
-  teams = ['qdsf','dfsdf'];
   checked = ['Verbeterd', 'Ja', 'Nee'];
 
   filterForm = new FormGroup({
     roundNumbersControl: new FormControl('Ronde'),
-    teamsControl: new FormControl(''),
+    teamsControl: new FormControl('Ploeg'),
     checkedControl: new FormControl('Verbeterd')
 
   });
@@ -35,6 +37,9 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
 
     this.subscriptionRounds = this.db.getRounds().subscribe(rounds => this.processRounds(rounds));
 
+    this.subscriptionTeams = this.db.currentTeams.subscribe(teams => this.processTeams(teams));
+
+
   }
 
 
@@ -46,10 +51,13 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
     if(this.subscriptionRounds) {
       this.subscriptionRounds.unsubscribe();
     }
-
+    if(this.subscriptionTeams) {
+      this.subscriptionTeams.unsubscribe();
+    }
   }
 
   processCorrections(corrections) {
+
     this.corrections = corrections;
 
     if(this.rounds) {
@@ -59,16 +67,24 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
   }
 
   processRounds(rounds) {
+
     this.rounds = rounds;
+
     if(this.corrections) {
       this.createCorrectionsList();
-
     }
+  }
 
+  processTeams(teamsDb: any[]) {
+
+    this.teams = [{name: "Ploeg"}];
+
+    for (let index = 0; index < teamsDb.length; index++) {
+      this.teams.push(teamsDb[index])
+    }
   }
 
   createCorrectionsList() {
-
 
     this.correctionsList = this.rounds;
 
@@ -79,7 +95,6 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
 
       //Loop over all questions of this round
       for (let indexx = 0; indexx < this.correctionsList[index].answers.length; indexx++) {
-
 
         // If a correction exists, match it with the answer and make auto correction
         if(this.corrections[this.correctionsList[index].number-1].corrections[indexx]) {
@@ -101,7 +116,10 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
       
     }
 
-    console.log(this.correctionsList)
+    // If the filtered list is empty, the complete list can be assigned
+    if(!this.filteredList) {
+      this.filteredList = this.correctionsList;
+    }
 
   }
 
@@ -109,12 +127,16 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
 
     var autoCorrect = false;
 
+    // Trim all answers and set to lower case
     answer = answer.toString().toLowerCase().trim();
 
+    // Check if the answer matches one of the options in the array
     if(corrections.includes(answer)){
       autoCorrect = true;
     };
 
+
+    // check if correction 0 is a part of the answer
     if(answer.includes(corrections[0])) {
       autoCorrect = true;
     };
@@ -124,7 +146,65 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
 
   onSubmit() {
 
-    console.log(this.filterForm.value);
+    this.filterCorrectionsList(this.filterForm.value)
+    
+  }
+
+  filterCorrectionsList(formInput) {
+
+    this.filteredList = [];
+
+    //Loop the correctionslist
+    for (let index = 0; index < this.correctionsList.length; index++) {
+  
+      // Check the different parameters and apply a filter
+      if(this.correctionsList[index].number == formInput.roundNumbersControl) {
+        this.filteredList.push(this.correctionsList[index]);
+      }
+
+      if(this.correctionsList[index].team == formInput.teamsControl) {
+        this.filteredList.push(this.correctionsList[index]);
+      }
+
+      
+      if(this.correctionsList[index].score && formInput.checkedControl == 'Ja') {
+        this.filteredList.push(this.correctionsList[index]);
+      }
+
+      if(!this.correctionsList[index].score && formInput.checkedControl == 'Nee') {
+        this.filteredList.push(this.correctionsList[index]);
+      }
+
+
+      // When the defaults are entered, give the full correctionslist
+      if(formInput.roundNumbersControl == 'Ronde' && formInput.teamsControl == 'Ploeg'
+       && formInput.checkedControl == 'Verbeterd') {
+         this.filteredList = this.correctionsList;
+       }
+      
+      
+    }
+
+
+  }
+
+  recalculateTotal(indexFromForm) {
+
+    // When a checkbox is changed, the total of the round must be reculculated
+    this.filteredList[indexFromForm].autoScore = 0;
+
+    for (let index = 0; index < this.filteredList[indexFromForm].answers.length; index++) {
+
+      if(this.filteredList[indexFromForm].answers[index].autoCorrect == true) {
+        this.filteredList[indexFromForm].autoScore++
+      }
+    }
+  }
+
+  setScore(index) {
+
+    let round = this.filteredList[index];
+    this.db.setScore(round.id, round.autoScore);
     
   }
 
