@@ -47,9 +47,9 @@ export class GameComponent implements OnInit, OnDestroy {
   highscores: Highscore[];
   newHs: boolean = false;
 
-  timeLeft: number = 10;
+  timeLeft: number = 100;
   // Set the amount of time that each game will take
-  gameTime: number = 10;
+  gameTime: number = 100;
   score: number = 0;
   interval;
   streakCounter: number = 0;

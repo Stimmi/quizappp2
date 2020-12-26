@@ -9,18 +9,27 @@ export class DatabaseService {
 
   highscores: Observable<any[]>;
 
-  private teamsSource = new BehaviorSubject([]);;
+  private teamsSource = new BehaviorSubject([]);
   currentTeams = this.teamsSource.asObservable();
 
-  private currentTeamSource = new BehaviorSubject([]);;
+  private currentTeamSource = new BehaviorSubject([]);
   currentTeam = this.currentTeamSource.asObservable();
+
+  private adminUsersSource = new BehaviorSubject([]);
+  currentAdminUsers = this.adminUsersSource.asObservable();
+
+  private roundsSource = new BehaviorSubject([]);
+  currentRounds = this.roundsSource.asObservable();
 
 
   constructor(private afs: AngularFirestore) { 
 
     this.getTeams();
+    this.getRounds();
 
     this.changeCurrentTeam(localStorage.currentTeam);
+
+    this.changeCurrentAdminUsers(['Stimmi', 'Dennis', 'Kasper', 'Jacky', 'Tom', 'Gio', 'Fotis']);
 
 
   }
@@ -43,10 +52,6 @@ export class DatabaseService {
     return this.afs.collection("rounds").add(Object.assign({},round));
   }
 
-  getRounds() {
-    return this.afs.collection("rounds").valueChanges({ idField: 'id' });
-
-  }
 
   getCorrections () {
 
@@ -81,10 +86,10 @@ export class DatabaseService {
     this.currentTeamSource.next(message)
   }
 
-/*
-  //Data avalaibe in the entire application
-  private roundsSource = new BehaviorSubject([]);
-  currentRounds = this.roundsSource.asObservable();
+  changeCurrentAdminUsers(message: any) {
+
+    this.adminUsersSource.next(message)
+  }
 
   getRounds() {
 
@@ -97,6 +102,6 @@ export class DatabaseService {
 
     this.roundsSource.next(message)
   }
-*/
+
 
 }

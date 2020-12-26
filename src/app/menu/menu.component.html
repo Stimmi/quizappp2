@@ -3,7 +3,7 @@
     <button class="navbar-toggler" type="button" (click)="toggleNavbar()" aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" [ngClass]="{'show': navbarOpen}">
+    <div *ngIf="showMenuPoints" class="collapse navbar-collapse" [ngClass]="{'show': navbarOpen}">
       <ul id="navbar-menu" class="navbar-nav mr-auto">
         <li class="nav-item" [routerLink]="['/start']" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['/start']">Start</a>
@@ -17,9 +17,12 @@
          <li class="nav-item" [routerLink]="['/score']" routerLinkActive="active">
            <a class="nav-link" [routerLink]="['/score']">Score</a>
         </li>
-        <li class="nav-item" [routerLink]="['/verbeter']" routerLinkActive="active">
+        <li *ngIf="adminMode" class="nav-item" [routerLink]="['/verbeter']" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['/verbeter']">Verbeter</a>
        </li>
+       <li class="nav-item"  routerLinkActive="active">
+        <a class="nav-link" (click)="logOut()">Afmelden</a>
+     </li>
       </ul>
     </div>
   </nav>

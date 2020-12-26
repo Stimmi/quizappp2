@@ -1,2 +1,18 @@
 <app-menu></app-menu>
-<p>scoreboard works!</p>
+<div class="container">
+    <h1>Algemeen klassement</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Ploeg</th>
+                <th scope="col">Score</th>
+            </tr>
+        </thead>    
+        <tr *ngFor="let totalScore of totalScoreList;let i = index" [attr.data-index]="i">
+            <th scope="row">{{i+1}}</th>
+            <td>{{totalScore.team}}</td>
+            <td>{{totalScore.score}}</td>
+        </tr>
+    </table>
+</div>

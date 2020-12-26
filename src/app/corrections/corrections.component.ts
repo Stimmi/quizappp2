@@ -34,11 +34,8 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     this.subscriptionCorrections = this.db.getCorrections().subscribe(corrections => this.processCorrections(corrections));
-
-    this.subscriptionRounds = this.db.getRounds().subscribe(rounds => this.processRounds(rounds));
-
+    this.subscriptionRounds = this.db.currentRounds.subscribe(rounds => this.processRounds(rounds));
     this.subscriptionTeams = this.db.currentTeams.subscribe(teams => this.processTeams(teams));
-
 
   }
 
@@ -108,12 +105,8 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
           } else {
             this.correctionsList[index].answers[indexx].autoCorrect = false;
           }
-
-
         }
-        
       }
-      
     }
 
     // If the filtered list is empty, the complete list can be assigned
@@ -135,7 +128,6 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
       autoCorrect = true;
     };
 
-
     // check if correction 0 is a part of the answer
     if(answer.includes(corrections[0])) {
       autoCorrect = true;
@@ -153,38 +145,44 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
   filterCorrectionsList(formInput) {
 
     this.filteredList = [];
+    var inbetweenList = [];
+    var inbetweenListTwo = [];
 
-    //Loop the correctionslist
-    for (let index = 0; index < this.correctionsList.length; index++) {
-  
-      // Check the different parameters and apply a filter
-      if(this.correctionsList[index].number == formInput.roundNumbersControl) {
-        this.filteredList.push(this.correctionsList[index]);
+    // Check each parameter and pass on a filtered list
+    // Check on the round number
+    if(formInput.roundNumbersControl == 'Ronde') {
+      inbetweenList = this.correctionsList
+    } else  {
+      for (let index = 0; index < this.correctionsList.length; index++) {
+        if(this.correctionsList[index].number == formInput.roundNumbersControl) {
+          inbetweenList.push(this.correctionsList[index]);
+        }
       }
-
-      if(this.correctionsList[index].team == formInput.teamsControl) {
-        this.filteredList.push(this.correctionsList[index]);
+    }
+    // Check on the selected team
+    if(formInput.teamsControl == 'Ploeg') {
+      inbetweenListTwo = inbetweenList;
+    } else {
+      for (let index = 0; index < inbetweenList.length; index++) {
+        if(inbetweenList[index].team == formInput.teamsControl) {
+          inbetweenListTwo.push(inbetweenList[index])
+        }
       }
-
-      
-      if(this.correctionsList[index].score && formInput.checkedControl == 'Ja') {
-        this.filteredList.push(this.correctionsList[index]);
-      }
-
-      if(!this.correctionsList[index].score && formInput.checkedControl == 'Nee') {
-        this.filteredList.push(this.correctionsList[index]);
-      }
-
-
-      // When the defaults are entered, give the full correctionslist
-      if(formInput.roundNumbersControl == 'Ronde' && formInput.teamsControl == 'Ploeg'
-       && formInput.checkedControl == 'Verbeterd') {
-         this.filteredList = this.correctionsList;
-       }
-      
-      
     }
 
+    // Check on the corrected parameter
+    if(formInput.checkedControl == 'Verbeterd') {
+      this.filteredList = inbetweenListTwo;
+    } else {
+      for (let index = 0; index < inbetweenListTwo.length; index++) {
+        if(inbetweenListTwo[index].score && formInput.checkedControl == 'Ja') {
+          this.filteredList.push(inbetweenListTwo[index]);
+        }
+        if(!inbetweenListTwo[index].score && formInput.checkedControl == 'Nee') {
+          this.filteredList.push(inbetweenListTwo[index]);
+        }
+      }
+    }
 
   }
 
@@ -194,18 +192,16 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
     this.filteredList[indexFromForm].autoScore = 0;
 
     for (let index = 0; index < this.filteredList[indexFromForm].answers.length; index++) {
-
       if(this.filteredList[indexFromForm].answers[index].autoCorrect == true) {
         this.filteredList[indexFromForm].autoScore++
       }
     }
+
   }
 
   setScore(index) {
-
     let round = this.filteredList[index];
     this.db.setScore(round.id, round.autoScore);
-    
   }
 
 
