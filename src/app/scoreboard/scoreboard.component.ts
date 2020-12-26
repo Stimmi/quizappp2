@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DatabaseService } from '../services/database.service';
+import { faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faMedal } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -9,6 +11,10 @@ import { DatabaseService } from '../services/database.service';
   styleUrls: ['./scoreboard.component.scss']
 })
 export class ScoreboardComponent implements OnInit {
+
+  // Font awesome icons
+  faUsers = faUsers;
+  faMedal = faMedal;
 
   subscriptionRounds: Subscription;
   rounds;

@@ -1,13 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 
-body {
-  font-family: 'Bebas Neue';
-}
-
 $theme-colors: (
   "primary": #ff5959,
   "secondary": #facf5adc,
   "dark": #086850,
 );
+
+body {
+  font-family: 'Bebas Neue';
+}
+
+h1 {
+  font-family: 'Bebas Neue';
+  color: var(--dark);
+  padding-top: 10px;
+  
+}
+
 
 @import "node_modules/bootstrap/scss/bootstrap";
