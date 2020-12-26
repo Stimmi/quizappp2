@@ -36,13 +36,14 @@ h5 {
 @import "node_modules/bootstrap/scss/bootstrap";
 
 .btn-primary {
-  color: var(--secondary);
+  background-color: var(--dark);
   border:none
 }
 
 .btn-primary:hover {
-  color: var(--primary);
+  
   background-color: var(--secondary);
+  color: var(--dark);
   border: none;
 }
 
