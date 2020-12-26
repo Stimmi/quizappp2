@@ -7,6 +7,8 @@ import {
   animate,
   transition
 } from '@angular/animations';
+import { faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faMedal } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -30,6 +32,11 @@ import {
 
 
 export class GameComponent implements OnInit, OnDestroy {
+
+   // Font awesome icons
+   faUsers = faUsers;
+   faMedal = faMedal;
+ 
 
   currentTeam;
   

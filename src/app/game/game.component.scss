@@ -41,3 +41,44 @@ h3 {
     background: black;
     /*background: #086850;*/
   }
+
+//   Styling of table
+
+.scoretable {
+    font-family: 'Bebas Neue';
+    font-size: 1.1em;
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba($color: #000000, $alpha: 0.25);
+}
+
+.scoretable thead {
+    font-family:  "Bebas Neue";
+    font-size: 1.2em;
+    background-color: var(--dark);
+    color: var(--secondary);
+    border-bottom-color: var(--primary);
+    border-bottom: 3px solid var(--secondary);
+    
+
+}
+
+.scoretable th:nth-child(1) {
+    text-align: center;
+    
+    max-width: 10px;
+    
+}
+
+.scoretable th:nth-child(3), .scoretable td:nth-child(3) {
+    text-align: center;
+    max-width: 10px;
+
+    
+}
+
+.scoretable td:nth-child(3) {
+    font-size: 1.3em;
+
+    
+}
