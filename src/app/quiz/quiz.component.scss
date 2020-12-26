@@ -400,3 +400,17 @@ input {
 .master-wrapper {
   position: relative;
 }
+
+
+// Answer button
+.answerbtn {
+  margin-top: -6px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  min-width: 200px;
+}
+
+.linebreak {
+  border: 1px solid var(--dark);
+  border-radius: 1px;
+}

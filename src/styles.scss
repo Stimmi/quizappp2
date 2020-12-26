@@ -17,5 +17,36 @@ h1 {
   
 }
 
+h5 {
+  font-family: 'Bebas Neue';
+  color: var(--secondary);
+  font-size: 1.5em!important;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: var(--dark);
+  border-radius: 5px;
+  
+}
+
+
+
+
 
 @import "node_modules/bootstrap/scss/bootstrap";
+
+.btn-primary {
+  color: var(--secondary);
+  border:none
+}
+
+.btn-primary:hover {
+  color: var(--primary);
+  background-color: var(--secondary);
+  border: none;
+}
+
+.btn-primary:focus {
+  color: var(--primary);
+  background-color: var(--secondary);
+}
