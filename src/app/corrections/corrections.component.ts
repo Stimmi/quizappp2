@@ -201,6 +201,7 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
 
   setScore(index) {
     let round = this.filteredList[index];
+    this.filteredList[index].score = round.autoScore;
     this.db.setScore(round.id, round.autoScore);
   }
 

@@ -5,4 +5,67 @@ select {
 .form-check-input {
     transform: scale(2);
     -webkit-transform: scale(2);
+
+}
+
+.checkboxTD {
+    text-align: center; /* center checkbox horizontally */
+}
+
+.right {
+    text-align: right;
+}
+
+//   Styling of table
+
+.scoretable {
+    font-family: 'Bebas Neue';
+    font-size: 1.1em;
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba($color: #000000, $alpha: 0.25);
+}
+
+.scoretable thead {
+    font-family:  "Bebas Neue";
+    font-size: 1.2em;
+    background-color: var(--dark);
+    color: var(--secondary);
+    border-bottom-color: var(--primary);
+    border-bottom: 3px solid var(--secondary);
+    
+
+}
+
+
+.scoretable td:nth-child(3) {
+    font-size: 1.3em;
+
+}
+
+
+.headerTotal {
+
+    font-family: 'Bebas Neue';
+    font-size: 1.2em;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba($color: #000000, $alpha: 0.25);
+    background-color: var(--dark);
+    color: var(--secondary);
+
+}
+
+
+.headerTotalTwo {
+
+    font-family: 'Bebas Neue';
+    font-size: 1.2em;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba($color: #000000, $alpha: 0.25);
+    background-color: #ff5959;
+    color: var(--secondary);
+
+
 }

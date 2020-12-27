@@ -31,8 +31,19 @@ setRound(newRound){
   // Working with reactive forms check: https://angular.io/guide/reactive-forms
 
   round;
+  rounds;
   currentTeam;
   subscriptionCurrentTeam: Subscription;
+  subscriptionRounds: Subscription;
+
+
+  // Booleans to hide the submit button when a round is finished or already submitted
+  // [0] = round 1 
+  // [1] = round 2 
+  // [2] = round 3
+  // ...
+
+  hideRounds: boolean[] = [false, false, false, false, false, false]
 
   round1 = new FormGroup({
     1: new FormControl(''),
@@ -69,18 +80,23 @@ setRound(newRound){
     this.subscriptionCurrentTeam = this.db.currentTeam
     .subscribe(currentTeam => {this.currentTeam = currentTeam});
 
+    this.subscriptionRounds = this.db.currentRounds
+    .subscribe(currentRounds => this.processRounds(currentRounds));
+
   }
 
   ngOnDestroy() {
     if(this.subscriptionCurrentTeam) {
       this.subscriptionCurrentTeam.unsubscribe();
     }
+    if(this.subscriptionRounds) {
+      this.subscriptionRounds.unsubscribe();
+    }
   }
 
 
-
   // Submitting a form 
-  onSubmit(round, number) {
+  onSubmit(round) {
 
     this.round = {};
     let answers = [];
@@ -95,10 +111,25 @@ setRound(newRound){
 
     this.round.team = this.currentTeam;
     this.round.answers = answers;
-    this.round.number = number;
+    this.round.number = this.currentRound;
+    this.hideRounds[this.currentRound-1] = true;
 
     this.db.setRound(this.round);
 
+  }
+
+  processRounds(rounds) {
+
+    this.rounds = rounds;
+
+    //Loop all rounds and check which rounds the currenTeam has already submitted
+    for (let index = 0; index < rounds.length; index++) {
+
+      if(this.rounds[index].team == this.currentTeam) {
+        this.hideRounds[this.rounds[index].number-1] = true;
+      }
+      
+    }
 
   }
 

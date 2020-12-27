@@ -34,7 +34,7 @@
   <main class="page-content">
     <div id="form-container" class="container">
       
-        <form [formGroup]="round1" [hidden]="currentRound != 1" (ngSubmit)="onSubmit(round1,1)">
+        <form [formGroup]="round1" [hidden]="currentRound != 1" (ngSubmit)="onSubmit(round1)">
 
           <h5>Ronde 1</h5>
 
@@ -49,10 +49,10 @@
           <input type="text" formControlName="9" class="form-control" placeholder="Vraag 9">
           <input type="text" formControlName="10" class="form-control" placeholder="Vraag 10">
           <hr class="linebreak">
-          <div class="text-center"><button type="submit" class="btn btn-primary answerbtn">Antwoord verzenden</button></div>
+          <div class="text-center" [hidden]="hideRounds[currentRound-1]"><button type="submit" class="btn btn-primary answerbtn">Antwoorden verzenden</button></div>
         </form>
 
-        <form [formGroup]="round2" [hidden]="currentRound != 2" (ngSubmit)="onSubmit(round2,2)">
+        <form [formGroup]="round2" [hidden]="currentRound != 2" (ngSubmit)="onSubmit(round2)">
 
           <h5>Ronde 2: ABC ronde</h5>
 
@@ -67,7 +67,7 @@
           <input type="text" formControlName="9" class="form-control" placeholder="Vraag 9">
           <input type="text" formControlName="10" class="form-control" placeholder="Vraag 10">
           <hr class="linebreak">
-          <div class="text-center"><button type="submit" class="btn btn-primary answerbtn">Antwoord verzenden</button></div>
+          <div class="text-center" [hidden]="hideRounds[currentRound-1]"><button type="submit" class="btn btn-primary answerbtn">Antwoorden verzenden</button></div>
           
         </form>
      
