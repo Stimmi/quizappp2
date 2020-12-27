@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { DatabaseService } from '../services/database.service';
 import { faUsers } from '@fortawesome/free-solid-svg-icons';
 import { faMedal } from '@fortawesome/free-solid-svg-icons';
+import { getLocaleExtraDayPeriodRules } from '@angular/common';
 
 
 @Component({
@@ -19,15 +20,16 @@ export class ScoreboardComponent implements OnInit {
   subscriptionRounds: Subscription;
   rounds;
   totalScoreList;
+  currentTeam;
 
-
-
+  
   constructor(private db: DatabaseService) { }
 
   ngOnInit(): void {
 
-    this.subscriptionRounds = this.db.currentRounds.subscribe(rounds => this.processRounds(rounds));
-
+      this.subscriptionRounds = this.db.currentRounds.subscribe(rounds => this.processRounds(rounds));
+      this.currentTeam = localStorage.getItem("currentTeam")
+      
   }
 
   processRounds(rounds) {

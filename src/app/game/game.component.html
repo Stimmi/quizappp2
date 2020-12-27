@@ -83,7 +83,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let highscore of highscores; let i = index" [attr.data-index]="i">
+          <tr [ngClass]="{'currentteamscore': currentTeam == highscore.team }" *ngFor="let highscore of highscores; let i = index" [attr.data-index]="i">
             <th scope="row">{{i+1}}</th>
             <td>{{highscore.team}}</td>
             <td>{{highscore.score}}</td>

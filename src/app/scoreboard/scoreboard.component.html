@@ -10,7 +10,7 @@
             </tr>
         </thead>    
         <tbody>
-        <tr *ngFor="let totalScore of totalScoreList;let i = index" [attr.data-index]="i">
+        <tr  [ngClass]="{'currentteamscore': currentTeam == totalScore.team }" *ngFor="let totalScore of totalScoreList;let i = index" [attr.data-index]="i">
             <th scope="row">{{i+1}}</th>
             <td>{{totalScore.team}}</td>
             <td>{{totalScore.score}}</td>
