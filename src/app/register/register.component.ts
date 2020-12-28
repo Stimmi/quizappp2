@@ -41,18 +41,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
  
   onSubmit() {
-
     this.db.setRegistration(this.registration);
-
-  }
-
-  validate(){
-    var form = document.getElementsByClassName('needs-validation')[0] as HTMLFormElement;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    form.classList.add('was-validated');
   }
 
 

@@ -17,32 +17,21 @@ export class QuizComponent implements OnInit, OnDestroy {
 
   // Sidebar handling
   statusSidebar: boolean = false;
-toggleSidebar(){
-    this.statusSidebar = !this.statusSidebar;
-    console.log(this.statusSidebar)       
-}
-
-// Current Round handling
-currentRound = 1
-setRound(newRound){
-  this.currentRound = newRound
-}
+  // Current Round handling
+  currentRound = 1
 
   // Working with reactive forms check: https://angular.io/guide/reactive-forms
-
   round;
   rounds;
   currentTeam;
   subscriptionCurrentTeam: Subscription;
   subscriptionRounds: Subscription;
 
-
   // Booleans to hide the submit button when a round is finished or already submitted
   // [0] = round 1 
   // [1] = round 2 
   // [2] = round 3
   // ...
-
   hideRounds: boolean[] = [false, false, false, false, false, false]
 
   round1 = new FormGroup({
@@ -116,6 +105,17 @@ setRound(newRound){
 
     this.db.setRound(this.round);
 
+  }
+
+  // Current round handling
+  setRound(newRound){
+    this.currentRound = newRound
+  }
+
+  // Sidebar handling
+  toggleSidebar(){
+    this.statusSidebar = !this.statusSidebar;
+    console.log(this.statusSidebar)       
   }
 
   processRounds(rounds) {

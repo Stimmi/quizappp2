@@ -1,32 +1,24 @@
 <app-menu></app-menu>
 <div class="container">
-<form (ngSubmit)="onSubmit()" #registerForm="ngForm" class="needs-validation" novalidate>
+<form (ngSubmit)="onSubmit()" #registerForm="ngForm" novalidate>
     <p>Wil je graag meedoen met de Superquiz van Scouts 32-48 op 20 Maart 2021? Registreer door onderstaande gegevens in te vullen en betaal het inchrijvingsgeld op rekening BE65464654. Vervolgens krijg je per mail een unieke code toegestuurd waarmee het mogelijk is om in te loggen op onze online quiz tool.</p>
     <div class="form-group row">
-      <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+      <label for="email" class="col-sm-2 col-form-label">Email</label>
       <div class="col-sm-10 input-group">
-        <input type="email" class="form-control" id="inputEmail3" placeholder="Email"  [(ngModel)]="registration.email" name="email" aria-describedby="inputGroupPrepend" required>
-        <div class="invalid-feedback">
-          Gelieve een e-mail adres op te geven
-        </div>
+        <input type="email" class="form-control" id="email" placeholder="Email"
+        [(ngModel)]="registration.email" name="email" required #email="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
       </div>
     </div>
     <div class="form-group row">
       <label for="Naam" class="col-sm-2 col-form-label">Naam</label>
       <div class="col-sm-10">
         <input type="text" class="form-control" id="naam" placeholder="Naam" [(ngModel)]="registration.name" name="Naam" required>
-        <div class="invalid-feedback">
-          Gelieve een naam op te geven
-        </div>
       </div>
     </div>
     <div class="form-group row">
       <label for="Ploegnaam" class="col-sm-2 col-form-label">Ploegnaam</label>
       <div class="col-sm-10">
         <input type="text" class="form-control" id="Ploegnaam" placeholder="Ploegnaam" [(ngModel)]="registration.team" name="Ploeg" required>
-        <div class="invalid-feedback">
-          Gelieve een ploegnaam op te geven
-        </div>
       </div>
     </div>
     <fieldset class="form-group">
@@ -50,26 +42,26 @@
     </fieldset>
     <div class="form-group row">
       <div class="col-sm-10">
-        <button type="submit" class="btn btn-primary" (click)="validate()">Registreer</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!registerForm.form.valid">Registreer</button>
       </div>
     </div>
   </form>
 
-  <form (ngSubmit)="onSubmitCode()" #codeForm="ngForm">
+  <form (ngSubmit)="onSubmitCode()" #codeForm="ngForm" novalidate>
 
     <div class="form-group row">
-      <label for="Ploegnaam" class="col-sm-2 col-form-label">Quizcode</label>
+      <label for="code" class="col-sm-2 col-form-label">Quizcode</label>
       <div class="col-sm-10">
-        <input type="password" class="form-control code" id="Ploegnaam" placeholder="Code" [(ngModel)]="code" name="Code">
-        <div *ngIf="wrongCode">
+        <input type="password" class="form-control code" id="code"
+         placeholder="Code" [(ngModel)]="code" name="Code" required>
+        <div *ngIf="wrongCode" class="wrongCode">
           Dit is geen geldige code
         </div>
       </div>
     </div>
-
     <div class="form-group row">
       <div class="col-sm-10">
-        <button type="submit" class="btn btn-primary">Open de quiz</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!codeForm.form.valid">Open de quiz</button>
       </div>
     </div>
   </form>
