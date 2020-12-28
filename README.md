@@ -29,3 +29,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## Bootstrap 
 Installed with https://loiane.com/2017/08/how-to-add-bootstrap-to-an-angular-cli-project/
 
+## To do
+- Add payconiq qr codes to registration process
+- Add angular validation to the registration form 
+- Make a component to control which rounds are accessible
+- Build a home page
+

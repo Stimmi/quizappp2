@@ -1,10 +1,10 @@
 <app-menu></app-menu>
 <div class="container">
 <form (ngSubmit)="onSubmit()" #registerForm="ngForm" class="needs-validation" novalidate>
+    <p>Wil je graag meedoen met de Superquiz van Scouts 32-48 op 20 Maart 2021? Registreer door onderstaande gegevens in te vullen en betaal het inchrijvingsgeld op rekening BE65464654. Vervolgens krijg je per mail een unieke code toegestuurd waarmee het mogelijk is om in te loggen op onze online quiz tool.</p>
     <div class="form-group row">
       <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
       <div class="col-sm-10 input-group">
-        <span class="input-group-text" id="inputGroupPrepend">@</span>
         <input type="email" class="form-control" id="inputEmail3" placeholder="Email"  [(ngModel)]="registration.email" name="email" aria-describedby="inputGroupPrepend" required>
         <div class="invalid-feedback">
           Gelieve een e-mail adres op te geven

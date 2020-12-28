@@ -144,9 +144,10 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
 
   filterCorrectionsList(formInput) {
 
-    this.filteredList = [];
     var inbetweenList = [];
     var inbetweenListTwo = [];
+    this.filteredList = [];
+
 
     // Check each parameter and pass on a filtered list
     // Check on the round number
