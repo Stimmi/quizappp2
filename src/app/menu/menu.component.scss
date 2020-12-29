@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
+nav {
+    font-family: 'Bebas Neue';
+}
+
 .navbar-brand {
     font-family: "Bebas Neue";
     color: #facf5adc;
@@ -49,4 +53,50 @@
 /* Bring Menu for other items */
 .navbar {
     z-index: 100;
+}
+
+// MENU TEAMBOX + SIGNOUT BTN
+.menuteambox {
+    padding-right: 20px;
+}
+
+.menuteambox-sm {
+    
+    font-size:large;
+    
+    margin: 5px;
+    text-align: right;
+    border-bottom: 1px solid var(--secondary);
+}
+
+.menuteambox-sm.logout {
+    padding-left: 10px;
+}
+
+// Menu change to button on right. Make rightbox disappear
+@media only screen and (max-width: 992px) {
+.menuteambox {
+    display: none;
+}
+}
+@media only screen and (min-width: 992px) {
+    .menuteambox-sm {
+        display: none;
+    }
+    }
+.currentteam{
+    font-size: large;
+    padding: 0;
+    margin: 0;
+}
+.logout {
+    font-size: 10pt;
+    color: var(--primary);
+    text-align: right;
+    margin-top:-7px;
+    cursor: pointer;
+}
+
+.logout:hover {
+    color: rgba(#ff5959,0.85)
 }
