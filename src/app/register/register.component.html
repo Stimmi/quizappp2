@@ -2,10 +2,10 @@
 
 <nav id= "registermenu" class="navbar navbar-expand-lg navbar-light navbar-custom">
   <a class="navbar-brand"><img height="45px" src="..\assets\Logo.png" ><span class="brand-name">Superquiz 32-48</span></a>
-  <form (ngSubmit)="onSubmitCode()" #codeForm="ngForm" class="form-inline loginform">
+  <form id="code" (keyup)="wrongCode = false" (ngSubmit)="onSubmitCode()" #codeForm="ngForm" class="form-inline loginform">
     <div class="code"> 
       <div  class="form-group row">
-        <input maxlength="6" class="form-control codeinput" id="code" placeholder="Quizcode" [(ngModel)]="code" name="Code" required>
+        <input maxlength="6" class="form-control codeinput"  placeholder="Quizcode" [(ngModel)]="code" name="Code" required>
         <div class="wrongcode" *ngIf="wrongCode">
           Ongeldige code
         </div>

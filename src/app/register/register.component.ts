@@ -62,13 +62,18 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
       } else {
         this.wrongCode = true;
-        
+
       }
 
 
       
     }
 
+  }
+
+  wrongCodeFalse(){
+    this.wrongCode = false;
+    console.log("change");
   }
 
   processTeams(teams) {
