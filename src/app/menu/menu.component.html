@@ -5,7 +5,7 @@
     </button>
     <div class="collapse navbar-collapse" [ngClass]="{'show': navbarOpen}">
       <ul id="navbar-menu" class="navbar-nav mr-auto">
-        <li class='menuteambox-sm'>Team: {{currentTeam}} <a (click)="logOut()" class="logout">Afmelden?</a></li>
+        <li class='menuteambox-sm'>Team: {{currentTeam}} <a (click)="logOut()" class="logout small"><fa-icon [icon]="faSignOutAlt"></fa-icon>Afmelden</a></li>
         
         <li class="nav-item" [routerLink]="['/start']" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['/start']">Start</a>
@@ -30,7 +30,8 @@
     <div class="ml-auto menuteambox">
       <div class="currentteam">Team: {{currentTeam}} 
       </div>
-      <div  class="logout"><a (click)="logOut()">Afmelden</a></div>
+      <div  class="logout"><a (click)="logOut()"><fa-icon [icon]="faSignOutAlt"></fa-icon>Afmelden</a></div>
+      
     </div>
     
   </nav>

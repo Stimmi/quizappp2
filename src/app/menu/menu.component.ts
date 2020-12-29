@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DatabaseService } from '../services/database.service';
+import { faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -10,6 +11,8 @@ import { DatabaseService } from '../services/database.service';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit, OnDestroy {
+
+  faSignOutAlt = faSignOutAlt;
 
   navbarOpen = false;
   subscriptionAdminUsers: Subscription;
