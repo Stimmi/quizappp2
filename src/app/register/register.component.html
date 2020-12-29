@@ -1,4 +1,26 @@
-<app-menu></app-menu>
+<!-- Navigation bar -->
+
+<nav id= "registermenu" class="navbar navbar-expand-lg navbar-light navbar-custom">
+  <a class="navbar-brand"><img height="45px" src="..\assets\Logo.png" ><span class="brand-name">Superquiz 32-48</span></a>
+  <form (ngSubmit)="onSubmitCode()" #codeForm="ngForm" class="form-inline loginform">
+    <div class="code"> 
+      <div  class="form-group row">
+        <input maxlength="6" class="form-control codeinput" id="code" placeholder="Quizcode" [(ngModel)]="code" name="Code" required>
+        <div class="wrongcode" *ngIf="wrongCode">
+          Ongeldige code
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col">
+        <button type="submit" class="btn btn-primary openquizbtn">Deelnemen</button>
+      </div>
+    </div>
+  </form>
+</nav>
+
+<!-- Page content -->
 <div class="container">
 <form (ngSubmit)="onSubmit()" #registerForm="ngForm" novalidate>
   <h1>Registreer</h1>

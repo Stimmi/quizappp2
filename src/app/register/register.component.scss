@@ -6,7 +6,107 @@ input.ng-valid  {
     border-left: 5px solid #42A948; /* green */
 }
 
-.wrongCode {
+
+
+// Navigationbar
+
+.navbar-custom {
+    color: #facf5adc;
+    background-color: #086850;
+}
+
+.navbar-brand {
+    font-family: "Bebas Neue";
+    color: #facf5adc;
+    
+}
+
+.brand-name {
+    padding-left: 10px;
+}
+
+.codeinput {
+    width: 180px;
+    height:45px;
+}
+
+.openquizbtn {
+    
+    padding-left: 7px;
+    padding-right: 7px;
+    position: relative;
+    margin-left: -60px;
+    font-family: "Bebas Neue";
+}
+
+.wrongcode {
+    position: absolute;
+    top: 20px;
+    margin-left: 8px;
+    font-size: 6pt;
+    color: red;
+}
+
+.loginform {
+    margin-left: auto;
+}
+
+@media only screen and (max-width: 400px) {
+    .loginform {
+                margin-right: auto;
+        
+        margin-left: auto;
+      
+        min-width: 200px;
+        background-color: var(--dark);
+       
+        
+    }
+
+    .openquizbtn {
+    
+        padding-left: 7px;
+        padding-right: 7px;
+        position: relative;
+        margin-left: -85px;
+        font-family: "Bebas Neue";
+    }
+
+    .codeinput {
+        width: 160px;
+        height:45px;
+      
+        
+    }
+    
+    .navbar-brand {
+        margin-left: auto;
+        margin-right: auto;
+        min-width: 100%;
+        text-align: center;
+        background-color: var(--dark);
+        border-radius: 5px;
+        
+    }
+
+    .code {
+        margin-left: auto;
+        margin-right:auto;
+        
+    }
+
+    .wrongcode {
+        color: red;
+        position: absolute;
+        top: 77px;
+        margin-left: 5px;
+        font-size: 6pt;
+    }
+
+   
+  }
+
+.wrongcode {
 
     color: red;
 

@@ -62,6 +62,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
       } else {
         this.wrongCode = true;
+        
       }
 
 
