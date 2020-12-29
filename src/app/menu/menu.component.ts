@@ -18,7 +18,6 @@ export class MenuComponent implements OnInit, OnDestroy {
   adminUsers;
   adminMode = false;
   currentTeam;
-  showMenuPoints = true;
 
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
@@ -31,10 +30,6 @@ export class MenuComponent implements OnInit, OnDestroy {
     this.subscriptionCurrentTeam = this.db.currentTeam.subscribe(currentTeam => {this.currentTeam = currentTeam});
 
     this.subscriptionAdminUsers = this.db.currentAdminUsers.subscribe(adminUsers => this.processAdminUsers(adminUsers));
-
-    if(this.router.url == '/registreer') {
-      this.showMenuPoints = false;
-    }
 
   }
 

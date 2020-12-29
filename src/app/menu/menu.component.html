@@ -3,7 +3,7 @@
     <button class="navbar-toggler" type="button" (click)="toggleNavbar()" aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div *ngIf="showMenuPoints" class="collapse navbar-collapse" [ngClass]="{'show': navbarOpen}">
+    <div class="collapse navbar-collapse" [ngClass]="{'show': navbarOpen}">
       <ul id="navbar-menu" class="navbar-nav mr-auto">
         <li class='menuteambox-sm'>Team: {{currentTeam}} <a (click)="logOut()" class="logout">Afmelden?</a></li>
         
