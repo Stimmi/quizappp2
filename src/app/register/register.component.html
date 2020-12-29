@@ -1,6 +1,7 @@
 <app-menu></app-menu>
 <div class="container">
 <form (ngSubmit)="onSubmit()" #registerForm="ngForm" novalidate>
+  <h1>Registreer</h1>
     <p>Wil je graag meedoen met de Superquiz van Scouts 32-48 op 20 Maart 2021? Registreer door onderstaande gegevens in te vullen en betaal het inchrijvingsgeld op rekening BE65464654. Vervolgens krijg je per mail een unieke code toegestuurd waarmee het mogelijk is om in te loggen op onze online quiz tool.</p>
     <div class="form-group row">
       <label for="email" class="col-sm-2 col-form-label">Email</label>
@@ -48,6 +49,7 @@
   </form>
 
   <form (ngSubmit)="onSubmitCode()" #codeForm="ngForm" novalidate>
+    <h1>Open de quiz</h1>
 
     <div class="form-group row">
       <label for="code" class="col-sm-2 col-form-label">Quizcode</label>
