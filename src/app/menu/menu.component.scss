@@ -83,6 +83,7 @@ nav {
     .menuteambox-sm {
         display: none;
     }
+   
     }
 .currentteam{
     font-size: large;
@@ -99,4 +100,8 @@ nav {
 
 .logout:hover {
     color: rgba(#ff5959,0.85)
+}
+
+.logout.small {
+    padding-left: 10px;
 }
