@@ -18,6 +18,7 @@ export class ScoreboardComponent implements OnInit {
   faMedal = faMedal;
 
   subscriptionRounds: Subscription;
+  subscriptionCurrentTeam: Subscription;
   rounds;
   totalScoreList;
   currentTeam;
@@ -28,7 +29,7 @@ export class ScoreboardComponent implements OnInit {
   ngOnInit(): void {
 
       this.subscriptionRounds = this.db.currentRounds.subscribe(rounds => this.processRounds(rounds));
-      this.currentTeam = localStorage.getItem("currentTeam")
+      this.subscriptionCurrentTeam = this.db.currentTeam.subscribe(currentTeam => {this.currentTeam = currentTeam});
       
   }
 
