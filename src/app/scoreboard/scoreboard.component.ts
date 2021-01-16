@@ -4,6 +4,7 @@ import { DatabaseService } from '../services/database.service';
 import { faUsers } from '@fortawesome/free-solid-svg-icons';
 import { faMedal } from '@fortawesome/free-solid-svg-icons';
 import { getLocaleExtraDayPeriodRules } from '@angular/common';
+import { FormControl, FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -21,8 +22,15 @@ export class ScoreboardComponent implements OnInit {
   subscriptionCurrentTeam: Subscription;
   rounds;
   totalScoreList;
+  roundScoreList;
   currentTeam;
 
+  roundNumbers = [1,2,3,4,5,6];
+
+  filterRoundForm = new FormGroup({
+    roundNumbersControl: new FormControl(1),
+
+  });
   
   constructor(private db: DatabaseService) { }
 
@@ -35,10 +43,15 @@ export class ScoreboardComponent implements OnInit {
 
   processRounds(rounds) {
 
+
     this.rounds = rounds;
     this.createTotalScoreList();
+    this.createRoundScoreList(this.filterRoundForm.value.roundNumbersControl);
+    
 
   }
+
+
 
   createTotalScoreList() {
 
@@ -53,9 +66,9 @@ export class ScoreboardComponent implements OnInit {
           score: 0
         }
       
-      this.totalScoreList.push(entry)
+        this.totalScoreList.push(entry)
+      }
     }
-  }
 
     for (let index = 0; index < this.rounds.length; index++) {
 
@@ -63,12 +76,47 @@ export class ScoreboardComponent implements OnInit {
         if(this.rounds[index].team == this.totalScoreList[indexx].team && this.rounds[index].score) {
           this.totalScoreList[indexx].score = this.rounds[index].score + this.totalScoreList[indexx].score;
         }
-        
       }
-
-  }
+    }
 
   this.totalScoreList.sort((a,b) => b.score - a.score);
+
+}
+
+createRoundScoreList(roundNumber) {
+
+  this.roundScoreList = [];
+
+  for (let index = 0; index < this.rounds.length; index++) {
+
+    if(!this.roundScoreList.some(el => el.team == this.rounds[index].team)) {
+
+      let entry = {
+        team: this.rounds[index].team,
+        score: 0
+      }
+    
+      this.roundScoreList.push(entry)
+    }
+  }
+
+
+  for (let index = 0; index < this.rounds.length; index++) {
+
+    for (let indexx = 0; indexx < this.roundScoreList.length; indexx++) {
+      if(this.rounds[index].team == this.roundScoreList[indexx].team && this.rounds[index].score && this.rounds[index].number == roundNumber) {
+        this.roundScoreList[indexx].score = this.rounds[index].score + this.roundScoreList[indexx].score;
+      }
+    }
+  }
+
+  this.roundScoreList.sort((a,b) => b.score - a.score);
+
+}
+
+filterRound() {
+
+  this.createRoundScoreList(this.filterRoundForm.value.roundNumbersControl);
 
 }
 

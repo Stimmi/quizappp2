@@ -55,21 +55,33 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
 
   processCorrections(corrections) {
 
-    this.corrections = corrections;
 
-    if(this.rounds) {
-      this.createCorrectionsList();
-    }    
+    if (corrections) {
+      this.corrections = [];
+      for (let index = 0; index < corrections.length; index++) {
+        this.corrections[corrections[index].number-1] = corrections[index];
+      }
+
+      if(this.rounds) {
+        this.createCorrectionsList();
+      }   
+
+    }
+
+ 
 
   }
 
   processRounds(rounds) {
 
-    this.rounds = rounds;
+    if(rounds) {
+      this.rounds = rounds;
 
-    if(this.corrections) {
-      this.createCorrectionsList();
+      if(this.corrections) {
+        this.createCorrectionsList();
+      }
     }
+
   }
 
   processTeams(teamsDb: any[]) {
@@ -106,6 +118,7 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
             this.correctionsList[index].answers[indexx].autoCorrect = false;
           }
         }
+      
       }
     }
 
@@ -204,6 +217,7 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
     let round = this.filteredList[index];
     this.filteredList[index].score = round.autoScore;
     this.db.setScore(round.id, round.autoScore);
+    this.filterCorrectionsList(this.filterForm.value);
   }
 
 

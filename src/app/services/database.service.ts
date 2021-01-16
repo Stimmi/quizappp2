@@ -21,11 +21,16 @@ export class DatabaseService {
   private roundsSource = new BehaviorSubject([]);
   currentRounds = this.roundsSource.asObservable();
 
+  private roundsControlSource = new BehaviorSubject([]);
+  currentRoundsControl = this.roundsControlSource.asObservable();
+
 
   constructor(private afs: AngularFirestore) { 
 
     this.getTeams();
     this.getRounds();
+    this.getRoundsControl();
+
 
     this.changeCurrentTeam(localStorage.currentTeam);
 
@@ -102,6 +107,25 @@ export class DatabaseService {
 
     this.roundsSource.next(message)
   }
+
+  getRoundsControl() {
+
+    this.afs.doc("controls/tPm2Co9wqIioaR2OMzC8").valueChanges({ idField: 'id' })
+    .subscribe(roundsControl => this.changeRoundsControl(roundsControl));
+
+   }
+
+   setRoundsControl(roundsControl) {
+
+    this.afs.doc("controls/tPm2Co9wqIioaR2OMzC8").update({rounds: roundsControl })
+
+   }
+
+  changeRoundsControl(message: any) {
+
+    this.roundsControlSource.next(message)
+  }
+
 
 
 }

@@ -34,7 +34,7 @@
   <main class="page-content">
     <div id="form-container" class="container">
       
-        <form [formGroup]="round1" [hidden]="currentRound != 1" (ngSubmit)="onSubmit(round1)">
+        <form [formGroup]="round1" [hidden]="currentRound != 1 || hideRounds[currentRound-1]" (ngSubmit)="onSubmit(round1)" (keydown.enter)="$event.preventDefault()">
 
           <h5>Ronde 1</h5>
 
@@ -52,9 +52,44 @@
           <div class="text-center" [hidden]="hideRounds[currentRound-1]"><button type="submit" class="btn btn-primary answerbtn">Antwoorden verzenden</button></div>
         </form>
 
-        <form [formGroup]="round2" [hidden]="currentRound != 2" (ngSubmit)="onSubmit(round2)">
+        <form [formGroup]="round2" [hidden]="currentRound != 2 || hideRounds[currentRound-1]" (ngSubmit)="onSubmit(round2)" (keydown.enter)="$event.preventDefault()">
 
           <h5>Ronde 2: ABC ronde</h5>
+
+          <input type="text" formControlName="1" class="form-control" placeholder="A">
+          <input type="text" formControlName="2" class="form-control" placeholder="B">
+          <input type="text" formControlName="3" class="form-control" placeholder="C">
+          <input type="text" formControlName="4" class="form-control" placeholder="D">
+          <input type="text" formControlName="5" class="form-control" placeholder="E">
+          <input type="text" formControlName="6" class="form-control" placeholder="F">
+          <input type="text" formControlName="7" class="form-control" placeholder="G">
+          <input type="text" formControlName="8" class="form-control" placeholder="H">
+          <input type="text" formControlName="9" class="form-control" placeholder="I">
+          <input type="text" formControlName="10" class="form-control" placeholder="J">
+          <input type="text" formControlName="11" class="form-control" placeholder="K">
+          <input type="text" formControlName="12" class="form-control" placeholder="L">
+          <input type="text" formControlName="13" class="form-control" placeholder="M">
+          <input type="text" formControlName="14" class="form-control" placeholder="N">
+          <input type="text" formControlName="15" class="form-control" placeholder="O">
+          <input type="text" formControlName="16" class="form-control" placeholder="P">
+          <input type="text" formControlName="17" class="form-control" placeholder="Q">
+          <input type="text" formControlName="18" class="form-control" placeholder="R">
+          <input type="text" formControlName="19" class="form-control" placeholder="S">
+          <input type="text" formControlName="20" class="form-control" placeholder="T">
+          <input type="text" formControlName="21" class="form-control" placeholder="U">
+          <input type="text" formControlName="22" class="form-control" placeholder="V">
+          <input type="text" formControlName="23" class="form-control" placeholder="W">
+          <input type="text" formControlName="24" class="form-control" placeholder="X">
+          <input type="text" formControlName="25" class="form-control" placeholder="Y">
+          <input type="text" formControlName="26" class="form-control" placeholder="Z">
+          <hr class="linebreak">
+          <div class="text-center" [hidden]="hideRounds[currentRound-1]"><button type="submit" class="btn btn-primary answerbtn">Antwoorden verzenden</button></div>
+          
+        </form>
+
+        <form [formGroup]="round3" [hidden]="currentRound != 3 || hideRounds[currentRound-1]" (ngSubmit)="onSubmit(round3)" (keydown.enter)="$event.preventDefault()">
+
+          <h5>Ronde 3</h5>
 
           <input type="text" formControlName="1" class="form-control" placeholder="Vraag 1">
           <input type="text" formControlName="2" class="form-control" placeholder="Vraag 2">
@@ -70,6 +105,161 @@
           <div class="text-center" [hidden]="hideRounds[currentRound-1]"><button type="submit" class="btn btn-primary answerbtn">Antwoorden verzenden</button></div>
           
         </form>
+
+        <form [formGroup]="round4" [hidden]="currentRound != 4 || hideRounds[currentRound-1]" (ngSubmit)="onSubmit(round4)" (keydown.enter)="$event.preventDefault()">
+
+          <h5>Ronde 4: Cluedo</h5>
+
+          <input type="text" formControlName="1" class="form-control" placeholder="Vraag 1">
+          <input type="text" formControlName="2" class="form-control" placeholder="Vraag 2">
+          <input type="text" formControlName="3" class="form-control" placeholder="Vraag 3">
+          <input type="text" formControlName="4" class="form-control" placeholder="Vraag 4">
+          <input type="text" formControlName="5" class="form-control" placeholder="Vraag 5">
+          <input type="text" formControlName="6" class="form-control" placeholder="Vraag 6">
+          <input type="text" formControlName="7" class="form-control" placeholder="Vraag 7">
+          <input type="text" formControlName="8" class="form-control" placeholder="Vraag 8">
+          <input type="text" formControlName="9" class="form-control" placeholder="Vraag 9">
+          <input type="text" formControlName="10" class="form-control" placeholder="Vraag 10">
+          <hr class="linebreak">
+          <div class="text-center" [hidden]="hideRounds[currentRound-1]"><button type="submit" class="btn btn-primary answerbtn">Antwoorden verzenden</button></div>
+          
+        </form>
+
+        <form [formGroup]="round5" [hidden]="currentRound != 5 || hideRounds[currentRound-1]" (ngSubmit)="onSubmit(round5)" (keydown.enter)="$event.preventDefault()">
+
+          <h5>Ronde 5</h5>
+
+          <input type="text" formControlName="1" class="form-control" placeholder="Vraag 1">
+          <input type="text" formControlName="2" class="form-control" placeholder="Vraag 2">
+          <input type="text" formControlName="3" class="form-control" placeholder="Vraag 3">
+          <input type="text" formControlName="4" class="form-control" placeholder="Vraag 4">
+          <input type="text" formControlName="5" class="form-control" placeholder="Vraag 5">
+          <input type="text" formControlName="6" class="form-control" placeholder="Vraag 6">
+          <input type="text" formControlName="7" class="form-control" placeholder="Vraag 7">
+          <input type="text" formControlName="8" class="form-control" placeholder="Vraag 8">
+          <input type="text" formControlName="9" class="form-control" placeholder="Vraag 9">
+          <input type="text" formControlName="10" class="form-control" placeholder="Vraag 10">
+          <hr class="linebreak">
+          <div class="text-center" [hidden]="hideRounds[currentRound-1]"><button type="submit" class="btn btn-primary answerbtn">Antwoorden verzenden</button></div>
+          
+        </form>
+
+        <form [formGroup]="round6" [hidden]="currentRound!=6 || hideRounds[currentRound-1]" (ngSubmit)="onSubmit(round6)" 
+        (keydown.enter)="$event.preventDefault()">
+
+          <h5>Ronde 6: Trippel ronde</h5>
+          <div class="form-inline">
+            <div class="col-4">
+              <input type="text" formControlName="1" class="form-control" placeholder="Vraag 1a">
+            </div>
+            <div class="col-4">
+              <input type="text" formControlName="2" class="form-control" placeholder="Vraag 1b">
+            </div>
+            <div class="col-4">
+              <input type="text" formControlName="3" class="form-control" placeholder="Vraag 1c">
+            </div>
+
+            <div class="col-4">
+              <input type="text" formControlName="4" class="form-control" placeholder="Vraag 2a">
+            </div>
+            <div class="col-4">
+              <input type="text" formControlName="5" class="form-control" placeholder="Vraag 2b">
+            </div>
+            <div class="col-4">
+              <input type="text" formControlName="6" class="form-control" placeholder="Vraag 2c">
+            </div>
+
+            <div class="col-4">
+              <input type="text" formControlName="7" class="form-control" placeholder="Vraag 3a">
+            </div>
+            <div class="col-4">
+              <input type="text" formControlName="8" class="form-control" placeholder="Vraag 3b">
+            </div>
+            <div class="col-4">
+              <input type="text" formControlName="9" class="form-control" placeholder="Vraag 3c">
+            </div>
+
+            <div class="col-4">
+              <input type="text" formControlName="10" class="form-control" placeholder="Vraag 4a">
+            </div>
+            <div class="col-4">
+              <input type="text" formControlName="11" class="form-control" placeholder="Vraag 4b">
+            </div>
+            <div class="col-4">
+              <input type="text" formControlName="12" class="form-control" placeholder="Vraag 4c">
+            </div>
+
+            <div class="col-4">
+              <input type="text" formControlName="13" class="form-control" placeholder="Vraag 5a">
+            </div>
+            <div class="col-4">
+              <input type="text" formControlName="14" class="form-control" placeholder="Vraag 5b">
+            </div>
+            <div class="col-4">
+              <input type="text" formControlName="15" class="form-control" placeholder="Vraag 5c">
+            </div>
+
+            <div class="col-4">
+              <input type="text" formControlName="16" class="form-control" placeholder="Vraag 6a">
+            </div>
+            <div class="col-4">
+              <input type="text" formControlName="17" class="form-control" placeholder="Vraag 6b">
+            </div>
+            <div class="col-4">
+              <input type="text" formControlName="18" class="form-control" placeholder="Vraag 6c">
+            </div>
+
+            <div class="col-4">
+              <input type="text" formControlName="19" class="form-control" placeholder="Vraag 7a">
+            </div>
+            <div class="col-4">
+              <input type="text" formControlName="20" class="form-control" placeholder="Vraag 7b">
+            </div>
+            <div class="col-4">
+              <input type="text" formControlName="21" class="form-control" placeholder="Vraag 7c">
+            </div>
+
+            <div class="col-4">
+              <input type="text" formControlName="22" class="form-control" placeholder="Vraag 8a">
+            </div>
+            <div class="col-4">
+              <input type="text" formControlName="23" class="form-control" placeholder="Vraag 8b">
+            </div>
+            <div class="col-4">
+              <input type="text" formControlName="24" class="form-control" placeholder="Vraag 8c">
+            </div>
+
+            <div class="col-4">
+              <input type="text" formControlName="25" class="form-control" placeholder="Vraag 9a">
+            </div>
+            <div class="col-4">
+              <input type="text" formControlName="26" class="form-control" placeholder="Vraag 9b">
+            </div>
+            <div class="col-4">
+              <input type="text" formControlName="27" class="form-control" placeholder="Vraag 9c">
+            </div>
+
+            <div class="col-4">
+              <input type="text" formControlName="28" class="form-control" placeholder="Vraag 10a">
+            </div>
+            <div class="col-4">
+              <input type="text" formControlName="29" class="form-control" placeholder="Vraag 10b">
+            </div>
+            <div class="col-4">
+              <input type="text" formControlName="30" class="form-control" placeholder="Vraag 10c">
+            </div>
+          </div>
+
+          <hr class="linebreak">
+          <div class="text-center"><button type="submit" class="btn btn-primary answerbtn">Antwoorden verzenden</button></div>
+          
+        </form>
+
+        <div [hidden]="!(hideRounds[currentRound-1])">
+          <h5>Ronde {{currentRound}}</h5>
+
+          <div class="text-center"><span>Ronde reeds ontvangen of afgesloten!</span></div>        
+        </div>
      
 
     </div>

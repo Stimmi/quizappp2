@@ -26,6 +26,8 @@ export class QuizComponent implements OnInit, OnDestroy {
   currentTeam;
   subscriptionCurrentTeam: Subscription;
   subscriptionRounds: Subscription;
+  subscriptionRoundsControl: Subscription;
+
 
   // Booleans to hide the submit button when a round is finished or already submitted
   // [0] = round 1 
@@ -58,8 +60,98 @@ export class QuizComponent implements OnInit, OnDestroy {
     7: new FormControl(''),
     8: new FormControl(''),
     9: new FormControl(''),
+    10: new FormControl(''),
+    11: new FormControl(''),
+    12: new FormControl(''),
+    13: new FormControl(''),
+    14: new FormControl(''),
+    15: new FormControl(''),
+    16: new FormControl(''),
+    17: new FormControl(''),
+    18: new FormControl(''),
+    19: new FormControl(''),
+    20: new FormControl(''),
+    21: new FormControl(''),
+    22: new FormControl(''),
+    23: new FormControl(''),
+    24: new FormControl(''),
+    25: new FormControl(''),
+    26: new FormControl('')
+  });
+
+  round3 = new FormGroup({
+    1: new FormControl(''),
+    2: new FormControl(''),
+    3: new FormControl(''),
+    4: new FormControl(''),
+    5: new FormControl(''),
+    6: new FormControl(''),
+    7: new FormControl(''),
+    8: new FormControl(''),
+    9: new FormControl(''),
     10: new FormControl('')
 
+  });
+
+  round4 = new FormGroup({
+    1: new FormControl(''),
+    2: new FormControl(''),
+    3: new FormControl(''),
+    4: new FormControl(''),
+    5: new FormControl(''),
+    6: new FormControl(''),
+    7: new FormControl(''),
+    8: new FormControl(''),
+    9: new FormControl(''),
+    10: new FormControl('')
+
+  });
+
+  round5 = new FormGroup({
+    1: new FormControl(''),
+    2: new FormControl(''),
+    3: new FormControl(''),
+    4: new FormControl(''),
+    5: new FormControl(''),
+    6: new FormControl(''),
+    7: new FormControl(''),
+    8: new FormControl(''),
+    9: new FormControl(''),
+    10: new FormControl('')
+
+  });
+
+  round6 = new FormGroup({
+    1: new FormControl(''),
+    2: new FormControl(''),
+    3: new FormControl(''),
+    4: new FormControl(''),
+    5: new FormControl(''),
+    6: new FormControl(''),
+    7: new FormControl(''),
+    8: new FormControl(''),
+    9: new FormControl(''),
+    10: new FormControl(''),
+    11: new FormControl(''),
+    12: new FormControl(''),
+    13: new FormControl(''),
+    14: new FormControl(''),
+    15: new FormControl(''),
+    16: new FormControl(''),
+    17: new FormControl(''),
+    18: new FormControl(''),
+    19: new FormControl(''),
+    20: new FormControl(''),
+    21: new FormControl(''),
+    22: new FormControl(''),
+    23: new FormControl(''),
+    24: new FormControl(''),
+    25: new FormControl(''),
+    26: new FormControl(''),
+    27: new FormControl(''),
+    28: new FormControl(''),
+    29: new FormControl(''),
+    30: new FormControl('')
   });
 
   constructor(private db: DatabaseService) { }
@@ -72,6 +164,9 @@ export class QuizComponent implements OnInit, OnDestroy {
     this.subscriptionRounds = this.db.currentRounds
     .subscribe(currentRounds => this.processRounds(currentRounds));
 
+    this.subscriptionRoundsControl = this.db.currentRoundsControl
+    .subscribe(currentRoundsControl => this.processRoundsControl(currentRoundsControl));
+
   }
 
   ngOnDestroy() {
@@ -80,6 +175,9 @@ export class QuizComponent implements OnInit, OnDestroy {
     }
     if(this.subscriptionRounds) {
       this.subscriptionRounds.unsubscribe();
+    }
+    if(this.subscriptionRoundsControl) {
+      this.subscriptionRoundsControl.unsubscribe();
     }
   }
 
@@ -115,7 +213,6 @@ export class QuizComponent implements OnInit, OnDestroy {
   // Sidebar handling
   toggleSidebar(){
     this.statusSidebar = !this.statusSidebar;
-    console.log(this.statusSidebar)       
   }
 
   processRounds(rounds) {
@@ -129,6 +226,19 @@ export class QuizComponent implements OnInit, OnDestroy {
         this.hideRounds[this.rounds[index].number-1] = true;
       }
       
+    }
+
+  }
+
+  processRoundsControl(roundsControl) {
+
+    if(roundsControl.rounds) {
+      for (let index = 0; index < roundsControl.rounds.length; index++) {
+
+        if(roundsControl.rounds[index] == false) {
+          this.hideRounds[index] = true;
+        }
+      }
     }
 
   }

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ControlComponent } from './control/control.component';
 import { CorrectionsComponent } from './corrections/corrections.component';
 import { GameComponent } from './game/game.component';
 import { HomeComponent } from './home/home.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'schifting', component: GameComponent, canActivate:[LoginGuard] },
   { path: 'quiz', component: QuizComponent, canActivate:[LoginGuard] },
   { path: 'verbeter', component: CorrectionsComponent, canActivate: [AdminGuard] },
+  { path: 'controle', component: ControlComponent, canActivate: [AdminGuard] },
   { path: '**', component: RegisterComponent }
 
 ];

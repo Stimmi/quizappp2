@@ -31,8 +31,9 @@ Installed with https://loiane.com/2017/08/how-to-add-bootstrap-to-an-angular-cli
 
 ## To do
 - Add payconiq qr codes to registration process
-- Make a component to control which rounds are accessible
+- Make a component to control which rounds are accessible -> Done 16/01/2020
 - Build a home page
-- In quiz component blokkeren dat je bij enter de form submit
+- In quiz component blokkeren dat je bij enter de form submit -> Done 16/01/2020
 - Triple ronde / correctie voorzien 
+- Score per ronde / ploeg
 
