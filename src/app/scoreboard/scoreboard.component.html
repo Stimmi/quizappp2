@@ -42,21 +42,32 @@
     </tbody>
     </table>
 
-    <!--<h1>Score detail per ploeg</h1>
+    <form [formGroup]="filterTeamForm" class="form-inline" (change)="filterTeam()">
+        <h1>Score per ploeg</h1>
+
+        <select formControlName="teamControl" class="form-control">
+        <option [value]="team" *ngFor="let team of teams">{{team}}</option>
+        </select>
+    </form>
     <table class="table table-striped scoretable">
         <thead >
             <tr>
-                <th scope="col"><fa-icon [icon]="faMedal"></fa-icon></th>
-                <th scope="col"><fa-icon [icon]="faUsers"></fa-icon></th>
+                <th scope="col">Ronde</th>
+                <th scope="col">Omschrijving</th>
                 <th scope="col">Score</th>
             </tr>
         </thead>    
         <tbody>
-        <tr  [ngClass]="{'currentteamscore': currentTeam == totalScore.team }" *ngFor="let totalScore of totalScoreList;let i = index" [attr.data-index]="i">
-            <th scope="row">{{i+1}}</th>
-            <td>{{totalScore.team}}</td>
-            <td>{{totalScore.score}}</td>
+        <tr *ngFor="let teamScore of teamScoreList;let i = index" [attr.data-index]="i">
+            <th scope="row">{{teamScore.number}}</th>
+            <td *ngIf="teamScore.number==1">ROde draad ronde</td>
+            <td *ngIf="teamScore.number==2">ABC ronde</td>
+            <td *ngIf="teamScore.number==3">Rode draad ronde</td>
+            <td *ngIf="teamScore.number==4">Cluedo ronde</td>
+            <td *ngIf="teamScore.number==5">Rode draad ronde</td>
+            <td *ngIf="teamScore.number==6">Trippel ronde</td>
+            <td>{{teamScore.score}}</td>
         </tr>
     </tbody>
-    </table>-->
+    </table>
 </div>

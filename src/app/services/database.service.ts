@@ -12,7 +12,7 @@ export class DatabaseService {
   private teamsSource = new BehaviorSubject([]);
   currentTeams = this.teamsSource.asObservable();
 
-  private currentTeamSource = new BehaviorSubject([]);
+  private currentTeamSource = new BehaviorSubject<string>('');
   currentTeam = this.currentTeamSource.asObservable();
 
   private adminUsersSource = new BehaviorSubject([]);
@@ -86,7 +86,7 @@ export class DatabaseService {
 
   }
 
-  changeCurrentTeam(message: any) {
+  changeCurrentTeam(message: string) {
 
     this.currentTeamSource.next(message)
   }

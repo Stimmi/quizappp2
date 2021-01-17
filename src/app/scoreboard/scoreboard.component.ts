@@ -3,7 +3,6 @@ import { Subscription } from 'rxjs';
 import { DatabaseService } from '../services/database.service';
 import { faUsers } from '@fortawesome/free-solid-svg-icons';
 import { faMedal } from '@fortawesome/free-solid-svg-icons';
-import { getLocaleExtraDayPeriodRules } from '@angular/common';
 import { FormControl, FormGroup } from '@angular/forms';
 
 
@@ -23,12 +22,20 @@ export class ScoreboardComponent implements OnInit {
   rounds;
   totalScoreList;
   roundScoreList;
+  teamScoreList;
+
   currentTeam;
+  teams;
 
   roundNumbers = [1,2,3,4,5,6];
 
   filterRoundForm = new FormGroup({
     roundNumbersControl: new FormControl(1),
+
+  });
+
+  filterTeamForm = new FormGroup({
+    teamControl: new FormControl()
 
   });
   
@@ -37,7 +44,9 @@ export class ScoreboardComponent implements OnInit {
   ngOnInit(): void {
 
       this.subscriptionRounds = this.db.currentRounds.subscribe(rounds => this.processRounds(rounds));
-      this.subscriptionCurrentTeam = this.db.currentTeam.subscribe(currentTeam => {this.currentTeam = currentTeam});
+      this.subscriptionCurrentTeam = this.db.currentTeam.subscribe(currentTeam => 
+        {this.currentTeam = currentTeam; this.filterTeamForm.controls['teamControl'].setValue(this.currentTeam);
+      });
       
   }
 
@@ -45,13 +54,26 @@ export class ScoreboardComponent implements OnInit {
 
 
     this.rounds = rounds;
+    this.createTeamsList();
     this.createTotalScoreList();
     this.createRoundScoreList(this.filterRoundForm.value.roundNumbersControl);
-    
+    this.filterTeam();
+
 
   }
 
+  createTeamsList() {
+    this.teams = [];
 
+    for (let index = 0; index < this.rounds.length; index++) {
+
+      if(!this.teams.some(el => el == this.rounds[index].team)) {
+
+        this.teams.push(this.rounds[index].team)
+      }
+    }
+
+  }
 
   createTotalScoreList() {
 
@@ -83,21 +105,21 @@ export class ScoreboardComponent implements OnInit {
 
 }
 
-createRoundScoreList(roundNumber) {
+  createRoundScoreList(roundNumber) {
 
-  this.roundScoreList = [];
+    this.roundScoreList = [];
 
-  for (let index = 0; index < this.rounds.length; index++) {
+    for (let index = 0; index < this.rounds.length; index++) {
 
-    if(!this.roundScoreList.some(el => el.team == this.rounds[index].team)) {
+      if(!this.roundScoreList.some(el => el.team == this.rounds[index].team)) {
 
-      let entry = {
-        team: this.rounds[index].team,
-        score: 0
+        let entry = {
+          team: this.rounds[index].team,
+          score: 0
+        }
+      
+        this.roundScoreList.push(entry)
       }
-    
-      this.roundScoreList.push(entry)
-    }
   }
 
 
@@ -112,13 +134,33 @@ createRoundScoreList(roundNumber) {
 
   this.roundScoreList.sort((a,b) => b.score - a.score);
 
-}
+  }
 
-filterRound() {
+  createTeamScoreList(team) {
 
-  this.createRoundScoreList(this.filterRoundForm.value.roundNumbersControl);
+    this.teamScoreList = [];
 
-}
+    for (let index = 0; index < this.rounds.length; index++) {
+
+      if(this.rounds[index].team == team && this.rounds[index].score) {
+        this.teamScoreList.push(this.rounds[index]);
+      }
+    }
+
+    this.teamScoreList.sort((a,b) => a.number - b.number);
+
+  }
+
+  filterRound() {
+
+    this.createRoundScoreList(this.filterRoundForm.value.roundNumbersControl);
+
+  }
+
+  filterTeam() {
+
+    this.createTeamScoreList(this.filterTeamForm.value.teamControl);
+  }
 
 
 
