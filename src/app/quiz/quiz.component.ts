@@ -34,7 +34,8 @@ export class QuizComponent implements OnInit, OnDestroy {
   // [1] = round 2 
   // [2] = round 3
   // ...
-  hideRounds: boolean[] = [false, false, false, false, false, false]
+  hideRounds: boolean[] = [false, false, false, false, false, false];
+  roundsControl: boolean[] = [true, true, true, true, true, true];
 
   round1 = new FormGroup({
     1: new FormControl(''),
@@ -219,8 +220,27 @@ export class QuizComponent implements OnInit, OnDestroy {
 
     this.rounds = rounds;
 
+    this.setHideRounds();
+
+  }
+
+  processRoundsControl(roundsControl) {
+
+    if(roundsControl.rounds) {
+      this.roundsControl = roundsControl.rounds;
+
+      this.setHideRounds();
+    }
+
+  }
+
+  setHideRounds() {
+
+    this.hideRounds = [false, false, false, false, false, false];
+
+    
     //Loop all rounds and check which rounds the currenTeam has already submitted
-    for (let index = 0; index < rounds.length; index++) {
+    for (let index = 0; index < this.rounds.length; index++) {
 
       if(this.rounds[index].team == this.currentTeam) {
         this.hideRounds[this.rounds[index].number-1] = true;
@@ -228,16 +248,11 @@ export class QuizComponent implements OnInit, OnDestroy {
       
     }
 
-  }
+    //Loop the roundscontrol to check which rounds are open
+    for (let index = 0; index < this.roundsControl.length; index++) {
 
-  processRoundsControl(roundsControl) {
-
-    if(roundsControl.rounds) {
-      for (let index = 0; index < roundsControl.rounds.length; index++) {
-
-        if(roundsControl.rounds[index] == false) {
-          this.hideRounds[index] = true;
-        }
+      if(this.roundsControl[index] == false) {
+        this.hideRounds[index] = true;
       }
     }
 

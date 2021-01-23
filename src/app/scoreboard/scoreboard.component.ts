@@ -38,14 +38,26 @@ export class ScoreboardComponent implements OnInit {
     teamControl: new FormControl()
 
   });
-  
+
+  classGen: string = 'nav-item nav-link active'
+  classRound: string = 'nav-item nav-link'
+  classTeam: string = 'nav-item nav-link'
+
+  classActive = 'nav-item nav-link active'
+  classInactive = 'nav-item nav-link'
+
+  general: boolean = true;
+  round: boolean = false;
+  team: boolean = false;
+
+
   constructor(private db: DatabaseService) { }
 
   ngOnInit(): void {
 
       this.subscriptionRounds = this.db.currentRounds.subscribe(rounds => this.processRounds(rounds));
       this.subscriptionCurrentTeam = this.db.currentTeam.subscribe(currentTeam => 
-        {this.currentTeam = currentTeam; this.filterTeamForm.controls['teamControl'].setValue(this.currentTeam);
+        {this.currentTeam = currentTeam; this.filterTeamForm.controls['teamControl'].setValue(this.currentTeam);this.filterTeam()
       });
       
   }
@@ -160,6 +172,40 @@ export class ScoreboardComponent implements OnInit {
   filterTeam() {
 
     this.createTeamScoreList(this.filterTeamForm.value.teamControl);
+  }
+
+  changeTable(table) {
+
+    this.general = false;
+    this.classGen = this.classInactive;
+    
+    this.round = false;
+    this.classRound = this.classInactive;
+
+    this.team = false;
+    this.classTeam = this.classInactive;
+
+    switch (table) {
+      case 'general':
+        this.general = true;
+        this.classGen = this.classActive;
+        break;
+      
+      case 'round':    
+        this.round = true;
+        this.classRound = this.classActive;
+        break;
+
+      case 'team':
+        this.team = true;
+        this.classTeam = this.classActive;
+        break;
+
+      default:
+        this.general = true;
+        this.classGen = this.classActive;
+        break;
+    }
   }
 
 

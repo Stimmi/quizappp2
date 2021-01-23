@@ -1,7 +1,13 @@
 <app-menu></app-menu>
 <div class="container">
-    <h1>Algemeen klassement</h1>
-    <table class="table table-striped scoretable">
+
+    <nav class="nav nav-pills nav-fill">
+        <a [class]="classGen" (click)="changeTable('general')">Algemeen klassement</a>
+        <a [class]="classRound" (click)="changeTable('round')">Per ronde</a>
+        <a [class]="classTeam" (click)="changeTable('team')">Per ploeg</a>
+      </nav>
+    <table *ngIf="general" class="table table-striped scoretable">
+
         <thead >
             <tr>
                 <th scope="col"><fa-icon [icon]="faMedal"></fa-icon></th>
@@ -18,14 +24,14 @@
     </tbody>
     </table>
 
-    <form [formGroup]="filterRoundForm" class="form-inline" (change)="filterRound()">
-        <h1>Score per ronde</h1>
+    <form *ngIf="round" [formGroup]="filterRoundForm" class="form-inline" (change)="filterRound()">
+        <h1>Ronde: </h1>
 
         <select formControlName="roundNumbersControl" class="form-control">
         <option [value]="round" *ngFor="let round of roundNumbers">{{round}}</option>
         </select>
     </form>
-    <table class="table table-striped scoretable">
+    <table *ngIf="round" class="table table-striped scoretable">
         <thead >
             <tr>
                 <th scope="col"><fa-icon [icon]="faMedal"></fa-icon></th>
@@ -42,14 +48,14 @@
     </tbody>
     </table>
 
-    <form [formGroup]="filterTeamForm" class="form-inline" (change)="filterTeam()">
-        <h1>Score per ploeg</h1>
+    <form *ngIf="team" [formGroup]="filterTeamForm" class="form-inline" (change)="filterTeam()">
+        <h1>Ploeg: </h1>
 
         <select formControlName="teamControl" class="form-control">
         <option [value]="team" *ngFor="let team of teams">{{team}}</option>
         </select>
     </form>
-    <table class="table table-striped scoretable">
+    <table *ngIf="team" class="table table-striped scoretable">
         <thead >
             <tr>
                 <th scope="col">Ronde</th>

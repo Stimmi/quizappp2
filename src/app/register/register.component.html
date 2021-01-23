@@ -22,9 +22,26 @@
 
 <!-- Page content -->
 <div class="container">
+<h1>Superquiz 2021</h1>
+<h2>20 Maart 20:00</h2>
+<h2>Iedereen samen online, gezellig met je ploeg thuis</h2>
+
+<div class="row justify-content-center align-items-center">
+    <fa-icon [icon]="faYoutube"></fa-icon> 
+    <fa-icon class="smallIcon" [icon]="faPlus"></fa-icon> 
+    <fa-icon [icon]="faDesktop"></fa-icon>
+</div>
+<h2>Live op YouTube</h2>
+<h2>Verwen je ploeg met een lekkere versnapering</h2>
+
+
+
 <form (ngSubmit)="onSubmit()" #registerForm="ngForm" novalidate>
   <h1>Registreer</h1>
-    <p>Wil je graag meedoen met de Superquiz van Scouts 32-48 op 20 Maart 2021? Registreer door onderstaande gegevens in te vullen en betaal het inchrijvingsgeld op rekening BE65464654. Vervolgens krijg je per mail een unieke code toegestuurd waarmee het mogelijk is om in te loggen op onze online quiz tool.</p>
+    <p>Registreer door onderstaande gegevens in te vullen en betaal het inchrijvingsgeld op rekening BE32 0014  1659 7902.
+       Vervolgens krijg je per mail een unieke code toegestuurd waarmee het mogelijk is om in te loggen op onze online quiz tool.
+      <br><br>De basisprijs om mee te doen aan de quiz is €10. Voor de tussenrondes moeten er enkel pagina's worden afgdrukt.
+       Wie een pakket besteld krijgt de tussenrondes mee geleverd met het pakket, dit is mogelijk in Mortsel en de buurgemeenten.</p>
     <div class="form-group row">
       <label for="email" class="col-sm-2 col-form-label">Email</label>
       <div class="col-sm-10 input-group">
@@ -46,13 +63,51 @@
     </div>
     <fieldset class="form-group">
     <div class="row">
-      <legend class="col-form-label col-sm-2 pt-0">Pakket</legend>
+      <legend class="col-form-label col-sm-2 pt-0">Formule</legend>
       <div class="col-sm-10">
         <div class="form-check">
           <input  class="form-check-input" type="radio" name="1" id="1" [value]="formules[0]" [(ngModel)]="registration.formule" ng-control="formule">
           <label class="form-check-label" for="1">
               {{formules[0]}}
           </label>
+          <div class="row">
+            <div class="col-1">
+              <input type="text" class="form-control" placeholder="0">
+            </div>
+            <div class="col-10">
+              <p>'t moet ni lekker zijn, alst ma veel is</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-1">
+              <input type="text" class="form-control" placeholder="0">
+            </div>
+            <div class="col-10">
+              <p>'t moet ni lekker zijn, alst ma veel is</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-1">
+              <input type="text" class="form-control" placeholder="0">
+            </div>
+            <div class="col-10">
+              <p>'t moet ni lekker zijn, alst ma veel is</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-1">
+              <input type="text" class="form-control" placeholder="0">
+            </div>
+            <div class="col-10">
+              <p>'t moet ni lekker zijn, alst ma veel is</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <textarea type="text" class="form-control" placeholder="Leveradres + voorkeur wijn/bier (indien van toepassing)"></textarea>
+            </div>
+          </div>
+          <p>Totaal: €35</p>
         </div>
         <div class="form-check">
           <input  class="form-check-input" type="radio" name="2" id="2" [value]="formules[1]" [(ngModel)]="registration.formule" ng-control="formule">
@@ -71,9 +126,10 @@
   </form>
 
 </div>
+<h2>Contacteer ons via <a href="mailto:info@superquiz.be">info@superquiz.be</a></h2>
 
 <div class="container">
-  <h1>Demo data:</h1>
+  <h1>Demo data</h1>
   <p>Om te testen kan je inloggen met één van volgende ploegen:</p>
   <table class="table table-striped">
     <tr>

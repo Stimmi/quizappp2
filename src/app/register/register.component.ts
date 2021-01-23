@@ -2,6 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DatabaseService } from '../services/database.service';
+import { faDesktop, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faYoutube } from '@fortawesome/free-brands-svg-icons';
+
 
 
 @Component({
@@ -12,12 +15,17 @@ import { DatabaseService } from '../services/database.service';
 export class RegisterComponent implements OnInit, OnDestroy {
 
   registration : Registration;
-  formules: string[] = ['Online (€5)','Pretpakket (€15)'];
+  formules: string[] = ['Pretpakket', 'Online (zelf de tussenronde afdrukken) - €10'];
   subscriptionTeams: Subscription;
   teams;
   wrongCode: boolean = false;
 
   code:string;
+
+    // Font awesome icons
+    faYoutube = faYoutube;
+    faDesktop = faDesktop;
+    faPlus = faPlus;
 
   constructor(private db: DatabaseService,
     private router: Router) { }
@@ -73,7 +81,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   wrongCodeFalse(){
     this.wrongCode = false;
-    console.log("change");
   }
 
   processTeams(teams) {
