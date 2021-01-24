@@ -6,9 +6,19 @@ input.ng-valid  {
     border-left: 5px solid #42A948; /* green */
 }
 
-h1,h2 {
+h1,h2, ngx-qrcode {
     text-align: center ;
 }
+
+.bshadow {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: drop-shadow(5px 5px 5px #222222);
+    opacity: .5;
+  
+  }
 
 fa-icon {
     font-size: 7em;

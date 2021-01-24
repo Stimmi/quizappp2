@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { DatabaseService } from '../services/database.service';
 import { faDesktop, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
-
+import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
 
 
 @Component({
@@ -22,10 +22,16 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   code:string;
 
-    // Font awesome icons
-    faYoutube = faYoutube;
-    faDesktop = faDesktop;
-    faPlus = faPlus;
+  // Font awesome icons
+  faYoutube = faYoutube;
+  faDesktop = faDesktop;
+  faPlus = faPlus;
+
+  registered: boolean = false;
+
+  elementType = NgxQrcodeElementTypes.URL;
+  correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
+  qrCodeValue: string;
 
   constructor(private db: DatabaseService,
     private router: Router) { }
@@ -35,8 +41,13 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.registration = {
       name: '',
       email: '',
-      formule:this.formules[0],
-      team: ''
+      team: '',
+      amount: 10,
+      pak1Amount: 0,
+      pak2Amount: 0,
+      pak3Amount: 0,
+      pak4Amount: 0,
+      address: ''
     }
 
     this.subscriptionTeams = this.db.currentTeams.subscribe(teams => this.processTeams(teams));
@@ -50,6 +61,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
  
   onSubmit() {
     this.db.setRegistration(this.registration);
+
+    this.registered = true;
+
+    this.qrCodeValue = `BCD\n002\n1\nSCT\nGEBABEBB\nVincent Reynaert\nBE32001416597902\nEUR${this.registration.amount}\n\nInschrijving Superquiz - ploeg ${this.registration.team}`;
+
   }
 
 
@@ -89,13 +105,51 @@ export class RegisterComponent implements OnInit, OnDestroy {
     
   }
 
+  recalculateTotal() {
+    console.log(this.registration.pak1Amount);
+
+    if(!this.between(this.registration.pak1Amount)) {
+      console.log(this.registration.pak1Amount)
+      this.registration.pak1Amount = 0;
+    }
+    if(!this.between(this.registration.pak2Amount)) {
+      this.registration.pak2Amount = 0;
+    }
+    if(!this.between(this.registration.pak3Amount)) {
+      this.registration.pak3Amount = 0;
+    }
+    if(!this.between(this.registration.pak4Amount)) {
+      this.registration.pak4Amount = 0;
+    }
+
+    this.registration.amount = 10;
+    this.registration.amount += (this.registration.pak1Amount * 10); 
+    this.registration.amount += (this.registration.pak2Amount * 15); 
+    this.registration.amount += (this.registration.pak3Amount * 25); 
+    this.registration.amount += (this.registration.pak4Amount * 25); 
+
+  }
+
+  between(pakAmount) {
+    if(pakAmount >= 0 && pakAmount < 100) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 }
 
 
 interface Registration {
   name: string;
   email: string;
-  formule: string;
   team: string;
+  amount: number;
+  pak1Amount: number;
+  pak2Amount: number;
+  pak3Amount: number;
+  pak4Amount: number;
+  address: string;
 
 }

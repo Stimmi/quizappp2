@@ -24,10 +24,13 @@
        </li>
        <li *ngIf="adminMode" class="nav-item" [routerLink]="['/controle']" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['/controle']">Controle</a>
-     </li>
+        </li>
+      <li *ngIf="adminMode" class="nav-item" [routerLink]="['/inschrijvingen']" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/inschrijvingen']">Inschrijvingen</a>
+      </li>
        <li class="nav-item"  routerLinkActive="active">
         <a class="nav-link" (click)="logOut()">Afmelden?</a>
-     </li>
+      </li>
       </ul>
     </div>
     <div class="ml-auto menuteambox">

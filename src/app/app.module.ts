@@ -20,6 +20,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ControlComponent } from './control/control.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
+import { RegistrationsComponent } from './registrations/registrations.component';
+
 
 @NgModule({
   declarations: [
@@ -31,7 +34,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MenuComponent,
     QuizComponent,
     CorrectionsComponent,
-    ControlComponent
+    ControlComponent,
+    RegistrationsComponent
   ],
   imports: [
     BrowserModule,
@@ -43,8 +47,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     FontAwesomeModule, 
-    MatSlideToggleModule
-    ],
+    MatSlideToggleModule,
+    NgxQRCodeModule
+      ],
   providers: [DatabaseService],
   bootstrap: [AppComponent]
 })

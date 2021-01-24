@@ -27,14 +27,14 @@ export class DatabaseService {
 
   constructor(private afs: AngularFirestore) { 
 
-    /*this.getTeams();
+    this.getTeams();
     this.getRounds();
     this.getRoundsControl();
 
 
     this.changeCurrentTeam(localStorage.currentTeam);
 
-    this.changeCurrentAdminUsers(['Stimmi', 'Dennis', 'Kasper', 'Jacky', 'Tom', 'Gio', 'Fotis']);*/
+    this.changeCurrentAdminUsers(['Stimmi', 'Dennis', 'Kasper', 'Jacky', 'Tom', 'Gio', 'Fotis']);
 
 
   }
@@ -85,6 +85,12 @@ export class DatabaseService {
     return this.afs.collection("registrations").add(Object.assign({},registration));
 
   }
+
+  getRegistrations() {
+    return this.afs.collection('registrations').valueChanges({ idField: 'id' });
+
+   }
+
 
   changeCurrentTeam(message: string) {
 

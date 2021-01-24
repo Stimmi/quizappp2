@@ -36,94 +36,94 @@
 
 
 
-<form (ngSubmit)="onSubmit()" #registerForm="ngForm" novalidate>
+<form *ngIf="!registered" (ngSubmit)="onSubmit()" #registerForm="ngForm" novalidate>
   <h1>Registreer</h1>
     <p>Registreer door onderstaande gegevens in te vullen en betaal het inchrijvingsgeld op rekening BE32 0014  1659 7902.
        Vervolgens krijg je per mail een unieke code toegestuurd waarmee het mogelijk is om in te loggen op onze online quiz tool.
       <br><br>De basisprijs om mee te doen aan de quiz is €10. Voor de tussenrondes moeten er enkel pagina's worden afgdrukt.
        Wie een pakket besteld krijgt de tussenrondes mee geleverd met het pakket, dit is mogelijk in Mortsel en de buurgemeenten.</p>
     <div class="form-group row">
-      <label for="email" class="col-sm-2 col-form-label">Email</label>
+      <label for="email" class="col-sm-2 col-form-label">Email*</label>
       <div class="col-sm-10 input-group">
         <input type="email" class="form-control" id="email" placeholder="Email"
-        [(ngModel)]="registration.email" name="email" required #email="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+        [(ngModel)]="registration.email" name="email" required #email="ngModel" pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
       </div>
     </div>
     <div class="form-group row">
-      <label for="Naam" class="col-sm-2 col-form-label">Naam</label>
+      <label for="Naam" class="col-sm-2 col-form-label">Naam*</label>
       <div class="col-sm-10">
         <input type="text" class="form-control" id="naam" placeholder="Naam" [(ngModel)]="registration.name" name="Naam" required>
       </div>
     </div>
     <div class="form-group row">
-      <label for="Ploegnaam" class="col-sm-2 col-form-label">Ploegnaam</label>
+      <label for="Ploegnaam" class="col-sm-2 col-form-label">Ploegnaam*</label>
       <div class="col-sm-10">
         <input type="text" class="form-control" id="Ploegnaam" placeholder="Ploegnaam" [(ngModel)]="registration.team" name="Ploeg" required>
       </div>
     </div>
-    <fieldset class="form-group">
-    <div class="row">
-      <legend class="col-form-label col-sm-2 pt-0">Formule</legend>
-      <div class="col-sm-10">
-        <div class="form-check">
-          <input  class="form-check-input" type="radio" name="1" id="1" [value]="formules[0]" [(ngModel)]="registration.formule" ng-control="formule">
-          <label class="form-check-label" for="1">
-              {{formules[0]}}
-          </label>
-          <div class="row">
-            <div class="col-1">
-              <input type="text" class="form-control" placeholder="0">
-            </div>
-            <div class="col-10">
-              <p>'t moet ni lekker zijn, alst ma veel is</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-1">
-              <input type="text" class="form-control" placeholder="0">
-            </div>
-            <div class="col-10">
-              <p>'t moet ni lekker zijn, alst ma veel is</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-1">
-              <input type="text" class="form-control" placeholder="0">
-            </div>
-            <div class="col-10">
-              <p>'t moet ni lekker zijn, alst ma veel is</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-1">
-              <input type="text" class="form-control" placeholder="0">
-            </div>
-            <div class="col-10">
-              <p>'t moet ni lekker zijn, alst ma veel is</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12">
-              <textarea type="text" class="form-control" placeholder="Leveradres + voorkeur wijn/bier (indien van toepassing)"></textarea>
-            </div>
-          </div>
-          <p>Totaal: €35</p>
-        </div>
-        <div class="form-check">
-          <input  class="form-check-input" type="radio" name="2" id="2" [value]="formules[1]" [(ngModel)]="registration.formule" ng-control="formule">
-          <label class="form-check-label" for="2">
-            {{formules[1]}}
-          </label>
-      </div>
-     </div>
-  </div>
-    </fieldset>
     <div class="form-group row">
-      <div class="col-sm-10">
+      <label for="Pakket" class="col-sm-2 col-form-label">Pakket</label>
+        <div class="col-3 col-lg-1">
+          <input type="number" class="form-control" placeholder="0" id="pak1Amount" [(ngModel)]="registration.pak1Amount" name="pak1Amount" (change)="recalculateTotal()">
+        </div>
+        <div class="col-8">
+          <p>'t moet ni lekker zijn, alst ma veel is: 12 x Cara's + chips en nootjes - €10</p>
+        </div>
+    </div>
+    <div class="form-group row">
+      <label for="Pakket" class="col-sm-2 col-form-label"></label>
+      <div class="col-3 col-lg-1">
+        <input type="number" class="form-control" placeholder="0" id="pak2Amount" [(ngModel)]="registration.pak2Amount" name="pak2Amount" (change)="recalculateTotal()">
+        </div>
+        <div class="col-8">
+          <p>Lekkere pintjes: 6 x Jupiler + chips en nootjes - €15</p>
+        </div>
+    </div>
+    <div class="form-group row">
+      <label for="Pakket" class="col-sm-2 col-form-label"></label>
+      <div class="col-3 col-lg-1">
+        <input type="number" class="form-control" placeholder="0" id="pak3Amount" [(ngModel)]="registration.pak3Amount" name="pak3Amount" (change)="recalculateTotal()">
+        </div>
+        <div class="col-8">
+          <p>Al dat flauw ge-doe mij maar echt bier: 75cl fles (Keuze uit Omer, Duvel, Blauwe Chimay, chouffe) + kaas, worstjes en nootjes - €25</p>
+        </div>
+    </div>
+    <div class="form-group row">
+      <label for="Pakket" class="col-sm-2 col-form-label"></label>
+      <div class="col-3 col-lg-1">
+        <input type="number" class="form-control" placeholder="0" id="pak4Amount" [(ngModel)]="registration.pak4Amount" name="pak4Amount" (change)="recalculateTotal()">
+        </div>
+        <div class="col-8">
+          <p>Lekkere wijnen: 1 fles (Keuze uit cava, witte of rode wijn) + kaas, worstjes en nootjes - €25</p>
+        </div>
+    </div>
+    <div class="form-group row">
+      <label for="Pakket" class="col-sm-2 col-form-label"></label>
+      <div class="col-12 col-md-10">
+        <textarea type="text" class="form-control" placeholder="Leveradres + voorkeur wijn/bier (indien van toepassing)" [(ngModel)]="registration.address" name="address"></textarea>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="Pakket" class="col-sm-2 col-form-label"><b>Totaal € {{registration.amount}}</b></label>
+    </div>
+    <div class="form-group row">
+      <div class="col-12">
         <button type="submit" class="btn btn-primary" [disabled]="!registerForm.form.valid">Registreer</button>
       </div>
     </div>
   </form>
+  <div *ngIf="registered">
+    <h1>Bedankt, we hebben je registatie goed ontvangen!</h1>
+    <p>Gelieve <b>€{{registration.amount}}</b> te storten op <b>BE32 0014  1659 7902</b> (rekening op naam van Vincent Reynaert). Eens we het bedrag hebben ontvangen ontvangen jullie een code
+       per e-mail waarmee je kan inloggen op ons quizplatform. Let op, dit kan enkele dagen duren. Je kan volgende qr-code gebruiken voor de betaling in je bank app.
+        Dit type qr-code wordt niet door alle banken ondersteund.</p>
+    <ngx-qrcode
+    [elementType]="elementType"
+    [errorCorrectionLevel]="correctionLevel"
+    [value]="qrCodeValue"
+    cssClass="bshadow"></ngx-qrcode>
+
+  </div>
 
 </div>
 <h2>Contacteer ons via <a href="mailto:info@superquiz.be">info@superquiz.be</a></h2>

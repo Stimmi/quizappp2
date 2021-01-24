@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { AdminGuard, LoginGuard } from './quiz-guard.guard';
 import { QuizComponent } from './quiz/quiz.component';
 import { RegisterComponent } from './register/register.component';
+import { RegistrationsComponent } from './registrations/registrations.component';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'quiz', component: QuizComponent, canActivate:[LoginGuard] },
   { path: 'verbeter', component: CorrectionsComponent, canActivate: [AdminGuard] },
   { path: 'controle', component: ControlComponent, canActivate: [AdminGuard] },
+  { path: 'inschrijvingen', component: RegistrationsComponent, canActivate: [AdminGuard] },
   { path: '**', component: RegisterComponent }
 
 ];

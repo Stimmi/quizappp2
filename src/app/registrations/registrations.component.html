@@ -1,0 +1,16 @@
+<app-menu></app-menu>
+<div class="container">
+    <h1>Inschrijvingen ({{registrations.length}})</h1>
+    <div *ngFor="let registration of registrations">
+        <p>Ploeg: {{registration.team}}</p>
+        <p>Naam: {{registration.name}}</p>
+        <p>Email: {{registration.email}}</p>
+        <p>Bedrag: €{{registration.amount}}</p>
+        <p># pakket 1: {{registration.pak1Amount}} - # pakket 2: {{registration.pak2Amount}}</p>
+        <p># pakket 3: {{registration.pak3Amount}} - # pakket 4: {{registration.pak4Amount}}</p>
+        <p>==========================</p>
+
+    </div>
+</div>
+
+

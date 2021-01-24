@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DatabaseService } from '../services/database.service';
 
@@ -8,7 +8,7 @@ import { DatabaseService } from '../services/database.service';
   templateUrl: './control.component.html',
   styleUrls: ['./control.component.scss']
 })
-export class ControlComponent implements OnInit {
+export class ControlComponent implements OnInit, OnDestroy {
 
   subscriptionRoundsControl: Subscription;
   roundsControl: boolean[] = [];
@@ -19,6 +19,11 @@ export class ControlComponent implements OnInit {
 
     this.subscriptionRoundsControl = this.db.currentRoundsControl.subscribe(roundsControl => this.processRoundsControl(roundsControl));
 
+  }
+  ngOnDestroy() {
+    if(this.subscriptionRoundsControl) {
+      this.subscriptionRoundsControl.unsubscribe();
+    }
   }
 
 
