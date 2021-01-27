@@ -161,3 +161,71 @@ fa-icon {
     margin-left: 3px;
     color: var(--dark);
 }
+
+.label {
+    color: var(--dark);
+    font-weight: 600;
+    max-width: 100px;
+}
+
+.qty-row {
+    padding-bottom: 10px; 
+    border-bottom:  solid 1px var(--secondary);
+}
+
+.btn {
+    cursor: pointer;
+}
+
+.packagedetails {
+    color: red;
+    margin-top: 0;
+    padding-top: 0;
+    font-size: 10px;
+}
+
+.green {
+    color: green;
+}
+
+.center-items{
+    padding-bottom: 5px; 
+  
+    justify-content: center;
+    text-align: center;
+
+}
+
+
+.basisprijs {
+    padding: 5px 10px 5px 10px;
+    border: solid 1px rgba(grey,0.4);
+    border-radius: 5px;
+   
+}
+
+.registerform {
+    border: solid 2px var(--secondary);
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
+}
+
+.promobanner {
+    border: solid 2px var(--dark);
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.promobannertitle {
+    margin: 10px 10px 0px 10px;
+    color:white;
+     background-color: var(--dark)
+}
+
+.formtitle {
+    width: 100%;
+   color:white;
+    background-color: var(--secondary)
+}
