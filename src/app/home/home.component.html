@@ -1,7 +1,35 @@
 <app-menu></app-menu>
 <div class="container">
-    <h1>Welkom {{currentTeam}}</h1>
-    <p>Op zaterdag 20 Maart om 20uur gaat de quiz van start. De quiz wordt uitgezonden op YouTube via deze <a href="https://www.youtube.com" target="_blank">link</a>. Je kan jezelf alvast in pole position zetten voor de quiz door de <a href="/schifting">schiftingsvraags</a> vraag te beantwoorden. Dit is een spel waarbij je zo veel mogelijk vlaggen moet raden in 100 seconden.</p>
+    <div class="row">
+<div class="col d-flex justify-content-center"> <h1>Welkom {{currentTeam}}</h1></div>
+
+    </div>
+    
+    
+    
+    
+    
+    <div class="row" style="padding-top: 20px">
+        <div class="col-md-6 d-flex justify-content-center ">
+        <div class="infobox">
+            <h1 class='center'> Livestream</h1>
+            <p>Op zaterdag 20 Maart om 20uur gaat de quiz van start. De quiz wordt uitgezonden op YouTube. 
+            Je opent deze stream best op een apart toestel. </p>
+            <div class="center"><a href="https://www.youtube.com" target="_blank" class="center btn btn-primary"><span><fa-icon class="rightmargin" [icon]="faYoutube"></fa-icon></span>open livestream </a></div>
+        </div>
+            
+        
+        </div>
+        <div class="col-md-6">
+            <div class="infobox">
+                <h1 class="center">Schiftingsronde</h1>
+              <p> Je kan jezelf alvast in pole position zetten voor de quiz met de onze schiftingsvraag. Dit is een spel waarbij je zo veel mogelijk vlaggen moet raden in 100 seconden.</p>
+              <p>Je mag zo vaak meespelen als je wil. Al je teamgenoten kunnen proberen. De ranking van dit spel wordt op de quizavond gebruikt om ex-aquo's op te lossen op de quizavond.</p>
+                          <div class="center"><a class="center btn btn-primary" href="/schifting"><span><fa-icon class="rightmargin" [icon]="faFlag"></fa-icon><fa-icon class="rightmargin" [icon]="faFlagusa"></fa-icon><fa-icon class="rightmargin" [icon]="faFlagcheck"></fa-icon></span>schiftingsspel</a></div>
+            </div>
+
+    </div>
+    
 
 </div>
 

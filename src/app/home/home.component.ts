@@ -1,6 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DatabaseService } from '../services/database.service';
+import { faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { faFontAwesomeFlag } from '@fortawesome/free-brands-svg-icons';
+import { faFlagUsa, faFlagCheckered } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home',
@@ -9,6 +12,12 @@ import { DatabaseService } from '../services/database.service';
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
+
+  // FA icons
+  faYoutube = faYoutube;
+  faFlag = faFontAwesomeFlag;
+  faFlagcheck = faFlagCheckered
+  faFlagusa = faFlagUsa
   currentTeam;
   subscriptionCurrentTeam: Subscription;
 
