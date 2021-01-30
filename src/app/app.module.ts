@@ -12,6 +12,7 @@ import { QuizComponent } from './quiz/quiz.component';
 import { RouterModule } from '@angular/router';
 import { DatabaseService } from './services/database.service';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -22,6 +23,7 @@ import { ControlComponent } from './control/control.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { RegistrationsComponent } from './registrations/registrations.component';
+import { StorageService } from './services/storage.service';
 
 
 @NgModule({
@@ -48,9 +50,10 @@ import { RegistrationsComponent } from './registrations/registrations.component'
     BrowserAnimationsModule,
     FontAwesomeModule, 
     MatSlideToggleModule,
-    NgxQRCodeModule
+    NgxQRCodeModule,
+    AngularFireStorageModule
       ],
-  providers: [DatabaseService],
+  providers: [DatabaseService, StorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

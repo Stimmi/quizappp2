@@ -1,4 +1,6 @@
 <app-menu></app-menu>
+
+
 <div class="master-wrapper">
 <div class="page-wrapper chiller-theme" [class.toggled]="statusSidebar">
   <a (click)="toggleSidebar()" id="show-sidebar" class="btn btn-sm btn-dark show-sidebar">
@@ -55,6 +57,11 @@
         <form [formGroup]="round2" [hidden]="currentRound != 2 || hideRounds[currentRound-1]" (ngSubmit)="onSubmit(round2)" (keydown.enter)="$event.preventDefault()">
 
           <h5>Ronde 2: ABC ronde</h5>
+
+          <video width="640" height="480" controls>
+            <source src="https://firebasestorage.googleapis.com/v0/b/superquiz3248.appspot.com/o/wkndvYouTube.mp4?alt=media&token=40364c45-95b7-433a-8584-cad245e6e683" type="video/mp4">
+            Your browser does not support the video tag.
+          </video> 
 
           <input type="text" formControlName="1" class="form-control" placeholder="A">
           <input type="text" formControlName="2" class="form-control" placeholder="B">

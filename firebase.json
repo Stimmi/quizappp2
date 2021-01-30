@@ -15,5 +15,12 @@
         "destination": "/index.html"
       }
     ]
-  }
+  },
+  "headers": [ {
+    "source" : "**/*.@(jpg|jpeg|gif|png|mp4)",
+    "headers" : [ {
+      "key" : "Access-Control-Allow-Origin",
+      "value" : "*"
+    } ]
+  } ]
 }

@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { DatabaseService } from '../services/database.service';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
+import { StorageService } from '../services/storage.service';
 
 
 @Component({
@@ -27,7 +28,6 @@ export class QuizComponent implements OnInit, OnDestroy {
   subscriptionCurrentTeam: Subscription;
   subscriptionRounds: Subscription;
   subscriptionRoundsControl: Subscription;
-
 
   // Booleans to hide the submit button when a round is finished or already submitted
   // [0] = round 1 
@@ -155,7 +155,7 @@ export class QuizComponent implements OnInit, OnDestroy {
     30: new FormControl('')
   });
 
-  constructor(private db: DatabaseService) { }
+  constructor(private db: DatabaseService, private st: StorageService) { }
 
   ngOnInit(): void {
 
@@ -257,9 +257,7 @@ export class QuizComponent implements OnInit, OnDestroy {
     }
 
   }
-
  
-    
   
 
 }

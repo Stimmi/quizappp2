@@ -30,13 +30,14 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 Installed with https://loiane.com/2017/08/how-to-add-bootstrap-to-an-angular-cli-project/
 
 ## To do
-- Add payconiq qr codes to registration process
-- toevoegen snack pakketten
+- Add payconiq qr codes to registration process -> Done 29/01
+- toevoegen snack pakketten -> Done 29/01
 - Make a component to control which rounds are accessible -> Done 16/01/2021
-- Build a home page
+- Build a home page -> Done 29/01/2021
 - In quiz component blokkeren dat je bij enter de form submit -> Done 16/01/2021
-- Triple ronde / correctie voorzien 
+- Triple ronde / correctie voorzien -> Done, made total score an input field
 - Score per ronde / ploeg -> Done 23/01/2021
-- Domeinnaam configureren
-- Find a solution for ABC video
+- Domeinnaam configureren -> Done 23/01/2021
+- Find a solution for ABC video -> Added an MP4 to storage, should be tested
+- Tussenronde toevoegen in de quiz component
 

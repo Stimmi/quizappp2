@@ -6,7 +6,6 @@ import { faDesktop, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
 
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -106,10 +105,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   recalculateTotal() {
-    console.log(this.registration.pak1Amount);
 
     if(!this.between(this.registration.pak1Amount)) {
-      console.log(this.registration.pak1Amount)
       this.registration.pak1Amount = 0;
     }
     if(!this.between(this.registration.pak2Amount)) {
@@ -137,6 +134,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
       return false;
     }
   }
+
+  backToHomePage() {
+    this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['registreer']);
+  });   }
 
 }
 

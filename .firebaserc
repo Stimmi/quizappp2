@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "superquiz3248"
+    "default": "superquiz3248",
+    "superquiz3248": "superquiz3248"
   }
 }

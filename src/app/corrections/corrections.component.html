@@ -63,7 +63,7 @@
                 <tr>
                     <th scope="row">Totaal</th>
                     <th colspan="2" class="right"><button type="submit" class="btn btn-primary" (click)="setScore(i)">Bevestig</button></th>
-                    <th class="checkboxTD">{{round.autoScore}}</th>
+                    <th><input [(ngModel)]="round.autoScore"></th>
                 </tr>
             </tbody>
         </table>

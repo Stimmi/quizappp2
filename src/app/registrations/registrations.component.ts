@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DatabaseService } from '../services/database.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-registrations',

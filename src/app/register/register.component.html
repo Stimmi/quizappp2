@@ -25,7 +25,7 @@
 
 <!-- Page content -->
 <div class="container">
-  <div class=" promobanner">
+  <div *ngIf="!registered" class=" promobanner">
     <h1 class="promobannertitle">Superquiz 2021</h1>
     <h2>20 Maart 20:00</h2>
     <h2>Iedereen samen online, gezellig met je ploeg thuis</h2>
@@ -41,7 +41,7 @@
 
 
 
-  <form class="registerform" *ngIf="!registered" (ngSubmit)="onSubmit()" #registerForm="ngForm" novalidate>
+  <form class="registerform" *ngIf="!registered" (ngSubmit)="onSubmit()" (keyup)="recalculateTotal()" #registerForm="ngForm" novalidate>
     <div class="formtitle"><h1 class="formtitle">Registreer</h1></div>
     <p>Registreer door onderstaande gegevens in te vullen en betaal het inschrijvingsgeld op rekening BE32 0014 1659
       7902.
@@ -199,6 +199,7 @@
     <ngx-qrcode [elementType]="elementType" [errorCorrectionLevel]="correctionLevel" [value]="qrCodeValue"
       cssClass="bshadow"></ngx-qrcode>
 
+    <button class="btn btn-primary" (click)="backToHomePage()">Ga terug</button>
   </div>
 
 </div>
