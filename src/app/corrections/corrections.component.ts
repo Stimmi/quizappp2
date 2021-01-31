@@ -19,7 +19,7 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
   rounds;
   teams = [{name: "Ploeg"}];
 
-  roundNumbers = ['Ronde',1,2,3,4,5,6];
+  roundNumbers = ['Ronde',1,2,3,4,5,6,7];
   checked = ['Verbeterd', 'Ja', 'Nee'];
 
   filterForm = new FormGroup({

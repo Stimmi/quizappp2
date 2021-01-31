@@ -27,7 +27,7 @@ export class ScoreboardComponent implements OnInit {
   currentTeam;
   teams;
 
-  roundNumbers = [1,2,3,4,5,6];
+  roundNumbers = [1,2,3,4,5,6,7];
 
   filterRoundForm = new FormGroup({
     roundNumbersControl: new FormControl(1),

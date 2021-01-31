@@ -34,8 +34,8 @@ export class QuizComponent implements OnInit, OnDestroy {
   // [1] = round 2 
   // [2] = round 3
   // ...
-  hideRounds: boolean[] = [false, false, false, false, false, false];
-  roundsControl: boolean[] = [true, true, true, true, true, true];
+  hideRounds: boolean[] = [false, false, false, false, false, false, false];
+  roundsControl: boolean[] = [true, true, true, true, true, true, true];
 
   round1 = new FormGroup({
     1: new FormControl(''),
@@ -155,6 +155,19 @@ export class QuizComponent implements OnInit, OnDestroy {
     30: new FormControl('')
   });
 
+  round7 = new FormGroup({
+    1: new FormControl(''),
+    2: new FormControl(''),
+    3: new FormControl(''),
+    4: new FormControl(''),
+    5: new FormControl(''),
+    6: new FormControl(''),
+    7: new FormControl(''),
+    8: new FormControl(''),
+    9: new FormControl(''),
+    10: new FormControl('')
+  });
+
   constructor(private db: DatabaseService, private st: StorageService) { }
 
   ngOnInit(): void {
@@ -236,7 +249,7 @@ export class QuizComponent implements OnInit, OnDestroy {
 
   setHideRounds() {
 
-    this.hideRounds = [false, false, false, false, false, false];
+    this.hideRounds = [false, false, false, false, false, false, false];
 
     
     //Loop all rounds and check which rounds the currenTeam has already submitted

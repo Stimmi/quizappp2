@@ -25,6 +25,7 @@
         <li class="rounds-menu-item"><a class="rounds-menu-item-text" (click)="setRound(4)" >4<br>Cluedo</a></li>
         <li class="rounds-menu-item"><a class="rounds-menu-item-number"(click)="setRound(5)" >5</a></li>
         <li class="rounds-menu-item"><a class="rounds-menu-item-text" (click)="setRound(6)" >6<br>Triple</a></li>
+        <li class="rounds-menu-item"><a class="rounds-menu-item-text" (click)="setRound(7)" >7<br>Sudoku</a></li>
 
       </ul>
     </div>
@@ -261,6 +262,68 @@
           <div class="text-center"><button type="submit" class="btn btn-primary answerbtn">Antwoorden verzenden</button></div>
           
         </form>
+
+        <form [formGroup]="round7" [hidden]="currentRound != 7 || hideRounds[currentRound-1]" (ngSubmit)="onSubmit(round7)" (keydown.enter)="$event.preventDefault()">
+
+        <h5>Tafelronde: Sudoku</h5>
+
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td class="sudoku"><input type="text" formControlName="1" class="form-control" placeholder="?" pattern="[0-1]"></td>
+              <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="sudoku"><input type="text" formControlName="2" class="form-control" placeholder="?" pattern="[0-1]"></td>
+              <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+              <td></td><td></td>
+              <td class="sudoku"><input type="text" formControlName="3" class="form-control" placeholder="?"></td>
+              <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+              <td></td><td></td><td></td>
+              <td class="sudoku"><input type="text" formControlName="4" class="form-control" placeholder="?"></td>
+              <td></td><td></td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+              <td></td><td></td><td></td><td></td>
+              <td class="sudoku"><input type="text" formControlName="5" class="form-control" placeholder="?"></td>
+              <td></td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+              <td></td><td></td><td></td><td></td><td></td>
+              <td class="sudoku"><input type="text" formControlName="6" class="form-control" placeholder="?"></td>
+              <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+              <td></td><td></td><td></td><td></td><td></td><td></td>
+              <td class="sudoku"><input type="text" formControlName="7" class="form-control" placeholder="?"></td>
+              <td></td><td></td><td></td>
+            </tr>
+            <tr>
+              <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+              <td class="sudoku"><input type="text" formControlName="8" class="form-control" placeholder="?"></td>
+              <td></td><td></td>
+            </tr>
+            <tr>
+              <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+              <td class="sudoku"><input type="text" formControlName="9" class="form-control" placeholder="?"></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+              <td class="sudoku"><input type="text" formControlName="10" class="form-control" placeholder="?"></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <hr class="linebreak">
+        <div class="text-center" [hidden]="hideRounds[currentRound-1]"><button type="submit" class="btn btn-primary answerbtn">Antwoorden verzenden</button></div>
+        
+      </form>
 
         <div [hidden]="!(hideRounds[currentRound-1])">
           <h5>Ronde {{currentRound}}</h5>
