@@ -34,7 +34,7 @@ export class DatabaseService {
 
     this.changeCurrentTeam(localStorage.currentTeam);
 
-    this.changeCurrentAdminUsers(['Stimmi', 'Dennis', 'Kasper', 'Jacky', 'Tom', 'Gio', 'Fotis']);
+    this.changeCurrentAdminUsers(['superquiz crew']);
 
 
   }
