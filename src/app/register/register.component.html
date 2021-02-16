@@ -83,7 +83,7 @@
           </div>
           <div class="col-sm-8">
             <div class="packtitle" >Deelname quiz</div>
-            <div class="packdescription">U ontvangt een quizcode om deel te nemen aan de online quiz.</div>
+            <div class="packdescription">U ontvangt een quizcode om deel te nemen aan de online quiz</div>
           </div>
         </div>
       </div>
@@ -101,11 +101,11 @@
           <div class="col-2" style="min-width: 135px;">
             <input type="number" class="form-control enterqty" placeholder="0" id="pak1Amount"
               [(ngModel)]="registration.pak1Amount" name="pak1Amount" (change)="recalculateTotal()">
-            <span class="pricetag">x €10</span>
+            <span class="pricetag">x €15</span>
           </div>
           <div class="col-sm-8">
-            <div class="packtitle">'t moet ni lekker zijn, alst ma veel is</div>
-            <div class="packdescription">12 x Cara's + chips en nootjes</div>
+            <div class="packtitle">Classic scoutscafe</div>
+            <div class="packdescription">4 flesjes (Keuze uit Omer, Duvel, Blauwe Chimay, chouffe) + chips en nootjes</div>
           </div>
         </div>
       </div>
@@ -121,8 +121,8 @@
         <span class="pricetag">x €15</span>
       </div>
       <div class="col-sm-8">
-        <div class="packtitle">Lekkere pintjes</div>
-        <div class="packdescription">6 x Jupiler + chips en nootjes</div>
+        <div class="packtitle">Lekkere wijnen</div>
+        <div class="packdescription">1 fles (Keuze uit Cava, witte of rode wijn) + chips en nootjes</div>
       </div>
     </div>
   </div>
@@ -136,12 +136,11 @@
       <div class="col-2" style="min-width: 140px;">
         <input type="number" class="form-control enterqty" placeholder="0" id="pak3Amount"
           [(ngModel)]="registration.pak3Amount" name="pak3Amount" (change)="recalculateTotal()">
-        <span class="pricetag">x €25</span>
+        <span class="pricetag">x €20</span>
       </div>
       <div class="col-sm-8">
-        <div class="packtitle">Al dat flauw ge-doe mij maar echt bier</div>
-        <div class="packdescription">75cl fles (Keuze uit Omer, Duvel, Blauwe Chimay, chouffe) + kaas, worstjes en
-          nootjes</div>
+        <div class="packtitle">Keuze van de jury</div>
+        <div class="packdescription">Bij de voorbereidingen van deze quiz, verdiepte de jury zich in de lokale biermarkt. In dit smakelijke pakket zitten de 5 bieren die de zintuigen van de jury het meest prikkelden. Bestel en ontdek wat nieuws uit de buurt!</div>
 
       </div>
     </div>
@@ -149,18 +148,52 @@
 </div>
 
 
-    <div class="form-group row">
-      <label for="Pakket" class="col-sm-2 col-form-label label"></label>
+<div class="form-group row">
+  <label for="Pakket" class="col-sm-2 col-form-label label"></label>
       <div class="col-9">
         <div class="row qty-row">
       <div class="col-2" style="min-width: 140px;">
         <input type="number" class="form-control enterqty" placeholder="0" id="pak4Amount"
           [(ngModel)]="registration.pak4Amount" name="pak4Amount" (change)="recalculateTotal()">
-        <span class="pricetag">x €25</span>
+        <span class="pricetag">x €10</span>
       </div>
       <div class="col-sm-8">
-        <div class="packtitle">Lekkere wijnen</div>
-        <div class="packdescription">1 fles (Keuze uit cava, witte of rode wijn) + kaas, worstjes en nootjes</div>
+        <div class="packtitle">Non-alcoholische apero</div>
+        <div class="packdescription">Een gezond, origineel en lekker drank met een kleine versnapering</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="form-group row">
+  <label for="Pakket" class="col-sm-2 col-form-label label"></label>
+      <div class="col-9">
+        <div class="row qty-row">
+      <div class="col-2" style="min-width: 140px;">
+        <input type="number" class="form-control enterqty" placeholder="0" id="pak5Amount"
+          [(ngModel)]="registration.pak5Amount" name="pak5Amount" (change)="recalculateTotal()">
+        <span class="pricetag">x €10</span>
+      </div>
+      <div class="col-sm-8">
+        <div class="packtitle"><a target="_blank" href="https://www.facebook.com/jamantwerpen/">JAM</a> aperoplank</div>
+        <div class="packdescription">Hartige neurotransmitterstimulerende snack by <a target="_blank" href="https://www.facebook.com/jamantwerpen/">JAM</a>, Oud-leiding Jasper Hautekiet en zijn verloofde Axelle runnen al 2 jaar dit gezellige brunch-lunch barretje in Antwerpen. Voor de gelegenheid maken ze voor u een verrukkelijke aperoplank</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="form-group row">
+  <label for="Pakket" class="col-sm-2 col-form-label label"></label>
+      <div class="col-9">
+        <div class="row qty-row">
+      <div class="col-2" style="min-width: 140px;">
+        <input type="number" class="form-control enterqty" placeholder="0" id="pak6Amount"
+          [(ngModel)]="registration.pak6Amount" name="pak6Amount" (change)="recalculateTotal()">
+        <span class="pricetag">x €7</span>
+      </div>
+      <div class="col-sm-8">
+        <div class="packtitle">Gebakjes van <a target="_blank" href="https://www.tantelie.com/">Tante Lie</a></div>
+        <div class="packdescription">Zoete focusverscherpende gebakjes by <a target="_blank" href="https://www.tantelie.com/">tanteliebakery</a>, Oud-leiding Julie Van Cleemput bakt al 3 jaar overheerlijke taarten en cupcakes voor alle gelegenheden. Ook voor de superquiz weet ze wel een gepast gebakje</div>
       </div>
     </div>
   </div>

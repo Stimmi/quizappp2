@@ -47,6 +47,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       pak3Amount: 0,
       pak4Amount: 0,
       pak5Amount: 0,
+      pak6Amount: 0,
       address: ''
     }
 
@@ -119,13 +120,20 @@ export class RegisterComponent implements OnInit, OnDestroy {
     if(!this.between(this.registration.pak4Amount)) {
       this.registration.pak4Amount = 0;
     }
+    if(!this.between(this.registration.pak5Amount)) {
+      this.registration.pak5Amount = 0;
+    }
+    if(!this.between(this.registration.pak6Amount)) {
+      this.registration.pak5Amount = 0;
+    }
 
     this.registration.amount = 10;
     this.registration.amount += (this.registration.pak1Amount * 15); 
     this.registration.amount += (this.registration.pak2Amount * 15); 
     this.registration.amount += (this.registration.pak3Amount * 20); 
     this.registration.amount += (this.registration.pak4Amount * 10); 
-    this.registration.amount += (this.registration.pak5Amount * 7); 
+    this.registration.amount += (this.registration.pak5Amount * 10); 
+    this.registration.amount += (this.registration.pak6Amount * 7); 
 
   }
 
@@ -155,6 +163,7 @@ interface Registration {
   pak3Amount: number;
   pak4Amount: number;
   pak5Amount: number;
+  pak6Amount: number;
   address: string;
 
 }
