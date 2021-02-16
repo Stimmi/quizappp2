@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DatabaseService } from '../services/database.service';
-import { faDesktop, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faDesktop, faPlus, faPlayCircle } from '@fortawesome/free-solid-svg-icons';
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
 
@@ -22,7 +22,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   code:string;
 
   // Font awesome icons
-  faYoutube = faYoutube;
+  faYoutube = faPlayCircle;
   faDesktop = faDesktop;
   faPlus = faPlus;
 
