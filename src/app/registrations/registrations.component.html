@@ -2,16 +2,38 @@
 <div class="container">
     <h1>Inschrijvingen ({{registrations.length}})</h1>
     <div *ngFor="let registration of registrations">
-        <p>Ploeg: {{registration.team}}</p>
+        <p>Ploeg: <b>{{registration.team}}</b></p>
         <p>Naam: {{registration.name}}</p>
         <p>Email: {{registration.email}}</p>
         <p>Bedrag: €{{registration.amount}}</p>
         <p>Adres: {{registration.address}}</p>
-
-        <p># pakket 1: {{registration.pak1Amount}} - # pakket 2: {{registration.pak2Amount}}</p>
-        <p># pakket 3: {{registration.pak3Amount}} - # pakket 4: {{registration.pak4Amount}}</p>
-        <p># pakket 5: {{registration.pak5Amount}} - # pakket 6: {{registration.pak6Amount}}</p>
-
+        <p>Betaald: {{registration.paid}}</p>
+        <table>
+            <tr>
+                <td>Classic Scoutscafe</td>
+                <td>{{registration.pak1Amount}}</td>
+            </tr>
+            <tr>
+                <td>Lekkere wijnen</td>
+                <td>{{registration.pak2Amount}}</td>
+            </tr>
+            <tr>
+                <td>Keuze vd jury</td>
+                <td>{{registration.pak3Amount}}</td>
+            </tr>
+            <tr>
+                <td>Non-alcoholisch</td>
+                <td>{{registration.pak4Amount}}</td>
+            </tr>
+            <tr>
+                <td>JAM</td>
+                <td>{{registration.pak5Amount}}</td>
+            </tr>
+            <tr>
+                <td>Tante Lie</td>
+                <td>{{registration.pak6Amount}}</td>
+            </tr>
+        </table>
         <p>==========================</p>
 
     </div>

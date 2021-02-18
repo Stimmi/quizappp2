@@ -211,16 +211,22 @@
 
     <div class="form-group row center-items">
       <b>Totaal € {{registration.amount}}</b>
-      </div>
+    </div>
+    
     <div *ngIf="registration.amount == 10" class="form-group row" class="packagedetails center-items">U bestelt enkel het basispakket. U krijgt een quizcode en pdf toegestuurd die u zelf dient te printen.
-           </div>
+    </div>
 
     <div *ngIf="registration.amount != 10" class="form-group row" class="packagedetails green center-items"> U bestelt een extra pakket. U krijgt een quizcode en alle tussenrondes afgedrukt thuisgeleverd.
-          </div>
+    </div>
     
     <div class="form-group row center-items" >
-          <button type="submit" class="btn btn-primary" [disabled]="!registerForm.form.valid">Registreer</button>
-       </div>
+      <button type="submit" class="btn btn-primary" [disabled]="!registerForm.form.valid">Registreer</button>
+    </div>
+    <div *ngIf="!registerForm.form.valid && (registerForm.form.dirty || registerForm.form.touched)" class="form-group row" class="packagedetails center-items">
+      Gelieve alle verplichte velden in te vullen
+    </div>
+    
+
   </form>
 
   <div *ngIf="registered">

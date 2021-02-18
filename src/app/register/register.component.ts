@@ -48,7 +48,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
       pak4Amount: 0,
       pak5Amount: 0,
       pak6Amount: 0,
-      address: ''
+      address: '',
+      paid: false
     }
 
     this.subscriptionTeams = this.db.currentTeams.subscribe(teams => this.processTeams(teams));
@@ -165,5 +166,6 @@ interface Registration {
   pak5Amount: number;
   pak6Amount: number;
   address: string;
+  paid: boolean;
 
 }
