@@ -1,14 +1,24 @@
 <app-menu></app-menu>
 <div class="container">
     <h1>Inschrijvingen ({{registrations.length}})</h1>
-    <div *ngFor="let registration of registrations">
-        <p>Ploeg: <b>{{registration.team}}</b></p>
-        <p>Naam: {{registration.name}}</p>
-        <p>Email: {{registration.email}}</p>
-        <p>Bedrag: €{{registration.amount}}</p>
-        <p>Adres: {{registration.address}}</p>
-        <p>Betaald: {{registration.paid}}</p>
-        <table>
+    <div *ngFor="let registration of registrations" class="card">
+        <div *ngIf="registration.paid" class="card-header paid">
+            <b>{{registration.team}}</b>
+        </div>
+        <div *ngIf="!registration.paid" class="card-header">
+            <b>{{registration.team}}</b>
+        </div>
+
+        <div class="card-body">
+            <p>Naam: {{registration.name}}</p>
+            <p>Email: {{registration.email}}</p>
+            <p>Bedrag: €{{registration.amount}}</p>
+            <p>Adres: {{registration.address}}</p>
+            <p *ngIf="registration.paid">Betaling: OK</p>
+            <p *ngIf="!registration.paid">Betaling: nog niet ontvangen</p>
+
+        </div>
+        <table class="table">
             <tr>
                 <td>Classic Scoutscafe</td>
                 <td>{{registration.pak1Amount}}</td>
@@ -34,9 +44,14 @@
                 <td>{{registration.pak6Amount}}</td>
             </tr>
         </table>
-        <p>==========================</p>
-
     </div>
+
+    <h1>Teams ({{teams.length}})</h1>
+    <table class="table">
+        <tr *ngFor="let team of teams">
+            <td>{{team.name}}</td>
+            <td>{{team.code}}</td>
+        </tr>
+    </table>
+
 </div>
-
-

@@ -34,7 +34,7 @@ export class DatabaseService {
 
     this.changeCurrentTeam(localStorage.currentTeam);
 
-    this.changeCurrentAdminUsers(['superquiz crew']);
+    this.changeCurrentAdminUsers(['superquiz crew', 'superquiz crew met een hele lange naam die maar blijft duren zonder limiet']);
 
 
   }

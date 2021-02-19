@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DatabaseService } from '../services/database.service';
-import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,13 +11,18 @@ import { Router } from '@angular/router';
 export class RegistrationsComponent implements OnInit, OnDestroy {
 
   subscriptionRegistrations: Subscription
-  registrations;
+  registrations = [];
+
+  subscriptionTeams: Subscription;
+  teams;
 
   constructor(private db: DatabaseService) { }
 
   ngOnInit(): void {
 
     this.db.getRegistrations().subscribe(reg => this.processRegistrations(reg));
+    this.db.currentTeams.subscribe(teams => this.processTeams(teams));
+
 
   }
 
@@ -30,6 +34,10 @@ export class RegistrationsComponent implements OnInit, OnDestroy {
 
   processRegistrations(registrations) {
     this.registrations = registrations;
+  }
+
+  processTeams(teams) {
+    this.teams = teams;
   }
  
 }
