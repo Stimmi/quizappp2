@@ -19,6 +19,7 @@ export class ScoreboardComponent implements OnInit {
 
   subscriptionRounds: Subscription;
   subscriptionCurrentTeam: Subscription;
+  allRounds;
   rounds;
   totalScoreList;
   roundScoreList;
@@ -65,7 +66,8 @@ export class ScoreboardComponent implements OnInit {
   processRounds(rounds) {
 
 
-    this.rounds = rounds;
+    this.allRounds = rounds;
+    this.rounds = this.filterNotCorrectedRounds(this.allRounds);
     this.createTeamsList();
     this.createTotalScoreList();
     this.createRoundScoreList(this.filterRoundForm.value.roundNumbersControl);
@@ -89,6 +91,7 @@ export class ScoreboardComponent implements OnInit {
 
   createTotalScoreList() {
 
+    // Create an element for every team that has a submitted and corrected round
     this.totalScoreList = [];
 
     for (let index = 0; index < this.rounds.length; index++) {
@@ -103,6 +106,8 @@ export class ScoreboardComponent implements OnInit {
         this.totalScoreList.push(entry)
       }
     }
+
+    // Loop all rounds and calculate the total score 
 
     for (let index = 0; index < this.rounds.length; index++) {
 
@@ -172,6 +177,20 @@ export class ScoreboardComponent implements OnInit {
   filterTeam() {
 
     this.createTeamScoreList(this.filterTeamForm.value.teamControl);
+  }
+
+  filterNotCorrectedRounds(rounds) {
+
+    let result = []
+
+    for (let index = 0; index < rounds.length; index++) {
+      if(rounds[index].score) {
+        result.push(rounds[index]);
+      }
+    }
+
+    return result;
+
   }
 
   changeTable(table) {

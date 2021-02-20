@@ -14,9 +14,10 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
   subscriptionRounds: Subscription;
   subscriptionTeams: Subscription;
   correctionsList;
-  filteredList;
+  filteredList = [];
   corrections;
   rounds;
+  roundsCorrected: number = 0;
   teams = [{name: "Ploeg"}];
 
   roundNumbers = ['Ronde',1,2,3,4,5,6,7];
@@ -58,6 +59,8 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
 
     if (corrections) {
       this.corrections = [];
+
+      // Sort the corrections based on the round number
       for (let index = 0; index < corrections.length; index++) {
         this.corrections[corrections[index].number-1] = corrections[index];
       }
@@ -76,6 +79,15 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
 
     if(rounds) {
       this.rounds = rounds;
+
+      // Count the number of rounds that are corrected
+      this.roundsCorrected = 0;
+
+      for (let index = 0; index < this.rounds.length; index++) {
+        if(this.rounds[index].score) {
+          this.roundsCorrected++          
+        }
+      }
 
       if(this.corrections) {
         this.createCorrectionsList();
@@ -122,10 +134,10 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
       }
     }
 
-    // If the filtered list is empty, the complete list can be assigned
+    /*// If the filtered list is empty, the complete list can be assigned
     if(!this.filteredList) {
       this.filteredList = this.correctionsList;
-    }
+    }*/
 
   }
 
@@ -215,9 +227,17 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
 
   setScore(index) {
     let round = this.filteredList[index];
-    this.filteredList[index].score = round.autoScore;
-    this.db.setScore(round.id, round.autoScore);
-    this.filterCorrectionsList(this.filterForm.value);
+
+    //Check if the score is a valid number and commit to DB
+    if(typeof round.autoScore == 'number') {
+
+      this.filteredList[index].score = round.autoScore;
+      this.db.setScore(round.id, round.autoScore);
+      this.filterCorrectionsList(this.filterForm.value);
+
+    } 
+
+
   }
 
 

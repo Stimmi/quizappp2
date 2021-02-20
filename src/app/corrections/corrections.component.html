@@ -3,6 +3,7 @@
 
 <div class="container">
     <br>
+    <p>Ingestuurde rondes: {{rounds.length}} - Totaal verbeterd: {{roundsCorrected}} - Aantal rondes met huidige filter: {{filteredList.length}}</p>
     <form [formGroup]="filterForm" class="form-inline" (ngSubmit)="onSubmit()">
 
         <select formControlName="roundNumbersControl" class="form-control">
@@ -63,7 +64,7 @@
                 <tr>
                     <th scope="row">Totaal</th>
                     <th colspan="2" class="right"><button type="submit" class="btn btn-primary" (click)="setScore(i)">Bevestig</button></th>
-                    <th><input [(ngModel)]="round.autoScore"></th>
+                    <th><input type="number" [(ngModel)]="round.autoScore"></th>
                 </tr>
             </tbody>
         </table>
