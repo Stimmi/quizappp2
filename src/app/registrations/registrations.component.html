@@ -1,6 +1,47 @@
 <app-menu></app-menu>
 <div class="container">
     <h1>Inschrijvingen ({{registrations.length}})</h1>
+
+    <button type="button" class="btn btn-primary" (click)="showHideTable()">Toon data in tabel</button>
+
+    <table class="table" *ngIf="showTable">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Team</th>
+                <th scope="col">Naam</th>
+                <th scope="col">Email</th>
+                <th scope="col">Adres + Opmerkingen</th>
+                <th scope="col">Bedrag</th>
+                <th scope="col">Betaald</th>
+                <th scope="col">Classic Scoutscafe</th>
+                <th scope="col">Lekkere wijnen</th>
+                <th scope="col">Keuze vd jury</th>
+                <th scope="col">Non-alcoholisch</th>
+                <th scope="col">JAM</th>
+                <th scope="col">Tante Lie</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let registration of registrations">
+                <td>{{registration.team}}</td>
+                <td>{{registration.name}}</td>
+                <td>{{registration.email}}</td>
+                <td>{{registration.address}}</td>
+                <td>{{registration.amount}}</td>
+                <td>{{registration.paid}}</td>
+                <td>{{registration.pak1Amount}}</td>
+                <td>{{registration.pak2Amount}}</td>
+                <td>{{registration.pak3Amount}}</td>
+                <td>{{registration.pak4Amount}}</td>
+                <td>{{registration.pak5Amount}}</td>
+                <td>{{registration.pak6Amount}}</td>
+              </tr>
+        </tbody>
+
+    </table>
+
+
+
     <div *ngFor="let registration of registrations" class="card">
         <div *ngIf="registration.paid" class="card-header paid">
             <b>{{registration.team}}</b>
@@ -54,4 +95,39 @@
         </tr>
     </table>
 
+    <table class="table" *ngIf="showTable">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Team</th>
+                <th scope="col">Naam</th>
+                <th scope="col">Email</th>
+                <th scope="col">Adres + Opmerkingen</th>
+                <th scope="col">Bedrag</th>
+                <th scope="col">Betaald</th>
+                <th scope="col">Classic Scoutscafe</th>
+                <th scope="col">Lekkere wijnen</th>
+                <th scope="col">Keuze vd jury</th>
+                <th scope="col">Non-alcoholisch</th>
+                <th scope="col">JAM</th>
+                <th scope="col">Tante Lie</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let registration of registrations">
+                <td>{{registration.team}}</td>
+                <td>{{registration.name}}</td>
+                <td>{{registration.email}}</td>
+                <td>{{registration.address}}</td>
+                <td>{{registration.amount}}</td>
+                <td>{{registration.paid}}</td>
+                <td>{{registration.pak1Amount}}</td>
+                <td>{{registration.pak2Amount}}</td>
+                <td>{{registration.pak3Amount}}</td>
+                <td>{{registration.pak4Amount}}</td>
+                <td>{{registration.pak5Amount}}</td>
+                <td>{{registration.pak6Amount}}</td>
+              </tr>
+        </tbody>
+
+    </table>
 </div>

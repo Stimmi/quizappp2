@@ -12,6 +12,7 @@ export class RegistrationsComponent implements OnInit, OnDestroy {
 
   subscriptionRegistrations: Subscription
   registrations = [];
+  showTable = false;
 
   subscriptionTeams: Subscription;
   teams;
@@ -38,6 +39,10 @@ export class RegistrationsComponent implements OnInit, OnDestroy {
 
   processTeams(teams) {
     this.teams = teams;
+  }
+
+  showHideTable() {
+    this.showTable = !this.showTable;
   }
  
 }
