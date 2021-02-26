@@ -128,6 +128,9 @@
           <input type="text" formControlName="8" class="form-control" placeholder="Vraag 8">
           <input type="text" formControlName="9" class="form-control" placeholder="Vraag 9">
           <input type="text" formControlName="10" class="form-control" placeholder="Vraag 10">
+          <input type="text" formControlName="11" class="form-control" placeholder="Vraag 11">
+          <input type="text" formControlName="11" class="form-control" placeholder="Vraag 12">
+
           <hr class="linebreak">
           <div class="text-center" [hidden]="hideRounds[currentRound-1]"><button type="submit" class="btn btn-primary answerbtn">Antwoorden verzenden</button></div>
           
@@ -272,51 +275,46 @@
           <tbody>
             <tr>
               <td class="sudoku"><input type="number" formControlName="1" class="form-control" placeholder="?" pattern="[0-1]"></td>
-              <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+              <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
             </tr>
             <tr>
               <td></td>
               <td class="sudoku"><input type="number" formControlName="2" class="form-control" placeholder="?" pattern="[0-1]"></td>
-              <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+              <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
             </tr>
             <tr>
               <td></td><td></td>
               <td class="sudoku"><input type="number" formControlName="3" class="form-control" placeholder="?"></td>
-              <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+              <td></td><td></td><td></td><td></td><td></td><td></td>
             </tr>
             <tr>
               <td></td><td></td><td></td>
               <td class="sudoku"><input type="number" formControlName="4" class="form-control" placeholder="?"></td>
-              <td></td><td></td><td></td><td></td><td></td><td></td>
+              <td></td><td></td><td></td><td></td><td></td>
             </tr>
             <tr>
               <td></td><td></td><td></td><td></td>
               <td class="sudoku"><input type="number" formControlName="5" class="form-control" placeholder="?"></td>
-              <td></td><td></td><td></td><td></td><td></td>
+              <td></td><td></td><td></td><td></td>
             </tr>
             <tr>
               <td></td><td></td><td></td><td></td><td></td>
               <td class="sudoku"><input type="number" formControlName="6" class="form-control" placeholder="?"></td>
-              <td></td><td></td><td></td><td></td>
+              <td></td><td></td><td></td>
             </tr>
             <tr>
               <td></td><td></td><td></td><td></td><td></td><td></td>
               <td class="sudoku"><input type="number" formControlName="7" class="form-control" placeholder="?"></td>
-              <td></td><td></td><td></td>
+              <td></td><td></td>
             </tr>
             <tr>
               <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
               <td class="sudoku"><input type="number" formControlName="8" class="form-control" placeholder="?"></td>
-              <td></td><td></td>
+              <td></td>
             </tr>
             <tr>
               <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
               <td class="sudoku"><input type="number" formControlName="9" class="form-control" placeholder="?"></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-              <td class="sudoku"><input type="number" formControlName="10" class="form-control" placeholder="?"></td>
             </tr>
           </tbody>
         </table>

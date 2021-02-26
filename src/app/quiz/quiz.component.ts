@@ -104,7 +104,10 @@ export class QuizComponent implements OnInit, OnDestroy {
     7: new FormControl(''),
     8: new FormControl(''),
     9: new FormControl(''),
-    10: new FormControl('')
+    10: new FormControl(''),
+    11: new FormControl(''),
+    12: new FormControl('')
+
 
   });
 
@@ -164,8 +167,7 @@ export class QuizComponent implements OnInit, OnDestroy {
     6: new FormControl(''),
     7: new FormControl(''),
     8: new FormControl(''),
-    9: new FormControl(''),
-    10: new FormControl('')
+    9: new FormControl('')
   });
 
   constructor(private db: DatabaseService, private st: StorageService) { }
