@@ -204,13 +204,40 @@ export class QuizComponent implements OnInit, OnDestroy {
     this.round = {};
     let answers = [];
 
-    for (const key in round.value) {
-      if (Object.prototype.hasOwnProperty.call(round.value, key)) {
-        const element = {answer: round.value[key]};
-        answers.push(element);
-        
+    if(this.currentRound != 6) {
+
+      for (const key in round.value) {
+        if (Object.prototype.hasOwnProperty.call(round.value, key)) {
+          const element = {answer: round.value[key]};
+          answers.push(element);
+          
+        }
       }
+
+    } else {
+      // For the triple round, store the answser in an array within a map
+      const element = {answer: {ans: [round.value[1], round.value[2], round.value[3]]}};
+      answers.push(element);
+      const element1 = {answer: {ans: [round.value[4], round.value[5], round.value[6]]}};
+      answers.push(element1);
+      const element2 = {answer: {ans: [round.value[7], round.value[8], round.value[9]]}};
+      answers.push(element2);
+      const element3 = {answer: {ans: [round.value[10], round.value[11], round.value[12]]}};
+      answers.push(element3);
+      const element4 = {answer: {ans: [round.value[13], round.value[14], round.value[15]]}};
+      answers.push(element4);
+      const element5 = {answer: {ans: [round.value[16], round.value[17], round.value[18]]}};
+      answers.push(element5);
+      const element6 = {answer: {ans: [round.value[19], round.value[20], round.value[21]]}};
+      answers.push(element6);
+      const element7 = {answer: {ans: [round.value[22], round.value[23], round.value[24]]}};
+      answers.push(element7);
+      const element8 = {answer: {ans: [round.value[25], round.value[26], round.value[27]]}};
+      answers.push(element8);
+      const element9 = {answer: {ans: [round.value[28], round.value[29], round.value[30]]}};
+      answers.push(element9);
     }
+
 
     this.round.team = this.currentTeam;
     this.round.answers = answers;

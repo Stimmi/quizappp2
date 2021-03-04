@@ -3,11 +3,12 @@
 
 <div class="container">
     <br>
-    <p>Ingestuurde rondes: {{rounds.length}} - Totaal verbeterd: {{roundsCorrected}} - Aantal rondes met huidige filter: {{filteredList.length}}</p>
+    <p>Ingestuurde rondes: {{rounds.length}} - Totaal verbeterd: {{roundsCorrected}} - Aantal rondes met huidige filter:
+        {{filteredList.length}}</p>
     <form [formGroup]="filterForm" class="form-inline" (ngSubmit)="onSubmit()">
 
         <select formControlName="roundNumbersControl" class="form-control">
-          <option [value]="round" *ngFor="let round of roundNumbers">{{round}}</option>
+            <option [value]="round" *ngFor="let round of roundNumbers">{{round}}</option>
         </select>
 
         <select formControlName="teamsControl" class="form-control">
@@ -54,16 +55,45 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let answer of round.answers; let j = index" [attr.data-index]="j">
-                    <th scope="row">{{j+1}}</th>
-                    <td>{{answer.answer}}</td>
-                    <td>{{answer.corrections}}</td>
-                    <td class="checkboxTD"><input type="checkbox" class="form-check-input" id="exampleCheck1" [(ngModel)]="answer.autoCorrect"
-                        (change)="recalculateTotal(i)"></td>
-                </tr>
+                <ng-container *ngIf="round.number==6">
+                    <ng-container *ngFor="let answer of round.answers; let j = index">
+                        <tr>
+                            <th scope="row">{{j+1}}</th>
+                            <td>{{answer.answer.ans[0]}}</td>
+                            <td>{{answer.corrections.m1}}, {{answer.corrections.m2}}, {{answer.corrections.m3}}</td>
+                            <td class="checkboxTD"><input type="checkbox" class="form-check-input" id="exampleCheck1"
+                                    [(ngModel)]="answer.autoCorrect[0]" (change)="recalculateTotal(i)"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">{{j+1}}</th>
+                            <td>{{answer.answer.ans[1]}}</td>
+                            <td>{{answer.corrections.m1}}, {{answer.corrections.m2}}, {{answer.corrections.m3}}</td>
+                            <td class="checkboxTD"><input type="checkbox" class="form-check-input" id="exampleCheck1"
+                                    [(ngModel)]="answer.autoCorrect[1]" (change)="recalculateTotal(i)"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">{{j+1}}</th>
+                            <td>{{answer.answer.ans[2]}}</td>
+                            <td>{{answer.corrections.m1}}, {{answer.corrections.m2}}, {{answer.corrections.m3}}</td>
+                            <td class="checkboxTD"><input type="checkbox" class="form-check-input" id="exampleCheck1"
+                                    [(ngModel)]="answer.autoCorrect[2]" (change)="recalculateTotal(i)"></td>
+                        </tr>
+                    </ng-container>
+                </ng-container>
+                <ng-container *ngIf="round.number!=6">
+                    <tr  *ngFor="let answer of round.answers; let j = index" [attr.data-index]="j">
+                        <th scope="row">{{j+1}}</th>
+                        <td>{{answer.answer}}</td>
+                        <td>{{answer.corrections}}</td>
+                        <td class="checkboxTD"><input type="checkbox" class="form-check-input" id="exampleCheck1"
+                                [(ngModel)]="answer.autoCorrect" (change)="recalculateTotal(i)"></td>
+                    </tr>
+                </ng-container>
+
                 <tr>
                     <th scope="row">Totaal</th>
-                    <th colspan="2" class="right"><button type="submit" class="btn btn-primary" (click)="setScore(i)">Bevestig</button></th>
+                    <th colspan="2" class="right"><button type="submit" class="btn btn-primary"
+                            (click)="setScore(i)">Bevestig</button></th>
                     <th><input type="number" [(ngModel)]="round.autoScore"></th>
                 </tr>
             </tbody>
