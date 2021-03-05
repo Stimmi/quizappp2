@@ -66,9 +66,9 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
         this.corrections[corrections[index].number - 1] = corrections[index];
       }
 
-      if (this.rounds) {
+      /*if (this.rounds) {
         this.createCorrectionsList();
-      }
+      }*/
 
     }
 
@@ -91,9 +91,9 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
         }
       }
 
-      if (this.corrections) {
+      /*if (this.corrections) {
         this.createCorrectionsList();
-      }
+      }*/
     }
 
   }
@@ -107,9 +107,8 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
     }
   }
 
-  createCorrectionsList() {
+  addAndExecuteCorrection() {
 
-    this.correctionsList = this.rounds;
 
     // Loop over all rounds
     for (let index = 0; index < this.correctionsList.length; index++) {
@@ -192,6 +191,8 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
       //Loop over all questions of this round
 
     }
+
+    this.filteredList = this.correctionsList;
 
     /*// If the filtered list is empty, the complete list can be assigned
     if(!this.filteredList) {
@@ -286,16 +287,16 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
     var inbetweenList = [];
     var inbetweenListTwo = [];
     this.filteredList = [];
-
+    this.correctionsList = []
 
     // Check each parameter and pass on a filtered list
     // Check on the round number
     if (formInput.roundNumbersControl == 'Ronde') {
-      inbetweenList = this.correctionsList
+      inbetweenList = this.rounds
     } else {
-      for (let index = 0; index < this.correctionsList.length; index++) {
-        if (this.correctionsList[index].number == formInput.roundNumbersControl) {
-          inbetweenList.push(this.correctionsList[index]);
+      for (let index = 0; index < this.rounds.length; index++) {
+        if (this.rounds[index].number == formInput.roundNumbersControl) {
+          inbetweenList.push(this.rounds[index]);
         }
       }
     }
@@ -312,17 +313,19 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
 
     // Check on the corrected parameter
     if (formInput.checkedControl == 'Verbeterd') {
-      this.filteredList = inbetweenListTwo;
+      this.correctionsList = inbetweenListTwo;
     } else {
       for (let index = 0; index < inbetweenListTwo.length; index++) {
         if (inbetweenListTwo[index].score && formInput.checkedControl == 'Ja') {
-          this.filteredList.push(inbetweenListTwo[index]);
+          this.correctionsList.push(inbetweenListTwo[index]);
         }
         if (!inbetweenListTwo[index].score && formInput.checkedControl == 'Nee') {
-          this.filteredList.push(inbetweenListTwo[index]);
+          this.correctionsList.push(inbetweenListTwo[index]);
         }
       }
     }
+
+    this.addAndExecuteCorrection();
 
   }
 
