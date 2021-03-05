@@ -79,8 +79,9 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
   processRounds(rounds) {
 
     if (rounds) {
-      this.rounds = rounds;
 
+      this.rounds = rounds;
+      
       // Count the number of rounds that are corrected
       this.roundsCorrected = 0;
 
@@ -140,7 +141,7 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
 
             // TRIPLE ROUND LOGIC
 
-          } else if (this.correctionsList[index].number = 6) {
+          } else if (this.correctionsList[index].number == 6) {
 
             // Reset all parameters
             this.correctionsList[index].answers[indexx].autoCorrect = [false, false, false];
@@ -182,7 +183,7 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
       }
 
       // For the triple round, the total is calculated for the complete round
-      if (this.correctionsList[index].number = 6) {
+      if (this.correctionsList[index].number == 6) {
 
         this.correctionsList[index].autoScore = this.recalculateTotalTriple(this.correctionsList[index].answers);
 
@@ -330,7 +331,7 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
     // When a checkbox is changed, the total of the round must be reculculated
     this.filteredList[indexFromForm].autoScore = 0;
 
-    if(this.filteredList[indexFromForm].number!=6) {
+    if(this.filteredList[indexFromForm].number!==6) {
 
       for (let index = 0; index < this.filteredList[indexFromForm].answers.length; index++) {
         if (this.filteredList[indexFromForm].answers[index].autoCorrect == true) {
