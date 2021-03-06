@@ -356,16 +356,13 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
 
     // Loop over all answers
     for (let index = 0; index < answers.length; index++) {
-      let bonus = 0;
       let result = 0;
 
       // Loop all subquestions
       for (let indexx = 0; indexx < 3; indexx++) {
         if (answers[index].autoCorrect[indexx] == true) {
 
-          result++
-          result = result + bonus;
-          bonus++
+          result++;
 
         };
       }
