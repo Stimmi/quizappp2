@@ -252,7 +252,7 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
         this.usedSubAnswers.push(1);
       };
 
-      if (answer.includes(corrections.m2[1])) {
+      if (answer.includes(corrections.m2[0])) {
         autoCorrect = 'correct';
         this.usedSubAnswers.push(1);
       };
@@ -265,7 +265,7 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
         this.usedSubAnswers.push(2);
       };
 
-      if (answer.includes(corrections.m3[2])) {
+      if (answer.includes(corrections.m3[0])) {
         autoCorrect = 'correct';
         this.usedSubAnswers.push(2);
       };

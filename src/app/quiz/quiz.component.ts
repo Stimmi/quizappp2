@@ -106,7 +106,8 @@ export class QuizComponent implements OnInit, OnDestroy {
     9: new FormControl(''),
     10: new FormControl(''),
     11: new FormControl(''),
-    12: new FormControl('')
+    12: new FormControl(''),
+    13: new FormControl('')
 
 
   });
