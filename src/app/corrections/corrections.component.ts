@@ -381,7 +381,12 @@ export class CorrectionsComponent implements OnInit, OnDestroy {
     //Check if the score is a valid number and commit to DB
     if (typeof round.autoScore == 'number') {
 
-      this.filteredList[index].score = round.autoScore;
+      for (let index = 0; index < this.rounds.length; index++) {
+        if (this.rounds[index].id == round.id) {
+          this.rounds[index].score = round.autoScore;
+        };
+      }
+
       this.db.setScore(round.id, round.autoScore);
       this.filterCorrectionsList(this.filterForm.value);
 
