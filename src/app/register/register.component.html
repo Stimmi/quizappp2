@@ -44,6 +44,8 @@
 
   <form class="registerform" *ngIf="!registered" (ngSubmit)="onSubmit()" (keyup)="recalculateTotal()" #registerForm="ngForm" novalidate>
     <div class="formtitle"><h1 class="formtitle">Registreer</h1></div>
+    <p>De inschrijvingen voor de superquiz 2021 zijn afgesloten! Geef bovenaan je quizcode in om deel te nemen aan de quiz.</p>
+    <!--
     <p>Registreer door onderstaande gegevens in te vullen en betaal het inschrijvingsgeld op rekening BE32 0014 1659
       7902.
       Vervolgens krijg je per mail een unieke code toegestuurd waarmee het mogelijk is om in te loggen op onze online
@@ -226,9 +228,11 @@
       Gelieve alle verplichte velden in te vullen
     </div>
     
+    -->
 
   </form>
 
+  <!--
   <div *ngIf="registered">
     <h1>Bedankt, we hebben je registatie goed ontvangen!</h1>
     <p>Gelieve <b>€{{registration.amount}}</b> te storten op <b>BE32 0014 1659 7902</b> (rekening op naam van Vincent
@@ -240,7 +244,7 @@
       cssClass="bshadow"></ngx-qrcode>
 
     <button class="btn btn-primary" (click)="backToHomePage()">Ga terug</button>
-  </div>
+  </div>-->
 
 </div>
 <h2>Voor vragen en info contacteer ons via <a href="mailto:info@superquiz.be">info@superquiz.be</a></h2>
