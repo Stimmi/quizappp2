@@ -63,7 +63,7 @@
                             [(ngModel)]="answ.autoCorrect" (change)="recalculateTotal(i)"></td>
                 </tr>
                 <tr>
-                    <th scope="row">Totaal</th>
+                    <th scope="row">Bevestigde score: {{round.score}}</th>
                     <th colspan="2" class="right"><button type="submit" class="btn btn-primary"
                             (click)="setScore(i)">Bevestig</button></th>
                     <th><input type="number" [(ngModel)]="round.autoScore"></th>
@@ -94,7 +94,7 @@
                     </tr>
                 </ng-container>
                 <tr>
-                    <th scope="row">Totaal</th>
+                    <th scope="row">BS: {{round.score}}</th>
                     <th colspan="2" class="right"><button type="submit" class="btn btn-primary"
                             (click)="setScore(i)">Bevestig</button></th>
                     <th><input type="number" [(ngModel)]="round.autoScore"></th>
